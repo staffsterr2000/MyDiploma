@@ -3,8 +3,8 @@ package com.stasroshchenko.diploma.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -33,21 +34,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
-    }
-
     @Bean
     @Override
     protected UserDetailsService userDetailsService() {
-        UserDetails user1 = User.builder()
+        UserDetails userAdmin = User.builder()
                 .username("admin")
                 .password(passwordEncoder.encode("admin"))
                 .authorities("ADMIN")
                 .build();
 
+        UserDetails userClient = User.builder()
+                .username("client")
+                .password(passwordEncoder.encode("client"))
+                .authorities("CLIENT")
+                .build();
 
-        return new InMemoryUserDetailsManager(user1);
+        return new InMemoryUserDetailsManager(userAdmin, userClient);
     }
 }
