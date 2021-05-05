@@ -13,4 +13,9 @@ public class TemplateController {
         return "login";
     }
 
+    @GetMapping("/redirect")
+    public String getRedirectView() {
+        return "redirect";
+    }
+
 }
