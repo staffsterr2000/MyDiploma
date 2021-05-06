@@ -3,7 +3,7 @@ package com.stasroshchenko.diploma.registration;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/register")
+@RequestMapping("/registration")
 public class RegistrationController {
 
     private final RegistrationService registrationService;
@@ -13,7 +13,7 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String signUpUser(@RequestBody RegistrationRequest request) {
+    public String signUpUser(RegistrationRequest request) {
         return registrationService.signUpUser(request);
     }
 
