@@ -1,6 +1,6 @@
 package com.stasroshchenko.diploma.security;
 
-public enum UserPermission {
+public enum ApplicationUserPermission {
     WRITE,
     READ
 }

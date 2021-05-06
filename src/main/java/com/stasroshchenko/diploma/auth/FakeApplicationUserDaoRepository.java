@@ -9,10 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.stasroshchenko.diploma.security.UserRole.*;
+import static com.stasroshchenko.diploma.security.ApplicationUserRole.*;
 
 @Repository("fake")
 public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
+
 
     private final PasswordEncoder passwordEncoder;
 
@@ -22,9 +23,16 @@ public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
     }
 
     @Override
-    public Optional<ApplicationUser> selectApplicationUserByUsername(String username) {
+    public Optional<ApplicationUser> findByUsername(String username) {
         return loadUsers().stream()
                 .filter(user -> username.equals(user.getUsername()))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<ApplicationUser> findByEmail(String email) {
+        return loadUsers().stream()
+                .filter(user -> email.equals(user.getEmail()))
                 .findFirst();
     }
 
@@ -32,8 +40,9 @@ public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
     public Set<ApplicationUser> loadUsers() {
         return Sets.newHashSet(
                 new ApplicationUser(
-                        ADMIN.getGrantedAuthorities(),
+                        ADMIN,
                         "admin",
+                        "admin@gmail.com",
                         passwordEncoder.encode("admin"),
                         true,
                         true,
@@ -42,8 +51,9 @@ public class FakeApplicationUserDaoRepository implements ApplicationUserDao {
                 ),
 
                 new ApplicationUser(
-                        CLIENT.getGrantedAuthorities(),
+                        CLIENT,
                         "client",
+                        "client@gmail.com",
                         passwordEncoder.encode("client"),
                         true,
                         true,

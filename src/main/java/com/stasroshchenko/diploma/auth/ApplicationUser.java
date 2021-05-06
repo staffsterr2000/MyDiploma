@@ -1,40 +1,69 @@
 package com.stasroshchenko.diploma.auth;
 
+import com.stasroshchenko.diploma.security.ApplicationUserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
-import java.util.Set;
 
+@Entity
 public class ApplicationUser implements UserDetails {
 
-    private final Set<? extends GrantedAuthority> grantedAuthorities;
-    private final String username;
-    private final String password;
-    private final boolean isAccountNonExpired;
-    private final boolean isAccountNonLocked;
-    private final boolean isCredentialsNonExpired;
-    private final boolean isEnabled;
+    @Id
+    @SequenceGenerator(
+            name = "client_sequence",
+            sequenceName = "client_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "client_sequence"
+    )
+    private Long id;
 
-    public ApplicationUser(Set<? extends GrantedAuthority> grantedAuthorities,
+    @Enumerated(EnumType.STRING)
+    private ApplicationUserRole role;
+
+    private String username;
+    private String email;
+    private String password;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+
+    public ApplicationUser(ApplicationUserRole role,
                            String username,
+                           String email,
                            String password,
                            boolean isAccountNonExpired,
                            boolean isAccountNonLocked,
                            boolean isCredentialsNonExpired,
                            boolean isEnabled) {
-        this.grantedAuthorities = grantedAuthorities;
+        this.role = role;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.isAccountNonExpired = isAccountNonExpired;
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
     }
+    public ApplicationUser() {
+    }
+
+    public ApplicationUserRole getRole() {
+        return role;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return grantedAuthorities;
+        return role.getGrantedAuthorities();
     }
 
     @Override
@@ -45,6 +74,10 @@ public class ApplicationUser implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -65,5 +98,41 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isEnabled;
+    }
+
+    public void setRole(ApplicationUserRole role) {
+        this.role = role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }
