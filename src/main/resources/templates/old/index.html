@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="wrapper fadeInDown">
+
+        <div id="formContent">
+
+            <div class="fadeIn first">
+                <img src="https://static1-repo.aif.ru/1/e1/302872/c/273bb62e3c4174d97e5dbe6cf2b49a98.jpg" id="icon" alt="User Icon" />
+            </div>
+
+            <h1>It's the main page what do you want?</h1>
+
+            <div th:switch="${auth.principal}">
+                <div th:case="'anonymousUser'">
+                    <form th:action="@{/login}" method="get">
+                        <input type="submit" class="fadeIn fourth" value="Log in">
+                    </form>
+                    <form method="get" th:action="@{/registration}">
+                        <input type="submit" class="fadeIn fourth" value="Register">
+                    </form>
+                </div>
+
+                <div th:case="*">
+                    <form method="post" th:action="@{/logout}">
+                        <input type="submit" class="fadeIn fourth" value="Log out">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+</div>
+</body>
+</html>

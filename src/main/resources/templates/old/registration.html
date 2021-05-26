@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Registration</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="/css/style.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+    <form action="#" th:action="@{/registration}" th:object="${request}" method="post">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <img src="https://static1-repo.aif.ru/1/e1/302872/c/273bb62e3c4174d97e5dbe6cf2b49a98.jpg"
+                     id="icon" alt="User Icon" />
+            </div>
+            <!--            <ul th:if="${#fields.hasGlobalErrors()}">-->
+            <!--                <li th:each="err : ${#fields.globalErrors()}" th:class="globalError" th:text="${err}"/>-->
+            <!--            </ul>-->
+
+            <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+
+            <input type="text" id="login" th:field="*{username}" class="fadeIn second" placeholder="login">
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"/>
+
+            <input type="text" id="email" th:field="*{email}" class="fadeIn second" placeholder="email">
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"/>
+
+            <input type="password" id="password" th:field="*{password}" class="fadeIn third" placeholder="password">
+            <p th:if="${#fields.hasErrors('*{password}')}" th:errors="*{password}" th:errorclass="error"/>
+
+            <input type="submit" class="fadeIn fourth" value="Registration">
+
+        </div>
+    </form>
+</div>
+</body>
+</html>
