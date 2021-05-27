@@ -3,6 +3,7 @@ package com.stasroshchenko.diploma.entity;
 import com.stasroshchenko.diploma.constraint.DateOfBirthConstraint;
 import com.stasroshchenko.diploma.constraint.EmailConstraint;
 import com.stasroshchenko.diploma.constraint.PasswordMatchConstraint;
+import com.stasroshchenko.diploma.constraint.UsernameConstraint;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,9 +38,9 @@ public class RegistrationRequest {
     private LocalDate dateOfBirth;
 
     @Size(min = 3, max = 24, message = "Username must have from 3 to 24 symbols")
+    @UsernameConstraint
     private String username;
 
-    @NotBlank
     @EmailConstraint
     private String email;
 
