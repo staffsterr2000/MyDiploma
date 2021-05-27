@@ -7,6 +7,7 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+@Deprecated
 @Documented
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD } )
