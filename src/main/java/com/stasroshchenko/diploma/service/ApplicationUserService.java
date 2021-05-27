@@ -1,6 +1,8 @@
 package com.stasroshchenko.diploma.service;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.repository.ApplicationUserRepository;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import com.stasroshchenko.diploma.util.TokenHelper;
@@ -12,9 +14,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Optional;
 
 import static com.stasroshchenko.diploma.auth.ApplicationUserRole.ADMIN;
+import static com.stasroshchenko.diploma.auth.ApplicationUserRole.CLIENT;
 
 @Service
 @AllArgsConstructor
@@ -116,24 +121,48 @@ public class ApplicationUserService implements UserDetailsService {
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
     }
 
-//    @Bean
-//    public CommandLineRunner admin() {
-//        return (args) -> {
-//            ApplicationUser user = new ApplicationUser(
-//                    ADMIN,
-//                    "admin",
-//                    "admin@gmail.com",
-//                    "admin"
-//            );
-//
-//            String encodedPassword = passwordEncoder
-//                    .encode(user.getPassword());
-//            user.setPassword(encodedPassword);
-//
-//            user.setEnabled(true);
-//
-//            applicationUserRepository.save(user);
-//        };
-//    }
+    @Bean
+    public CommandLineRunner initialUsers() {
+        return (args) -> {
+            ApplicationUser user = new ApplicationUser(
+                    ADMIN,
+                    new DoctorData(
+                            "Semen",
+                            "Lobanov",
+                            LocalDate.of(1983, Month.NOVEMBER, 22)
+                    ),
+                    "lobanov_semen",
+                    "lobanov_semen@gmail.com",
+                    "password"
+            );
+
+            String encodedPassword = passwordEncoder
+                    .encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            user.setEnabled(true);
+            applicationUserRepository.save(user);
+
+            user = new ApplicationUser(
+                    CLIENT,
+                    new ClientData(
+                            "Stanislav",
+                            "Roshchenko",
+                            LocalDate.of(2000, Month.JULY, 10)
+                    ),
+                    "roshchenko_stas",
+                    "roshchenko_stas@gmail.com",
+                    "password"
+            );
+
+            ClientData clientData = (ClientData) user.getPersonData();
+            clientData.addComplaint("Tooth broke");
+
+            encodedPassword = passwordEncoder
+                    .encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            user.setEnabled(true);
+            applicationUserRepository.save(user);
+        };
+    }
 
 }
