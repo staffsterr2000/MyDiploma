@@ -15,13 +15,18 @@
 </head>
 
 <body>
-<div class="wrapper fadeInDown">
+<div>
     <h1>We've just sent you a verification mail. Check your email box.</h1>
     <form th:action="@{/registration}" th:object="${redirectedRequest}" method="post">
-        <input type="text" id="login" th:field="*{username}" class="fadeIn second" placeholder="login" hidden/>
-        <input type="text" id="email" th:field="*{email}" class="fadeIn second" placeholder="email" hidden/>
-        <input type="text" id="password" th:field="*{password}" class="fadeIn third" placeholder="password" hidden/>
-        <input type="submit" value="Resend message?"/>
+        <input type="text" th:field="*{firstName}" class="form-control" id="firstName" hidden/>
+        <input type="text" th:field="*{lastName}" class="form-control" id="lastName" hidden/>
+        <input type="text" th:field="*{dateOfBirthInput}" class="form-control" id="date-of-birth" hidden/>
+        <input type="text" th:field="*{username}" class="form-control" id="username" hidden/>
+        <input type="text" th:field="*{email}" class="form-control" id="email" hidden/>
+        <input type="text" th:field="*{password}" class="form-control" id="password" hidden/>
+        <input type="text" th:field="*{repeatedPassword}" class="form-control" id="repeatedPassword" hidden/>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 <!--    <form action="#" th:action="@{/registration}" th:object="${request}" method="post">-->
 <!--        <div id="formContent">-->
