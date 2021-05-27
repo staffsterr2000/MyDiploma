@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.entity.database;
 
 import com.stasroshchenko.diploma.auth.ApplicationUserRole;
-import com.stasroshchenko.diploma.entity.PersonData;
+import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,15 +14,16 @@ import java.util.Collection;
 @Entity
 public class ApplicationUser implements UserDetails {
 
+    private static final String SEQUENCE_NAME = "application_user_sequence";
+
     @Id
     @SequenceGenerator(
-            name = "client_sequence",
-            sequenceName = "client_sequence",
-            allocationSize = 1
+            name = SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "client_sequence"
+            generator = SEQUENCE_NAME
     )
     private Long id;
 
@@ -89,21 +90,4 @@ public class ApplicationUser implements UserDetails {
         return isEnabled;
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        ApplicationUser that = (ApplicationUser) o;
-//        return isAccountLocked == that.isAccountLocked &&
-//                isEnabled == that.isEnabled &&
-//                role == that.role &&
-//                username.equals(that.username) &&
-//                email.equals(that.email) &&
-//                password.equals(that.password);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(role, username, email, password, isAccountLocked, isEnabled);
-//    }
 }

@@ -3,6 +3,8 @@ package com.stasroshchenko.diploma.entity.database;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Polymorphism;
+import org.hibernate.annotations.PolymorphismType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,25 +12,29 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @Entity
 public class ConfirmationToken {
 
+    private static final String SEQUENCE_NAME = "confirmation_token_sequence";
+
     @Id
     @SequenceGenerator(
-            name = "confirmation_token_sequence",
-            sequenceName = "confirmation_token_sequence",
+            name = SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME,
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "confirmation_token_sequence"
+            generator = SEQUENCE_NAME
     )
     private Long id;
 
     @ManyToOne
     @JoinColumn(
             nullable = false,
-            name = "app_user_id"
+            name = "app_user_id",
+            foreignKey = @ForeignKey(name="FK_APP_USER")
     )
     private ApplicationUser applicationUser;
 
