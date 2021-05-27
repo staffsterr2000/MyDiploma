@@ -13,8 +13,6 @@ import javax.transaction.Transactional;
 
 import java.time.LocalDateTime;
 
-import static com.stasroshchenko.diploma.auth.ApplicationUserRole.CLIENT;
-
 @Service
 @AllArgsConstructor
 public class RegistrationService {
@@ -27,7 +25,6 @@ public class RegistrationService {
         String requestEmail = request.getEmail();
         String token = applicationUserService.signUpUser(
                 new ApplicationUser(
-                        CLIENT,
                         new ClientData(
                                 request.getFirstName(),
                                 request.getLastName(),

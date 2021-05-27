@@ -1,13 +1,18 @@
 package com.stasroshchenko.diploma.entity.database;
 
-import com.stasroshchenko.diploma.auth.ApplicationUserRole;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.entity.database.person.PersonData;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -27,28 +32,24 @@ public class ApplicationUser implements UserDetails {
     )
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ApplicationUserRole role;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumns({
             @JoinColumn(name="person_id", referencedColumnName="id")
 //            @JoinColumn(name="person_first_name", referencedColumnName="firstName")
     })
     private PersonData personData;
+
     private String username;
     private String email;
     private String password;
     private boolean isAccountLocked;
     private boolean isEnabled = false;
 
-    public ApplicationUser(ApplicationUserRole role,
-                           PersonData personData,
+    public ApplicationUser(PersonData personData,
                            String username,
                            String email,
                            String password
     ) {
-        this.role = role;
         this.personData = personData;
         this.username = username;
         this.email = email;
@@ -57,7 +58,14 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getGrantedAuthorities();
+        Set<SimpleGrantedAuthority> grantedAuthorities = new HashSet<>();
+        String role = (personData instanceof ClientData) ?
+                "CLIENT" : (personData instanceof DoctorData) ?
+                "DOCTOR" : null;
+        if (role == null) throw new IllegalStateException("User role is unknown");
+
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+        return grantedAuthorities;
     }
 
     @Override

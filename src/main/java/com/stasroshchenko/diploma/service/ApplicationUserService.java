@@ -18,9 +18,6 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.Optional;
 
-import static com.stasroshchenko.diploma.auth.ApplicationUserRole.ADMIN;
-import static com.stasroshchenko.diploma.auth.ApplicationUserRole.CLIENT;
-
 @Service
 @AllArgsConstructor
 public class ApplicationUserService implements UserDetailsService {
@@ -115,7 +112,7 @@ public class ApplicationUserService implements UserDetailsService {
 
     public boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
         return rawUser.getAuthorities().equals(encodedUser.getAuthorities()) &&
-                rawUser.getRole().equals(encodedUser.getRole()) &&
+//                rawUser.getRole().equals(encodedUser.getRole()) &&
                 rawUser.getEmail().equals(encodedUser.getEmail()) &&
                 rawUser.getUsername().equals(encodedUser.getUsername()) &&
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
@@ -125,7 +122,6 @@ public class ApplicationUserService implements UserDetailsService {
     public CommandLineRunner initialUsers() {
         return (args) -> {
             ApplicationUser user = new ApplicationUser(
-                    ADMIN,
                     new DoctorData(
                             "Semen",
                             "Lobanov",
@@ -143,7 +139,6 @@ public class ApplicationUserService implements UserDetailsService {
             applicationUserRepository.save(user);
 
             user = new ApplicationUser(
-                    CLIENT,
                     new ClientData(
                             "Stanislav",
                             "Roshchenko",
