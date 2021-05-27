@@ -120,7 +120,7 @@ public class ApplicationUserService implements UserDetailsService {
     @Bean
     public CommandLineRunner initialUsers() {
         return (args) -> {
-            ApplicationUser user = new ApplicationUser(
+            ApplicationUser user1 = new ApplicationUser(
                     new DoctorData(
                             "Semen",
                             "Lobanov",
@@ -131,13 +131,13 @@ public class ApplicationUserService implements UserDetailsService {
                     "password"
             );
 
-            String encodedPassword = passwordEncoder
-                    .encode(user.getPassword());
-            user.setPassword(encodedPassword);
-            user.setEnabled(true);
-            applicationUserRepository.save(user);
+            String encodedPassword1 = passwordEncoder
+                    .encode(user1.getPassword());
+            user1.setPassword(encodedPassword1);
+            user1.setEnabled(true);
+            applicationUserRepository.save(user1);
 
-            user = new ApplicationUser(
+            ApplicationUser user2 = new ApplicationUser(
                     new ClientData(
                             "Stanislav",
                             "Roshchenko",
@@ -148,14 +148,14 @@ public class ApplicationUserService implements UserDetailsService {
                     "password"
             );
 
-            ClientData clientData = (ClientData) user.getPersonData();
-            clientData.addComplaint("Tooth broke");
+//            ClientData clientData = (ClientData) user2.getPersonData();
+//            clientData.addComplaint("Tooth broke");
 
-            encodedPassword = passwordEncoder
-                    .encode(user.getPassword());
-            user.setPassword(encodedPassword);
-            user.setEnabled(true);
-            applicationUserRepository.save(user);
+            String encodedPassword2 = passwordEncoder
+                    .encode(user2.getPassword());
+            user2.setPassword(encodedPassword2);
+            user2.setEnabled(true);
+            applicationUserRepository.save(user2);
         };
     }
 

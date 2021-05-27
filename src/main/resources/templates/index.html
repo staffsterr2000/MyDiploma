@@ -14,34 +14,34 @@
 <header>
     <div class="container-fluid">
         <div class="navbar">
-            <div class="nav_logo">
-                <a href="#"><img src="" alt="">DeDentist?</a>
+            <div class="nav-logo">
+                <a th:href="@{/}">DeDentist?</a>
             </div>
             <div class="menu">
                 <ul>
-                    <a href="#">
-                        <li>Main</li>
-                    </a>
-                    <a href="#">
-                        <li>About us</li>
-                    </a>
-                    <a href="#">
-                        <li>memes</li>
-                    </a>
-                    <a href="#">
-                        <li>ytrewq</li>
-                    </a>
-                    <a href="#">
-                        <li>contact</li>
-                    </a>
+                    <li>
+                        <a href="">Main</a>
+                    </li>
+                    <li>
+                        <a href="">About us</a>
+                    </li>
+                    <li>
+                        <a href="">Memes</a>
+                    </li>
+                    <li>
+                        <a href="">Ytrewq</a>
+                    </li>
+                    <li>
+                        <a href="">Contact</a>
+                    </li>
                 </ul>
             </div>
             <div th:switch="${auth.principal}">
-                <div th:case="'anonymousUser'" class="anonymous_user">
+                <div th:case="'anonymousUser'" class="right-menu">
                     <a th:href="@{/registration}">Sign up</a>
                     <a th:href="@{/login}">Sign in</a>
                 </div>
-                <div th:case="*" class="authorized_user">
+                <div th:case="*" class="right-menu">
                     <a th:href="@{/profile}">Profile</a>
                     <a th:href="@{/logout}">Log out</a>
                 </div>
@@ -67,10 +67,10 @@
 <hr/>
 <footer>
     <div class="container">
-        <div class="left_info">
+        <div class="left-info">
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         </div>
-        <div class="right_info">
+        <div class="right-info">
             <ul>
 
                 <li>Number: +380503423423</li>
