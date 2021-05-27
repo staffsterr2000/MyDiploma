@@ -1,6 +1,7 @@
 package com.stasroshchenko.diploma.service;
 
-import com.stasroshchenko.diploma.entity.PersonData;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.service.mail.EmailSender;
 import com.stasroshchenko.diploma.entity.RegistrationRequest;
@@ -27,7 +28,7 @@ public class RegistrationService {
         String token = applicationUserService.signUpUser(
                 new ApplicationUser(
                         CLIENT,
-                        new PersonData(
+                        new ClientData(
                                 request.getFirstName(),
                                 request.getLastName(),
                                 request.getDateOfBirth()

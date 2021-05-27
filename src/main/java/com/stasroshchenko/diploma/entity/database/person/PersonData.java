@@ -1,31 +1,38 @@
-package com.stasroshchenko.diploma.entity;
+package com.stasroshchenko.diploma.entity.database.person;
 
 import com.stasroshchenko.diploma.constraint.DateOfBirthConstraint;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
+
 @Entity
-public class PersonData {
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name="person_role")
+public abstract class PersonData {
+
+    private static final String SEQUENCE_NAME = "person_data_sequence";
 
     @Id
     @SequenceGenerator(
-            name = "person_sequence",
-            sequenceName = "person_sequence"
+            name = SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "person_sequence"
+            generator = SEQUENCE_NAME
     )
     private Long id;
-    private String firstName;
-    private String lastName;
+
+    protected String firstName;
+    protected String lastName;
 
     @DateOfBirthConstraint
-    private LocalDate dateOfBirth;
+    protected LocalDate dateOfBirth;
 
     public PersonData(String firstName, String lastName, LocalDate dateOfBirth) {
         this.firstName = firstName;
