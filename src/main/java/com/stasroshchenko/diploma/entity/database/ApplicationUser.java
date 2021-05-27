@@ -4,6 +4,7 @@ import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,6 +31,7 @@ public class ApplicationUser implements UserDetails {
             strategy = GenerationType.SEQUENCE,
             generator = SEQUENCE_NAME
     )
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -38,7 +40,6 @@ public class ApplicationUser implements UserDetails {
 //            @JoinColumn(name="person_first_name", referencedColumnName="firstName")
     })
     private PersonData personData;
-
     private String username;
     private String email;
     private String password;

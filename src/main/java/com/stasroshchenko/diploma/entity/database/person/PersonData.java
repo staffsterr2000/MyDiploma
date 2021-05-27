@@ -1,6 +1,7 @@
 package com.stasroshchenko.diploma.entity.database.person;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -25,8 +26,8 @@ public abstract class PersonData {
             strategy = GenerationType.SEQUENCE,
             generator = SEQUENCE_NAME
     )
+    @EqualsAndHashCode.Exclude
     private Long id;
-
     protected String firstName;
     protected String lastName;
     protected LocalDate dateOfBirth;

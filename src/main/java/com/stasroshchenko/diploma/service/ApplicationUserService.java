@@ -72,7 +72,7 @@ public class ApplicationUserService implements UserDetailsService {
                                     confirmationToken.getConfirmedAt() == null)
                             .findFirst()
                             .orElseThrow(() -> new IllegalStateException(
-                                    String.format("Email %s and username %s has been already taken", userEmail, userUsername)
+                                    String.format("Email %s and username %s has already been taken", userEmail, userUsername)
                             ));
 
             ApplicationUser userFromDB = unconfirmedToken.getApplicationUser();
@@ -88,11 +88,11 @@ public class ApplicationUserService implements UserDetailsService {
 
         } else if (userByUsername.isPresent()) {
             throw new IllegalStateException(
-                    String.format("Username %s has been already taken", userUsername)
+                    String.format("Username %s has already been taken", userUsername)
             );
         } else if (userByEmail.isPresent()) {
             throw new IllegalStateException(
-                    String.format("Email %s has been already taken", userEmail)
+                    String.format("Email %s has already been taken", userEmail)
             );
         }
 
@@ -111,8 +111,7 @@ public class ApplicationUserService implements UserDetailsService {
     }
 
     public boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
-        return rawUser.getAuthorities().equals(encodedUser.getAuthorities()) &&
-//                rawUser.getRole().equals(encodedUser.getRole()) &&
+        return rawUser.getPersonData().equals(encodedUser.getPersonData()) &&
                 rawUser.getEmail().equals(encodedUser.getEmail()) &&
                 rawUser.getUsername().equals(encodedUser.getUsername()) &&
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
