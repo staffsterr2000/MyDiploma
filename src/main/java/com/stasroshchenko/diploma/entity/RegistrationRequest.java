@@ -1,9 +1,9 @@
 package com.stasroshchenko.diploma.entity;
 
-import com.stasroshchenko.diploma.constraint.DateOfBirthConstraint;
-import com.stasroshchenko.diploma.constraint.EmailConstraint;
-import com.stasroshchenko.diploma.constraint.PasswordMatchConstraint;
-import com.stasroshchenko.diploma.constraint.UsernameConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.DateOfBirthConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.EmailConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.PasswordMatchConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.UsernameConstraint;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +15,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @AllArgsConstructor
-@ToString
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @PasswordMatchConstraint
 public class RegistrationRequest {
 

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity(name = "doctor_data")
-@DiscriminatorValue(value = "doctor")
+@DiscriminatorValue(value = "DOCTOR")
 public class DoctorData extends PersonData {
 
     public DoctorData(String firstName, String lastName, LocalDate dateOfBirth) {

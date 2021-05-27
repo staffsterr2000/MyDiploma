@@ -1,6 +1,6 @@
-package com.stasroshchenko.diploma.constraint.validator;
+package com.stasroshchenko.diploma.annotation.validator;
 
-import com.stasroshchenko.diploma.constraint.UsernameConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.UsernameConstraint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

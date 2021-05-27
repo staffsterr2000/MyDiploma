@@ -2,11 +2,9 @@ package com.stasroshchenko.diploma.entity;
 
 import lombok.*;
 
-@EqualsAndHashCode
 @AllArgsConstructor
-@ToString
-@Getter
-@Setter
+@NoArgsConstructor
+@Data
 public class Client {
 
     private Integer id;

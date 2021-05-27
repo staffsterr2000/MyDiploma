@@ -1,6 +1,5 @@
 package com.stasroshchenko.diploma.entity.database.person;
 
-import com.stasroshchenko.diploma.constraint.DateOfBirthConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,8 +29,6 @@ public abstract class PersonData {
 
     protected String firstName;
     protected String lastName;
-
-    @DateOfBirthConstraint
     protected LocalDate dateOfBirth;
 
     public PersonData(String firstName, String lastName, LocalDate dateOfBirth) {

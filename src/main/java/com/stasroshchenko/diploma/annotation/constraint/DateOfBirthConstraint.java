@@ -1,6 +1,6 @@
-package com.stasroshchenko.diploma.constraint;
+package com.stasroshchenko.diploma.annotation.constraint;
 
-import com.stasroshchenko.diploma.constraint.validator.DateOfBirthValidation;
+import com.stasroshchenko.diploma.annotation.validator.DateOfBirthValidation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

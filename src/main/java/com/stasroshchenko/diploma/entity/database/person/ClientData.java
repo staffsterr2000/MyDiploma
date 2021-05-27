@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity(name = "client_data")
-@DiscriminatorValue(value = "client")
+@DiscriminatorValue(value = "CLIENT")
 public class ClientData extends PersonData {
 
     private String complaint;

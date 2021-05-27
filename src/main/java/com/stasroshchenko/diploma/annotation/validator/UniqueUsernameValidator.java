@@ -1,6 +1,6 @@
-package com.stasroshchenko.diploma.constraint.validator;
+package com.stasroshchenko.diploma.annotation.validator;
 
-import com.stasroshchenko.diploma.constraint.UniqueEmailConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.UniqueUsernameConstraint;
 import com.stasroshchenko.diploma.service.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -13,21 +13,21 @@ import javax.validation.ConstraintValidatorContext;
 @Service
 @AllArgsConstructor
 @Deprecated
-public class UniqueEmailValidator implements
-        ConstraintValidator<UniqueEmailConstraint, String> {
+public class UniqueUsernameValidator implements
+        ConstraintValidator<UniqueUsernameConstraint, String> {
 
     private final ApplicationUserService applicationUserService;
     private final static Logger LOGGER =
-            LoggerFactory.getLogger(UniqueEmailValidator.class);
+            LoggerFactory.getLogger(UniqueUsernameValidator.class);
 
     @Override
-    public void initialize(UniqueEmailConstraint constraintAnnotation) {
+    public void initialize(UniqueUsernameConstraint constraintAnnotation) {
     }
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
         try {
-            applicationUserService.loadUserByOnlyEmail(email);
+            applicationUserService.loadUserByOnlyUsername(username);
 
         } catch (IllegalStateException ex) {
             LOGGER.error(ex.getMessage());

@@ -1,6 +1,6 @@
-package com.stasroshchenko.diploma.constraint;
+package com.stasroshchenko.diploma.annotation.constraint;
 
-import com.stasroshchenko.diploma.constraint.validator.PasswordMatchValidator;
+import com.stasroshchenko.diploma.annotation.validator.PasswordMatchValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
