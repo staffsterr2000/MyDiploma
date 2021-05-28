@@ -110,11 +110,44 @@ public class ApplicationUserService implements UserDetailsService {
         return token;
     }
 
-    public boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
+    private boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
         return rawUser.getPersonData().equals(encodedUser.getPersonData()) &&
                 rawUser.getEmail().equals(encodedUser.getEmail()) &&
                 rawUser.getUsername().equals(encodedUser.getUsername()) &&
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
+    }
+
+    private void signUpInitialUser(ApplicationUser user) {
+        String userUsername = user.getUsername();
+        String userEmail = user.getEmail();
+
+        Optional<ApplicationUser> userByEmail =
+                applicationUserRepository.findByEmail(userEmail);
+        Optional<ApplicationUser> userByUsername =
+                applicationUserRepository.findByUsername(userUsername);
+
+        if (userByEmail.isPresent() && userByUsername.isPresent()) {
+            throw new IllegalStateException(
+                    String.format("Email %s and username %s has already been taken",
+                            userEmail, userUsername));
+
+        } else if (userByUsername.isPresent()) {
+            throw new IllegalStateException(
+                    String.format("Username %s has already been taken", userUsername)
+            );
+
+        } else if (userByEmail.isPresent()) {
+            throw new IllegalStateException(
+                    String.format("Email %s has already been taken", userEmail)
+            );
+        }
+
+        String encodedPassword = passwordEncoder
+                .encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        user.setEnabled(true);
+        applicationUserRepository.save(user);
+
     }
 
     @Bean
@@ -124,18 +157,16 @@ public class ApplicationUserService implements UserDetailsService {
                     new DoctorData(
                             "Semen",
                             "Lobanov",
-                            LocalDate.of(1983, Month.NOVEMBER, 22)
+                            LocalDate.of(1983, Month.NOVEMBER, 22),
+                            29,
+                            5
                     ),
                     "lobanov_semen",
                     "lobanov_semen@gmail.com",
                     "password"
             );
 
-            String encodedPassword1 = passwordEncoder
-                    .encode(user1.getPassword());
-            user1.setPassword(encodedPassword1);
-            user1.setEnabled(true);
-            applicationUserRepository.save(user1);
+            signUpInitialUser(user1);
 
             ApplicationUser user2 = new ApplicationUser(
                     new ClientData(
@@ -148,14 +179,7 @@ public class ApplicationUserService implements UserDetailsService {
                     "password"
             );
 
-//            ClientData clientData = (ClientData) user2.getPersonData();
-//            clientData.addComplaint("Tooth broke");
-
-            String encodedPassword2 = passwordEncoder
-                    .encode(user2.getPassword());
-            user2.setPassword(encodedPassword2);
-            user2.setEnabled(true);
-            applicationUserRepository.save(user2);
+            signUpInitialUser(user2);
         };
     }
 
