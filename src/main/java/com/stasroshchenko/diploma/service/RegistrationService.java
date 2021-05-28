@@ -1,8 +1,8 @@
 package com.stasroshchenko.diploma.service;
 
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
-import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.service.application.user.ApplicationUserService;
 import com.stasroshchenko.diploma.service.mail.EmailSender;
 import com.stasroshchenko.diploma.entity.RegistrationRequest;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
@@ -21,19 +21,36 @@ public class RegistrationService {
     private final EmailSender emailSender;
     private final ConfirmationTokenService confirmationTokenService;
 
+    public ApplicationUser convertRegistrationRequestToApplicationUser(RegistrationRequest request) {
+        return new ApplicationUser(
+                new ClientData(
+                        request.getFirstName(),
+                        request.getLastName(),
+                        request.getDateOfBirth()
+                ),
+                request.getUsername(),
+                request.getEmail(),
+                request.getPassword()
+        );
+    }
+
+    public void resendConfirmationToken(RegistrationRequest request) {
+        String requestEmail = request.getEmail();
+        String token = applicationUserService.resendConfirmationToken(
+                convertRegistrationRequestToApplicationUser(request)
+        );
+
+        String host = "localhost:8080";
+        String link = "http://" + host + "/registration/confirm?token=" + token;
+        emailSender.send(requestEmail,
+                buildEmailMessage(request.getUsername(), link));
+
+    }
+
     public void signUpUser(RegistrationRequest request) {
         String requestEmail = request.getEmail();
         String token = applicationUserService.signUpUser(
-                new ApplicationUser(
-                        new ClientData(
-                                request.getFirstName(),
-                                request.getLastName(),
-                                request.getDateOfBirth()
-                        ),
-                        request.getUsername(),
-                        request.getEmail(),
-                        request.getPassword()
-                )
+                convertRegistrationRequestToApplicationUser(request)
         );
 
         String host = "localhost:8080";
@@ -62,7 +79,6 @@ public class RegistrationService {
         confirmationTokenService.setConfirmedAt(token);
         applicationUserService.enableUserByEmail(confirmationToken
                 .getApplicationUser().getEmail());
-//        return "Success";
     }
 
     public String buildEmailMessage(String username, String link) {

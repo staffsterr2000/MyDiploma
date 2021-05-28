@@ -1,10 +1,11 @@
-package com.stasroshchenko.diploma.service;
+package com.stasroshchenko.diploma.service.application.user;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.repository.ApplicationUserRepository;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
+import com.stasroshchenko.diploma.service.ConfirmationTokenService;
 import com.stasroshchenko.diploma.util.TokenHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class ApplicationUserService implements UserDetailsService {
+class ApplicationUserServiceReal implements UserDetailsService {
 
     private final ApplicationUserRepository applicationUserRepository;
     private final PasswordEncoder passwordEncoder;
@@ -49,12 +50,7 @@ public class ApplicationUserService implements UserDetailsService {
                 .orElseThrow(() -> new IllegalStateException("User with " + email + " email doesn't exist"));
     }
 
-    public void enableUserByEmail(String email) {
-        loadUserByOnlyEmail(email).setEnabled(true);
-    }
-
-
-    public String signUpUser(ApplicationUser rawUser) {
+    public ApplicationUser loadUserByUser(ApplicationUser rawUser) {
         String userUsername = rawUser.getUsername();
         String userEmail = rawUser.getEmail();
 
@@ -64,50 +60,65 @@ public class ApplicationUserService implements UserDetailsService {
                 applicationUserRepository.findByUsername(userUsername);
 
         if (userByEmail.isPresent() && userByUsername.isPresent()) {
-            ConfirmationToken unconfirmedToken =
-                    confirmationTokenService.getAllConfirmationTokens().stream()
-                            .filter(confirmationToken ->
-                                    rawUserAndEncodedUserEquality(rawUser, confirmationToken.getApplicationUser()))
-                            .filter(confirmationToken ->
-                                    confirmationToken.getConfirmedAt() == null)
-                            .findFirst()
-                            .orElseThrow(() -> new IllegalStateException(
-                                    String.format("Email %s and username %s has already been taken", userEmail, userUsername)
-                            ));
-
-            ApplicationUser userFromDB = unconfirmedToken.getApplicationUser();
-
-            ConfirmationToken newConfirmationToken =
-                    TokenHelper.createConfirmationToken(userFromDB);
-            String token = newConfirmationToken.getToken();
-
-            confirmationTokenService.deleteConfirmationToken(unconfirmedToken);
-            confirmationTokenService.saveConfirmationToken(newConfirmationToken);
-
-            return token;
-
-        } else if (userByUsername.isPresent()) {
+            throw new IllegalStateException(
+                    String.format("Email %s and username %s has already been taken", userEmail, userUsername)
+            );
+        }
+        if (userByUsername.isPresent()) {
             throw new IllegalStateException(
                     String.format("Username %s has already been taken", userUsername)
             );
-        } else if (userByEmail.isPresent()) {
+        }
+        if (userByEmail.isPresent()) {
             throw new IllegalStateException(
                     String.format("Email %s has already been taken", userEmail)
             );
         }
 
+
+        return rawUser;
+    }
+
+    public void enableUserByEmail(String email) {
+        loadUserByOnlyEmail(email).setEnabled(true);
+    }
+
+    public String signUpUser(ApplicationUser rawUser) {
+        ApplicationUser user = loadUserByUser(rawUser);
+
         String encodedPassword = passwordEncoder
-                .encode(rawUser.getPassword());
-        rawUser.setPassword(encodedPassword);
-        applicationUserRepository.save(rawUser);
+                .encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        applicationUserRepository.save(user);
 
         ConfirmationToken confirmationToken =
-                TokenHelper.createConfirmationToken(rawUser);
+                TokenHelper.createConfirmationToken(user);
 
         String token = confirmationToken.getToken();
         confirmationTokenService.saveConfirmationToken(confirmationToken);
 
         return token;
+    }
+
+    public String resendConfirmationToken(ApplicationUser user) {
+        ConfirmationToken unconfirmedToken =
+                confirmationTokenService.getAllConfirmationTokens().stream()
+                        .filter(confirmationToken ->
+                                rawUserAndEncodedUserEquality(user, confirmationToken.getApplicationUser()))
+                        .filter(confirmationToken ->
+                                confirmationToken.getConfirmedAt() == null)
+                        .findFirst()
+                        .orElseThrow(() -> new IllegalStateException("No such user in database"));
+
+        ApplicationUser userFromDB = unconfirmedToken.getApplicationUser();
+
+        ConfirmationToken newConfirmationToken =
+                TokenHelper.createConfirmationToken(userFromDB);
+
+        confirmationTokenService.deleteConfirmationToken(unconfirmedToken);
+        confirmationTokenService.saveConfirmationToken(newConfirmationToken);
+
+        return newConfirmationToken.getToken();
     }
 
     private boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
@@ -117,37 +128,15 @@ public class ApplicationUserService implements UserDetailsService {
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
     }
 
-    private void signUpInitialUser(ApplicationUser user) {
-        String userUsername = user.getUsername();
-        String userEmail = user.getEmail();
-
-        Optional<ApplicationUser> userByEmail =
-                applicationUserRepository.findByEmail(userEmail);
-        Optional<ApplicationUser> userByUsername =
-                applicationUserRepository.findByUsername(userUsername);
-
-        if (userByEmail.isPresent() && userByUsername.isPresent()) {
-            throw new IllegalStateException(
-                    String.format("Email %s and username %s has already been taken",
-                            userEmail, userUsername));
-
-        } else if (userByUsername.isPresent()) {
-            throw new IllegalStateException(
-                    String.format("Username %s has already been taken", userUsername)
-            );
-
-        } else if (userByEmail.isPresent()) {
-            throw new IllegalStateException(
-                    String.format("Email %s has already been taken", userEmail)
-            );
-        }
+    private void signUpInitialUser(ApplicationUser rawUser) {
+        ApplicationUser user = loadUserByUser(rawUser);
 
         String encodedPassword = passwordEncoder
                 .encode(user.getPassword());
         user.setPassword(encodedPassword);
-        user.setEnabled(true);
         applicationUserRepository.save(user);
 
+        enableUserByEmail(user.getEmail());
     }
 
     @Bean
