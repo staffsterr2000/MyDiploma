@@ -169,6 +169,21 @@ class ApplicationUserServiceReal implements UserDetailsService {
             );
 
             signUpInitialUser(user2);
+
+            ApplicationUser user3 = new ApplicationUser(
+                    new DoctorData(
+                            "Varvara",
+                            "Chernous",
+                            LocalDate.of(1988, Month.APRIL, 14),
+                            10,
+                            3
+                    ),
+                    "varya69",
+                    "varya69@gmail.com",
+                    "password"
+            );
+
+            signUpInitialUser(user3);
         };
     }
 

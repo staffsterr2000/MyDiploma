@@ -1,4 +1,4 @@
-package com.stasroshchenko.diploma.controller;
+package com.stasroshchenko.diploma.controller.profile;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.service.application.user.ApplicationUserService;
