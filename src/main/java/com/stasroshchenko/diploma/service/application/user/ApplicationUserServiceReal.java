@@ -1,10 +1,10 @@
 package com.stasroshchenko.diploma.service.application.user;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.repository.ApplicationUserRepository;
-import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import com.stasroshchenko.diploma.service.ConfirmationTokenService;
 import com.stasroshchenko.diploma.util.TokenHelper;
 import lombok.AllArgsConstructor;
@@ -134,9 +134,9 @@ class ApplicationUserServiceReal implements UserDetailsService {
         String encodedPassword = passwordEncoder
                 .encode(user.getPassword());
         user.setPassword(encodedPassword);
-        applicationUserRepository.save(user);
+        user.setEnabled(true);
 
-        enableUserByEmail(user.getEmail());
+        applicationUserRepository.save(user);
     }
 
     @Bean

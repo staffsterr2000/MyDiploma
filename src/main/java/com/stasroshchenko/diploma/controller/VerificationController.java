@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/verification")
 @AllArgsConstructor
@@ -23,7 +21,7 @@ public class VerificationController {
 
     @GetMapping
     public String getVerificationView(
-            @Valid @ModelAttribute("redirectedRequest")
+            @ModelAttribute("redirectedRequest")
                     RegistrationRequest request) {
 
         return "verification";
@@ -31,7 +29,7 @@ public class VerificationController {
 
     @PostMapping("/resend")
     public String resendConfirmationToken(
-            @Valid @ModelAttribute RegistrationRequest request,
+            @ModelAttribute RegistrationRequest request,
             BindingResult result,
             RedirectAttributes redirectAttributes
     ) {
