@@ -2,8 +2,8 @@ package com.stasroshchenko.diploma.service;
 
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
-import com.stasroshchenko.diploma.service.application.user.ApplicationUserService;
-import com.stasroshchenko.diploma.service.mail.EmailSender;
+import com.stasroshchenko.diploma.service.user.ApplicationUserService;
+import com.stasroshchenko.diploma.service.email.EmailSender;
 import com.stasroshchenko.diploma.entity.RegistrationRequest;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import lombok.AllArgsConstructor;

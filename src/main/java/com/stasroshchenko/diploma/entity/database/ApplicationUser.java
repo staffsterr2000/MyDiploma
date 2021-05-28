@@ -54,6 +54,9 @@ public class ApplicationUser implements UserDetails {
     private String password;
 
     @Column(nullable = false)
+    private String imageLink = "default.jpg";
+
+    @Column(nullable = false)
     private boolean isAccountLocked;
 
     @Column(nullable = false)

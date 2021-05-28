@@ -1,4 +1,4 @@
-package com.stasroshchenko.diploma.service.mail;
+package com.stasroshchenko.diploma.service.email;
 
 public interface EmailSender {
 

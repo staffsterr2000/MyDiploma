@@ -1,9 +1,10 @@
-package com.stasroshchenko.diploma.service.application.user;
+package com.stasroshchenko.diploma.service.user;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import com.stasroshchenko.diploma.repository.ApplicationUserRepository;
 import com.stasroshchenko.diploma.service.ConfirmationTokenService;
 import com.stasroshchenko.diploma.util.TokenHelper;
@@ -77,6 +78,11 @@ class ApplicationUserServiceReal implements UserDetailsService {
 
 
         return rawUser;
+    }
+
+    public ApplicationUser loadUserByPersonData(PersonData personData) {
+        return applicationUserRepository.findByPersonData(personData)
+                .orElseThrow(() -> new IllegalStateException("User with " + personData + " data doesn't exist"));
     }
 
     public void enableUserByEmail(String email) {
@@ -154,6 +160,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
                     "lobanov_semen@gmail.com",
                     "password"
             );
+            user1.setImageLink("lobanov_semen.jpg");
 
             signUpInitialUser(user1);
 

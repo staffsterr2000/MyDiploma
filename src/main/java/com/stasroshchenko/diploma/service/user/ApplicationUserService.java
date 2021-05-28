@@ -1,7 +1,7 @@
-package com.stasroshchenko.diploma.service.application.user;
+package com.stasroshchenko.diploma.service.user;
 
-import com.stasroshchenko.diploma.entity.RegistrationRequest;
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -14,20 +14,24 @@ public class ApplicationUserService {
 
     private final ApplicationUserServiceReal applicationUserServiceReal;
 
-    public ApplicationUser loadUserByUsernameOrEmail(String input) throws UsernameNotFoundException {
+    public ApplicationUser getByUsernameOrEmail(String input) throws UsernameNotFoundException {
         return applicationUserServiceReal.loadUserByUsername(input);
     }
 
-    public ApplicationUser loadUserByUsername(String username) {
+    public ApplicationUser getByUsername(String username) {
         return applicationUserServiceReal.loadUserByOnlyUsername(username);
     }
 
-    public ApplicationUser loadUserByEmail(String email) {
+    public ApplicationUser getByEmail(String email) {
         return applicationUserServiceReal.loadUserByOnlyEmail(email);
     }
 
-    public ApplicationUser loadUserByUser(ApplicationUser user) {
+    public ApplicationUser getByUser(ApplicationUser user) {
         return applicationUserServiceReal.loadUserByUser(user);
+    }
+
+    public ApplicationUser getByPersonData(PersonData personData) {
+        return applicationUserServiceReal.loadUserByPersonData(personData);
     }
 
     public void enableUserByEmail(String email) {

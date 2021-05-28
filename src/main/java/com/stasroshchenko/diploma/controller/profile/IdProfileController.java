@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.controller.profile;
 
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
-import com.stasroshchenko.diploma.service.application.user.ApplicationUserService;
+import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +23,7 @@ public class IdProfileController {
     ) {
 
         ApplicationUser userByUsername =
-                applicationUserService.loadUserByUsername(username);
+                applicationUserService.getByUsername(username);
         model.addAttribute("requiredUser", userByUsername);
 
         return "id_profile";

@@ -80,12 +80,14 @@
         <div class="container">
             <h1>Our specialists</h1>
             <ul>
-                <li th:each="doctor : ${allDoctors}" th:object="${doctor}">
-<!--                    <img src="" alt="|*{firstName} *{lastName} face|" width="100" height="100"/>-->
-                    <h2 th:text="|*{firstName} *{lastName}|"/>
+
+                <li th:each="doctorUser : ${allDoctorUsers}" th:object="${doctorUser.personData}">
+                    <img th:src="@{'/images/' + ${doctorUser.imageLink}}" width="150" height="150"/>
+                    <a th:href="@{'/id/' + ${doctorUser.username}}"><h2 th:text="|*{firstName} *{lastName}|"/></a>
                     <p th:text="|Experience: *{experienceAge} years|"/>
                     <p th:text="|Room: *{room}|"/>
                 </li>
+
             </ul>
         </div>
     </section>

@@ -2,7 +2,7 @@ package com.stasroshchenko.diploma.annotation.validator;
 
 import com.stasroshchenko.diploma.annotation.constraint.UniqueEmailConstraint;
 import com.stasroshchenko.diploma.entity.database.ApplicationUser;
-import com.stasroshchenko.diploma.service.application.user.ApplicationUserService;
+import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 
 import javax.validation.ConstraintValidator;
@@ -21,7 +21,7 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmailCons
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         try {
             ApplicationUser user = applicationUserService
-                    .loadUserByEmail(email);
+                    .getByEmail(email);
         } catch (IllegalStateException ex) {
             return true;
         }
