@@ -16,14 +16,11 @@ import java.time.LocalDate;
 @DiscriminatorValue(value = "CLIENT")
 public class ClientData extends PersonData {
 
-    private String complaint;
+    public ClientData(String firstName,
+                      String lastName,
+                      LocalDate dateOfBirth) {
 
-    public ClientData(String firstName, String lastName, LocalDate dateOfBirth) {
         super(firstName, lastName, dateOfBirth);
-    }
-
-    public void addComplaint(String complaint) {
-        this.complaint = complaint;
     }
 
 }

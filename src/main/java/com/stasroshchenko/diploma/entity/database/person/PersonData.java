@@ -20,7 +20,8 @@ public abstract class PersonData {
     @Id
     @SequenceGenerator(
             name = SEQUENCE_NAME,
-            sequenceName = SEQUENCE_NAME
+            sequenceName = SEQUENCE_NAME,
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

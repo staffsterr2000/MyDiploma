@@ -15,8 +15,18 @@ import java.time.LocalDate;
 @DiscriminatorValue(value = "DOCTOR")
 public class DoctorData extends PersonData {
 
-    public DoctorData(String firstName, String lastName, LocalDate dateOfBirth) {
+    private Integer room;
+    private Integer experienceAge;
+
+    public DoctorData(String firstName,
+                      String lastName,
+                      LocalDate dateOfBirth,
+                      Integer room,
+                      Integer experienceAge) {
+
         super(firstName, lastName, dateOfBirth);
+        this.room = room;
+        this.experienceAge = experienceAge;
     }
 
 }

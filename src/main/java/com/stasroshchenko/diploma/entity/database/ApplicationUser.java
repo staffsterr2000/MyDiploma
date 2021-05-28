@@ -25,7 +25,8 @@ public class ApplicationUser implements UserDetails {
     @Id
     @SequenceGenerator(
             name = SEQUENCE_NAME,
-            sequenceName = SEQUENCE_NAME
+            sequenceName = SEQUENCE_NAME,
+            initialValue = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -35,15 +36,27 @@ public class ApplicationUser implements UserDetails {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumns({
-            @JoinColumn(name="person_id", referencedColumnName="id")
-//            @JoinColumn(name="person_first_name", referencedColumnName="firstName")
-    })
+//    @JoinColumn(name="person_id", referencedColumnName="id")
+    @JoinColumn(
+            nullable = false,
+            name = "person_id",
+            foreignKey = @ForeignKey(name="FK_PERSON_DATA")
+    )
     private PersonData personData;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private boolean isAccountLocked;
+
+    @Column(nullable = false)
     private boolean isEnabled = false;
 
     public ApplicationUser(PersonData personData,
