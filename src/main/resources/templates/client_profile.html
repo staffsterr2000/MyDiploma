@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,13 +28,68 @@
 </header>
 <main>
     <section class="profile">
+        <div th:object="${principal.personData}"  class="container">
+            <img th:src="@{'/images/' + ${principal.imageLink}}" width="250" height="250"/>
+            <h2 th:text="|*{firstName} *{lastName}|"/>
+        </div>
+    </section>
+    <br/>
+    <hr/>
+    <br/>
+    <section class="visits">
         <div class="container">
-            <h1>Hi baby, do you wanna rock?</h1>
-            <form >
-                <div class="input-group">
-                    <span class="input-group-text">describe your complaint</span>
-                    <textarea class="form-control" aria-label="With textarea"></textarea>
-                    <button type="submit" class="btn btn-primary">sign up</button>
+            <h1 th:text="'Your visits (' + ${#lists.size(allVisits)} + '):'"/>
+            <th:block th:unless="${#lists.isEmpty(allVisits)}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Doctor name</th>
+                        <th>Complaint</th>
+                        <th>Booked for</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="visit : ${allVisits}" th:object="${visit}">
+                        <td th:text="*{id}"/>
+                        <td th:text="*{doctorData.firstName} + *{doctorData.lastName}"/>
+                        <td th:text="*{complaint}"/>
+                        <td th:text="*{time}"/>
+                        <td th:text="*{status}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
+    </section>
+
+    <br/>
+    <hr/>
+    <br/>
+
+    <section class="book">
+        <div class="container">
+            <h1>Register a new visit:</h1>
+            <form th:action="@{/visit/create-as-client}" th:object="${visitToSend}" method="post">
+<!--                <div class="input-group">-->
+<!--                    <span class="input-group-text">describe your complaint</span>-->
+<!--                    <textarea class="form-control" aria-label="With textarea"></textarea>-->
+<!--                    <button type="submit">sign up</button>-->
+<!--                </div>-->
+                <div>
+                    <span>Describe your complaint</span>
+                    <textarea th:field="*{complaint}" class="form-control"></textarea>
+
+                    <select th:name="doctorDataId">
+                        <option th:each="doctor : ${allDoctors}"
+                                th:value="${doctor.id}"
+                                th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
+
+                        </option>
+                    </select>
+
+                    <button type="submit">Book</button>
                 </div>
             </form>
         </div>

@@ -2,6 +2,12 @@ package com.stasroshchenko.diploma.controller.profile;
 
 import com.google.common.collect.Lists;
 import com.stasroshchenko.diploma.entity.Client;
+import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.Visit;
+import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.service.PersonDataService;
+import com.stasroshchenko.diploma.service.VisitService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +19,11 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
+@AllArgsConstructor
 public class ProfileController {
+
+    private final VisitService visitService;
+    private final PersonDataService personDataService;
 
     @GetMapping
     public String getProfileView(Authentication authentication, Model model) {
@@ -21,27 +31,46 @@ public class ProfileController {
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
             switch (grantedAuthority.getAuthority()) {
                 case "ROLE_CLIENT":
-                    return getClientProfileView();
+                    return getClientProfileView(authentication, model);
                 case "ROLE_DOCTOR":
-                    return getDoctorProfileView(model);
+                    return getDoctorProfileView(authentication, model);
                 case "ROLE_ADMIN":
-                    return getAdminProfileView();
+                    return getAdminProfileView(authentication, model);
             }
         }
 
         throw new IllegalStateException("Unknown role");
     }
 
-    public String getClientProfileView() {
+    public String getClientProfileView(Authentication authentication, Model model) {
+        ApplicationUser principal =
+                (ApplicationUser) authentication.getPrincipal();
+        model.addAttribute("principal", principal);
+
+        List<Visit> allVisits = visitService
+                .getAllVisitsByPerson(principal.getPersonData());
+        model.addAttribute("allVisits", allVisits);
+
+        List<DoctorData> allDoctors =
+                personDataService.getAllDoctors();
+        model.addAttribute("allDoctors", allDoctors);
+
+        model.addAttribute("visitToSend", new Visit());
         return "client_profile";
     }
 
-    public String getDoctorProfileView(Model model) {
-        model.addAttribute(new Client());
+    public String getDoctorProfileView(Authentication authentication, Model model) {
+        ApplicationUser principal =
+                (ApplicationUser) authentication.getPrincipal();
+        model.addAttribute("principal", principal);
+        List<Visit> allVisits = visitService
+                .getAllVisitsByPerson(principal.getPersonData());
+        model.addAttribute("allVisits", allVisits);
+//        model.addAttribute(new Client());
         return "doctor_profile";
     }
 
-    public String getAdminProfileView() {
+    public String getAdminProfileView(Authentication authentication, Model model) {
         return "admin_profile";
     }
 

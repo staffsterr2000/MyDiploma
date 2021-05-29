@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,7 @@
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+<!--    <link rel="stylesheet" href="css/main.css">-->
 </head>
 
 <body>
@@ -19,16 +20,27 @@
                 <a th:href="@{/}">DeDentist?</a>
             </div>
 
-            <div class="right-menu">
-                <a th:href="@{/profile}">Profile</a>
-                <a th:href="@{/logout}">Log out</a>
-            </div>
+            <th:block th:switch="${auth.principal}">
+                <div th:case="'anonymousUser'" class="right-menu">
+                    <a th:href="@{/registration}">Sign up</a>
+                    <a th:href="@{/login}">Sign in</a>
+                </div>
+                <div th:case="*" class="right-menu">
+                    <a th:href="@{/profile}">Profile</a>
+                    <a th:href="@{/logout}">Log out</a>
+                </div>
+            </th:block>
         </div>
     </div>
 </header>
 <main>
-    <div th:object="${requiredUser}">
-        <h1 th:utext="|It's *{personData.firstName} *{personData.lastName} page.|"/>
+    <div th:switch="${userRole}" th:object="${requiredUser.personData}"  class="container">
+            <img th:src="@{'/images/' + ${requiredUser.imageLink}}" width="250" height="250"/>
+            <h2 th:text="|*{firstName} *{lastName}|"/>
+        <th:block th:case="'DoctorData'">
+            <p th:text="|Experience: *{experienceAge} years|"/>
+            <p th:text="|Room: *{room}|"/>
+        </th:block>
     </div>
 </main>
 

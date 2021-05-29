@@ -2,10 +2,8 @@ package com.stasroshchenko.diploma.entity.database;
 
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.stasroshchenko.diploma.util.VisitStatus;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,7 +36,7 @@ public class Visit {
             name = "doctor_id",
             foreignKey = @ForeignKey(name="FK_DOCTOR_DATA")
     )
-    private DoctorData doctor;
+    private DoctorData doctorData;
 
     @OneToOne
     @JoinColumn(
@@ -51,7 +49,10 @@ public class Visit {
     @Column(nullable = false)
     private String complaint;
     private LocalDateTime acceptedAt;
-    private LocalDateTime time;
-    private Boolean isOccurred;
+    private LocalDateTime appointsAt;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private VisitStatus status;
 
 }

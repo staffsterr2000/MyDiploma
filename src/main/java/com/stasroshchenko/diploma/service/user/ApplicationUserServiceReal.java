@@ -163,17 +163,17 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user1.setImageLink("lobanov_semen.jpg");
             signUpInitialUser(user1);
 
-//            ApplicationUser user2 = new ApplicationUser(
-//                    new ClientData(
-//                            "Stanislav",
-//                            "Roshchenko",
-//                            LocalDate.of(2000, Month.JULY, 10)
-//                    ),
-//                    "roshchenko_stas",
-//                    "roshchenko_stas@gmail.com",
-//                    "password"
-//            );
-//            signUpInitialUser(user2);
+            ApplicationUser user2 = new ApplicationUser(
+                    new ClientData(
+                            "Stanislav",
+                            "Roshchenko",
+                            LocalDate.of(2000, Month.JULY, 10)
+                    ),
+                    "roshchenko_stas",
+                    "roshchenko_stas@gmail.com",
+                    "password"
+            );
+            signUpInitialUser(user2);
 
             ApplicationUser user3 = new ApplicationUser(
                     new DoctorData(

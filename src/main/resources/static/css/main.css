@@ -2,11 +2,15 @@
 
 html {
   background-color: #56baed;
+  height: 100%;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  height: 100vh;
+}
+
+table, th, td {
+  border: 1px solid black;
 }
 
 a {
@@ -23,7 +27,6 @@ h2 {
   text-transform: uppercase;
   display:inline-block;
   margin: 40px 8px 10px 8px;
-  color: #cccccc;
 }
 
 .error,

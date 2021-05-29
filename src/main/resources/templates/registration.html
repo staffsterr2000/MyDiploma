@@ -11,53 +11,57 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-<form th:object="${request}" th:action="@{/registration}" method="post">
-    <div class="mb-3">
-        <label for="firstName" class="form-label">First Name</label>
-        <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
-    </div>
-    <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"/>
+<div class="container">
+    <div class="sign-up">
+        <form th:object="${request}" th:action="@{/registration}" method="post">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
+            </div>
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"/>
 
-    <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name</label>
-        <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
-    </div>
-    <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"/>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
+            </div>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"/>
 
-    <div class="mb-3">
-        <label for="date-of-birth" class="form-label">Date of Birth (DD/MM/YYYY)</label>
-        <input type="text" th:field="*{dateOfBirthInput}" class="form-control" id="date-of-birth">
-    </div>
-    <p th:if="${#fields.hasErrors('dateOfBirthInput')}"
-       th:errors="*{dateOfBirthInput}" th:errorclass="error"/>
-    <p th:if="${!#fields.hasErrors('dateOfBirthInput')} and ${#fields.hasErrors('dateOfBirth')}"
-       th:errors="*{dateOfBirth}" th:errorclass="error"/>
+            <div class="mb-3">
+                <label for="date-of-birth" class="form-label">Date of Birth (DD/MM/YYYY)</label>
+                <input type="text" th:field="*{dateOfBirthInput}" class="form-control" id="date-of-birth">
+            </div>
+            <p th:if="${#fields.hasErrors('dateOfBirthInput')}"
+               th:errors="*{dateOfBirthInput}" th:errorclass="error"/>
+            <p th:if="${!#fields.hasErrors('dateOfBirthInput')} and ${#fields.hasErrors('dateOfBirth')}"
+               th:errors="*{dateOfBirth}" th:errorclass="error"/>
 
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" th:field="*{username}" class="form-control" id="username">
-    </div>
-    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"/>
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" th:field="*{username}" class="form-control" id="username">
+            </div>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"/>
 
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="text" th:field="*{email}" class="form-control" id="email">
-    </div>
-    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"/>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" th:field="*{email}" class="form-control" id="email">
+            </div>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"/>
 
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" th:field="*{password}" class="form-control" id="password">
-    </div>
-    <div class="mb-3">
-        <label for="repeatedPassword" class="form-label">Repeat Your Password</label>
-        <input type="password" th:field="*{repeatedPassword}" class="form-control" id="repeatedPassword">
-    </div>
-    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"/>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+                <label for="repeatedPassword" class="form-label">Repeat Your Password</label>
+                <input type="password" th:field="*{repeatedPassword}" class="form-control" id="repeatedPassword">
+            </div>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"/>
 
-    <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+            <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
