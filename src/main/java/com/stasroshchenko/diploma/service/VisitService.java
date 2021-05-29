@@ -3,7 +3,6 @@ package com.stasroshchenko.diploma.service;
 import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
-import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import com.stasroshchenko.diploma.repository.VisitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,16 +19,12 @@ public class VisitService {
         return visitRepository.findAll();
     }
 
-    public List<Visit> getAllVisitsByPerson(PersonData personData) {
-        if (personData instanceof ClientData) {
-            return visitRepository.findByClientData((ClientData) personData);
-        }
+    public List<Visit> getAllVisitsByClient(ClientData clientData) {
+        return visitRepository.findByClientData(clientData);
+    }
 
-        if (personData instanceof DoctorData) {
-            return visitRepository.findByDoctorData((DoctorData) personData);
-        }
-
-        throw new IllegalStateException("Unknown type");
+    public List<Visit> getAllVisitsByDoctor(DoctorData doctorData) {
+        return visitRepository.findByDoctorData(doctorData);
     }
 
     public void saveVisit(Visit visit) {

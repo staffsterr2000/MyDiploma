@@ -50,7 +50,7 @@ public class ProfileController {
         model.addAttribute("principal", principal);
 
         List<Visit> allVisits = visitService
-                .getAllVisitsByPerson(principal.getClientData());
+                .getAllVisitsByClient(principal.getClientData());
         model.addAttribute("allVisits", allVisits);
 
         List<DoctorData> allDoctors =
@@ -66,7 +66,7 @@ public class ProfileController {
                 (ApplicationUserDoctor) authentication.getPrincipal();
         model.addAttribute("principal", principal);
         List<Visit> allVisits = visitService
-                .getAllVisitsByPerson(principal.getDoctorData());
+                .getAllVisitsByDoctor(principal.getDoctorData());
         model.addAttribute("allVisits", allVisits);
 //        model.addAttribute(new Client());
         return "doctor_profile";

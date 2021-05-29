@@ -24,7 +24,7 @@ public class ApplicationUserClient extends ApplicationUser {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             nullable = false,
-            name = "client_id",
+            name = "client_data_id",
             foreignKey = @ForeignKey(name="FK_CLIENT_DATA")
     )
     private ClientData clientData;

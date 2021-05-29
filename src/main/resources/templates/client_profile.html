@@ -68,10 +68,10 @@
     <hr/>
     <br/>
 
-    <section class="book">
+    <section class="make-appointment">
         <div class="container">
-            <h1>Register a new visit:</h1>
-            <form th:action="@{/visit/create-as-client}" th:object="${visitToSend}" method="post">
+            <h1>Make an appointment:</h1>
+            <form th:action="@{/visit/as-client/create}" th:object="${visitToSend}" method="post">
 <!--                <div class="input-group">-->
 <!--                    <span class="input-group-text">describe your complaint</span>-->
 <!--                    <textarea class="form-control" aria-label="With textarea"></textarea>-->
@@ -89,7 +89,7 @@
                         </option>
                     </select>
 
-                    <button type="submit">Book</button>
+                    <button type="submit">Send</button>
                 </div>
             </form>
         </div>

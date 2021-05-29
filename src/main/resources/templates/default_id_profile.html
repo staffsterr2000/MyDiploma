@@ -34,18 +34,14 @@
     </div>
 </header>
 <main>
-    <div th:switch="${userRole}" th:object="${requiredUser}"  class="container">
-        <th:block th:case="'ApplicationUserClient'">
+    <section class="profile">
+        <div th:object="${requiredUser}"  class="container">
+
             <img th:src="@{'/images/' + *{imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{clientData.firstName} *{clientData.lastName}|"/>
-        </th:block>
-        <th:block th:case="'ApplicationUserDoctor'">
-            <img th:src="@{'/images/' + *{imageLink}}" width="250" height="250"/>
-            <h2 th:text="|*{doctorData.firstName} *{doctorData.lastName}|"/>
-            <p th:text="|Experience: *{doctorData.experienceAge} years|"/>
-            <p th:text="|Room: *{doctorData.room}|"/>
-        </th:block>
-    </div>
+
+        </div>
+    </section>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

@@ -43,7 +43,7 @@
 
     <section class="visits">
         <div class="container">
-            <h1 th:text="'Visits to you (' + ${#lists.size(allVisits)} + '):'"/>
+            <h1 th:text="'Visiting you (' + ${#lists.size(allVisits)} + '):'"/>
             <th:block th:unless="${#lists.isEmpty(allVisits)}">
                 <table>
                     <thead>

@@ -1,11 +1,12 @@
 package com.stasroshchenko.diploma.controller.profile;
 
+import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
-import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class IdProfileController {
     private final ApplicationUserService applicationUserService;
 
     @GetMapping("/{username}")
+    @PreAuthorize("isAuthenticated()")
     public String getIdProfileView(
             @PathVariable("username") String username,
             Model model) {
@@ -30,32 +32,24 @@ public class IdProfileController {
                 SecurityContextHolder
                         .getContext()
                         .getAuthentication();
-        model.addAttribute("auth", authentication);
 
-        boolean isAnonymous = authentication.getAuthorities().stream()
-                .anyMatch(authority -> authority.getAuthority().equals("ROLE_ANONYMOUS"));
+        ApplicationUser authenticatedUser =
+                (ApplicationUser) authentication.getPrincipal();
 
-        try {
-            ApplicationUser userByUsername =
-                    applicationUserService.getByUsername(username);
+        model.addAttribute("isAuthUserClient",
+                authenticatedUser instanceof ApplicationUserClient);
 
-            if (isAnonymous &&
-                    !(userByUsername instanceof ApplicationUserDoctor)) {
+        ApplicationUser userByUsername =
+                applicationUserService.getByUsername(username);
 
-                throw new AccessDeniedException("Forbidden");
-            }
+        model.addAttribute("requiredUser", userByUsername);
 
-            model.addAttribute("userRole", userByUsername.getClass().getSimpleName());
-            model.addAttribute("requiredUser", userByUsername);
-
-        } catch (IllegalStateException ex) {
-            if (isAnonymous) {
-                throw new AccessDeniedException("Forbidden");
-            }
-            throw ex;
+        if (userByUsername instanceof ApplicationUserDoctor) {
+            model.addAttribute("visitToSend", new Visit());
+            return "doctor_id_profile";
         }
 
-        return "id_profile";
+        return "default_id_profile";
     }
 
 }

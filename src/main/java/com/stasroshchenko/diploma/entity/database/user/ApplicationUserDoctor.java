@@ -21,6 +21,19 @@ import java.util.Collection;
 @Entity
 public class ApplicationUserDoctor extends ApplicationUser {
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            nullable = false,
+            name = "doctor_data_id",
+            foreignKey = @ForeignKey(name="FK_DOCTOR_DATA")
+    )
+    private DoctorData doctorData;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_DOCTOR"));
+    }
+
     public ApplicationUserDoctor(
             DoctorData doctorData,
             String username,
@@ -29,19 +42,6 @@ public class ApplicationUserDoctor extends ApplicationUser {
 
         super(username, email, password);
         this.doctorData= doctorData;
-    }
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(
-            nullable = false,
-            name = "doctor_id",
-            foreignKey = @ForeignKey(name="FK_DOCTOR_DATA")
-    )
-    private DoctorData doctorData;
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_DOCTOR"));
     }
 
 }

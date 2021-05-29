@@ -22,7 +22,7 @@ public class VisitController {
     private final VisitService visitService;
     private final PersonDataService personDataService;
 
-    @PostMapping("/create-as-client")
+    @PostMapping("/as-client/create")
     public String createVisitAsClient(
             @RequestParam("doctorDataId") Long doctorDataId,
             @ModelAttribute("visitToSend") Visit visit,
