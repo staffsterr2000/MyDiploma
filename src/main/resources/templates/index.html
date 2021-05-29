@@ -83,6 +83,7 @@
 
                 <li th:each="doctorUser : ${allDoctorUsers}" th:object="${doctorUser.personData}">
                     <img th:src="@{'/images/' + ${doctorUser.imageLink}}" width="150" height="150"/>
+                    <p th:text="'/images/' + ${doctorUser.imageLink}"/>
                     <a th:href="@{'/id/' + ${doctorUser.username}}"><h2 th:text="|*{firstName} *{lastName}|"/></a>
                     <p th:text="|Experience: *{experienceAge} years|"/>
                     <p th:text="|Room: *{room}|"/>

@@ -161,21 +161,19 @@ class ApplicationUserServiceReal implements UserDetailsService {
                     "password"
             );
             user1.setImageLink("lobanov_semen.jpg");
-
             signUpInitialUser(user1);
 
-            ApplicationUser user2 = new ApplicationUser(
-                    new ClientData(
-                            "Stanislav",
-                            "Roshchenko",
-                            LocalDate.of(2000, Month.JULY, 10)
-                    ),
-                    "roshchenko_stas",
-                    "roshchenko_stas@gmail.com",
-                    "password"
-            );
-
-            signUpInitialUser(user2);
+//            ApplicationUser user2 = new ApplicationUser(
+//                    new ClientData(
+//                            "Stanislav",
+//                            "Roshchenko",
+//                            LocalDate.of(2000, Month.JULY, 10)
+//                    ),
+//                    "roshchenko_stas",
+//                    "roshchenko_stas@gmail.com",
+//                    "password"
+//            );
+//            signUpInitialUser(user2);
 
             ApplicationUser user3 = new ApplicationUser(
                     new DoctorData(
@@ -189,8 +187,68 @@ class ApplicationUserServiceReal implements UserDetailsService {
                     "varya69@gmail.com",
                     "password"
             );
-
+            user3.setImageLink("chernous_varvara.jpg");
             signUpInitialUser(user3);
+
+            ApplicationUser user4 = new ApplicationUser(
+                    new DoctorData(
+                            "Andrey",
+                            "Bikov",
+                            LocalDate.of(1966, Month.JULY, 22),
+                            5,
+                            25
+                    ),
+                    "bikov_v_kedah",
+                    "bikov@gmail.com",
+                    "password"
+            );
+            user4.setImageLink("bikov_andrey.jpg");
+            signUpInitialUser(user4);
+
+            ApplicationUser user5 = new ApplicationUser(
+                    new DoctorData(
+                            "Boris",
+                            "Levin",
+                            LocalDate.of(1986, Month.JANUARY, 15),
+                            5,
+                           10
+                    ),
+                    "levin_v_kedah",
+                    "levin_borya@gmail.com",
+                    "password"
+            );
+            user5.setImageLink("levin_boris.jpg");
+            signUpInitialUser(user5);
+
+            ApplicationUser user6 = new ApplicationUser(
+                    new DoctorData(
+                            "Ivan",
+                            "Kupitman",
+                            LocalDate.of(1963, Month.MARCH, 13),
+                            33,
+                           19
+                    ),
+                    "kupi_dom",
+                    "kupitman_vanya@gmail.com",
+                    "password"
+            );
+            user6.setImageLink("kupitman_ivan.jpg");
+            signUpInitialUser(user6);
+
+            ApplicationUser user7 = new ApplicationUser(
+                    new DoctorData(
+                            "Gleb",
+                            "Romanenko",
+                            LocalDate.of(1984, Month.SEPTEMBER, 19),
+                            14,
+                            6
+                    ),
+                    "gleb_roma",
+                    "glebgleb@gmail.com",
+                    "password"
+            );
+            user7.setImageLink("romanenko_gleb.jpg");
+            signUpInitialUser(user7);
         };
     }
 
