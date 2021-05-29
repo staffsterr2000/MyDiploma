@@ -1,11 +1,10 @@
 package com.stasroshchenko.diploma.entity.database;
 
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Polymorphism;
-import org.hibernate.annotations.PolymorphismType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

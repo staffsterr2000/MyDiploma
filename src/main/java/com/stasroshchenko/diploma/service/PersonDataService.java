@@ -5,24 +5,17 @@ import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import com.stasroshchenko.diploma.repository.person.ClientDataRepository;
 import com.stasroshchenko.diploma.repository.person.DoctorDataRepository;
-import com.stasroshchenko.diploma.repository.person.PersonDataRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class PersonDataService {
 
-    private final PersonDataRepository personDataRepository;
     private final DoctorDataRepository doctorDataRepository;
     private final ClientDataRepository clientDataRepository;
-
-    public List<PersonData> getAllPersons() {
-        return personDataRepository.findAll();
-    }
 
     public List<DoctorData> getAllDoctors() {
         return doctorDataRepository.findAll();
@@ -32,8 +25,15 @@ public class PersonDataService {
         return clientDataRepository.findAll();
     }
 
-    public PersonData getPersonById(Long id) {
-        return personDataRepository.findAll().stream()
+    public ClientData getClientById(Long id) {
+        return clientDataRepository.findAll().stream()
+                .filter(personData -> id.equals(personData.getId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Person with id " + id + " doesn't exist"));
+    }
+
+    public DoctorData getDoctorById(Long id) {
+        return doctorDataRepository.findAll().stream()
                 .filter(personData -> id.equals(personData.getId()))
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Person with id " + id + " doesn't exist"));

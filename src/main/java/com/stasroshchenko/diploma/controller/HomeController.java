@@ -1,6 +1,6 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.service.PersonDataService;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
@@ -22,10 +22,8 @@ public class HomeController {
     private final ApplicationUserService applicationUserService;
 
     @ModelAttribute("allDoctorUsers")
-    public List<ApplicationUser> getAllDoctorUsers() {
-        return personDataService.getAllDoctors().stream()
-                .map(applicationUserService::getByPersonData)
-                .collect(Collectors.toList());
+    public List<ApplicationUserDoctor> getAllDoctorUsers() {
+        return applicationUserService.getAllUserDoctors();
     }
 
     @GetMapping

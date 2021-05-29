@@ -29,7 +29,7 @@
 <!-- sam -->
 <main>
     <section class="profile">
-        <div th:object="${principal.personData}" class="container">
+        <div th:object="${principal.doctorData}" class="container">
             <img th:src="@{'/images/' + ${principal.imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{firstName} *{lastName}|"/>
 <!--            <p th:text="|Experience: *{experienceAge} years|"/>-->

@@ -28,7 +28,7 @@
 </header>
 <main>
     <section class="profile">
-        <div th:object="${principal.personData}"  class="container">
+        <div th:object="${principal.clientData}"  class="container">
             <img th:src="@{'/images/' + ${principal.imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{firstName} *{lastName}|"/>
         </div>
@@ -43,7 +43,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Id</th>
+<!--                        <th>Id</th>-->
                         <th>Doctor name</th>
                         <th>Complaint</th>
                         <th>Booked for</th>
@@ -52,10 +52,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="visit : ${allVisits}" th:object="${visit}">
-                        <td th:text="*{id}"/>
+<!--                        <td th:text="*{id}"/>-->
                         <td th:text="*{doctorData.firstName} + *{doctorData.lastName}"/>
                         <td th:text="*{complaint}"/>
-                        <td th:text="*{time}"/>
+                        <td th:text="*{appointsAt}"/>
                         <td th:text="*{status}"/>
                     </tr>
                     </tbody>

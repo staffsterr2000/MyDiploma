@@ -2,9 +2,11 @@ package com.stasroshchenko.diploma.controller.profile;
 
 import com.google.common.collect.Lists;
 import com.stasroshchenko.diploma.entity.Client;
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.service.PersonDataService;
 import com.stasroshchenko.diploma.service.VisitService;
 import lombok.AllArgsConstructor;
@@ -43,12 +45,12 @@ public class ProfileController {
     }
 
     public String getClientProfileView(Authentication authentication, Model model) {
-        ApplicationUser principal =
-                (ApplicationUser) authentication.getPrincipal();
+        ApplicationUserClient principal =
+                (ApplicationUserClient) authentication.getPrincipal();
         model.addAttribute("principal", principal);
 
         List<Visit> allVisits = visitService
-                .getAllVisitsByPerson(principal.getPersonData());
+                .getAllVisitsByPerson(principal.getClientData());
         model.addAttribute("allVisits", allVisits);
 
         List<DoctorData> allDoctors =
@@ -60,11 +62,11 @@ public class ProfileController {
     }
 
     public String getDoctorProfileView(Authentication authentication, Model model) {
-        ApplicationUser principal =
-                (ApplicationUser) authentication.getPrincipal();
+        ApplicationUserDoctor principal =
+                (ApplicationUserDoctor) authentication.getPrincipal();
         model.addAttribute("principal", principal);
         List<Visit> allVisits = visitService
-                .getAllVisitsByPerson(principal.getPersonData());
+                .getAllVisitsByPerson(principal.getDoctorData());
         model.addAttribute("allVisits", allVisits);
 //        model.addAttribute(new Client());
         return "doctor_profile";

@@ -1,8 +1,7 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.Visit;
-import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.service.PersonDataService;
 import com.stasroshchenko.diploma.service.VisitService;
@@ -28,12 +27,12 @@ public class VisitController {
             @RequestParam("doctorDataId") Long doctorDataId,
             @ModelAttribute("visitToSend") Visit visit,
             Authentication authentication) {
-        ApplicationUser principal = (ApplicationUser) authentication.getPrincipal();
+        ApplicationUserClient principal = (ApplicationUserClient) authentication.getPrincipal();
 
-        visit.setClientData((ClientData) principal.getPersonData());
+        visit.setClientData(principal.getClientData());
 
-        DoctorData doctorData = (DoctorData)
-                personDataService.getPersonById(doctorDataId);
+        DoctorData doctorData =
+                personDataService.getDoctorById(doctorDataId);
         visit.setDoctorData(doctorData);
 
         visit.setStatus(VisitStatus.SENT);

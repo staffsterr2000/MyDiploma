@@ -1,10 +1,16 @@
 package com.stasroshchenko.diploma.service.user;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.person.PersonData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 // applicationUserService delegator
 
@@ -30,8 +36,20 @@ public class ApplicationUserService {
         return applicationUserServiceReal.loadUserByUser(user);
     }
 
-    public ApplicationUser getByPersonData(PersonData personData) {
-        return applicationUserServiceReal.loadUserByPersonData(personData);
+    public ApplicationUserClient getByClientData(ClientData clientData) {
+        return applicationUserServiceReal.loadUserByClientData(clientData);
+    }
+
+    public ApplicationUserDoctor getByDoctorData(DoctorData doctorData) {
+        return applicationUserServiceReal.loadUserByDoctorData(doctorData);
+    }
+
+    public List<ApplicationUserClient> getAllUserClients() {
+        return applicationUserServiceReal.loadAllUserClients();
+    }
+
+    public List<ApplicationUserDoctor> getAllUserDoctors() {
+        return applicationUserServiceReal.loadAllUserDoctors();
     }
 
     public void enableUserByEmail(String email) {

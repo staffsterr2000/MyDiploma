@@ -1,7 +1,8 @@
 package com.stasroshchenko.diploma.service;
 
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import com.stasroshchenko.diploma.service.email.EmailSender;
 import com.stasroshchenko.diploma.entity.RegistrationRequest;
@@ -22,7 +23,7 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
 
     public ApplicationUser convertRegistrationRequestToApplicationUser(RegistrationRequest request) {
-        return new ApplicationUser(
+        return new ApplicationUserClient(
                 new ClientData(
                         request.getFirstName(),
                         request.getLastName(),

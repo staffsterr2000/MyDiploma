@@ -1,10 +1,11 @@
 package com.stasroshchenko.diploma.service.user;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
-import com.stasroshchenko.diploma.entity.database.person.PersonData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.repository.ApplicationUserRepository;
 import com.stasroshchenko.diploma.service.ConfirmationTokenService;
 import com.stasroshchenko.diploma.util.TokenHelper;
@@ -18,13 +19,16 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 class ApplicationUserServiceReal implements UserDetailsService {
 
     private final ApplicationUserRepository applicationUserRepository;
+
     private final PasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
@@ -76,13 +80,35 @@ class ApplicationUserServiceReal implements UserDetailsService {
             );
         }
 
-
         return rawUser;
     }
 
-    public ApplicationUser loadUserByPersonData(PersonData personData) {
-        return applicationUserRepository.findByPersonData(personData)
-                .orElseThrow(() -> new IllegalStateException("User with " + personData + " data doesn't exist"));
+    public ApplicationUserClient loadUserByClientData(ClientData clientData) {
+        return loadAllUserClients().stream()
+                .filter(client -> client.getClientData().equals(clientData))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("User with " + clientData + " data doesn't exist"));
+    }
+
+    public ApplicationUserDoctor loadUserByDoctorData(DoctorData doctorData) {
+        return loadAllUserDoctors().stream()
+                .filter(doctor -> doctor.getDoctorData().equals(doctorData))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("User with " + doctorData + " data doesn't exist"));
+    }
+
+    public List<ApplicationUserClient> loadAllUserClients() {
+        return applicationUserRepository.findAll().stream()
+                .filter(user -> user instanceof ApplicationUserClient)
+                .map(user -> (ApplicationUserClient) user)
+                .collect(Collectors.toList());
+    }
+
+    public List<ApplicationUserDoctor> loadAllUserDoctors() {
+        return applicationUserRepository.findAll().stream()
+                .filter(user -> user instanceof ApplicationUserDoctor)
+                .map(user -> (ApplicationUserDoctor) user)
+                .collect(Collectors.toList());
     }
 
     public void enableUserByEmail(String email) {
@@ -128,8 +154,8 @@ class ApplicationUserServiceReal implements UserDetailsService {
     }
 
     private boolean rawUserAndEncodedUserEquality(ApplicationUser rawUser, ApplicationUser encodedUser) {
-        return rawUser.getPersonData().equals(encodedUser.getPersonData()) &&
-                rawUser.getEmail().equals(encodedUser.getEmail()) &&
+//        return rawUser.getPersonData().equals(encodedUser.getPersonData()) &&
+        return rawUser.getEmail().equals(encodedUser.getEmail()) &&
                 rawUser.getUsername().equals(encodedUser.getUsername()) &&
                 passwordEncoder.matches(rawUser.getPassword(), encodedUser.getPassword());
     }
@@ -148,7 +174,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
     @Bean
     public CommandLineRunner initialUsers() {
         return (args) -> {
-            ApplicationUser user1 = new ApplicationUser(
+            ApplicationUser user1 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Semen",
                             "Lobanov",
@@ -163,7 +189,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user1.setImageLink("lobanov_semen.jpg");
             signUpInitialUser(user1);
 
-            ApplicationUser user2 = new ApplicationUser(
+            ApplicationUser user2 = new ApplicationUserClient(
                     new ClientData(
                             "Stanislav",
                             "Roshchenko",
@@ -175,7 +201,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             );
             signUpInitialUser(user2);
 
-            ApplicationUser user3 = new ApplicationUser(
+            ApplicationUser user3 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Varvara",
                             "Chernous",
@@ -190,7 +216,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user3.setImageLink("chernous_varvara.jpg");
             signUpInitialUser(user3);
 
-            ApplicationUser user4 = new ApplicationUser(
+            ApplicationUser user4 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Andrey",
                             "Bikov",
@@ -205,7 +231,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user4.setImageLink("bikov_andrey.jpg");
             signUpInitialUser(user4);
 
-            ApplicationUser user5 = new ApplicationUser(
+            ApplicationUser user5 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Boris",
                             "Levin",
@@ -220,7 +246,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user5.setImageLink("levin_boris.jpg");
             signUpInitialUser(user5);
 
-            ApplicationUser user6 = new ApplicationUser(
+            ApplicationUser user6 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Ivan",
                             "Kupitman",
@@ -235,7 +261,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user6.setImageLink("kupitman_ivan.jpg");
             signUpInitialUser(user6);
 
-            ApplicationUser user7 = new ApplicationUser(
+            ApplicationUser user7 = new ApplicationUserDoctor(
                     new DoctorData(
                             "Gleb",
                             "Romanenko",

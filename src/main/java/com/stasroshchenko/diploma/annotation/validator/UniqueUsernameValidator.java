@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.annotation.validator;
 
 import com.stasroshchenko.diploma.annotation.constraint.UniqueUsernameConstraint;
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 

@@ -34,12 +34,16 @@
     </div>
 </header>
 <main>
-    <div th:switch="${userRole}" th:object="${requiredUser.personData}"  class="container">
-            <img th:src="@{'/images/' + ${requiredUser.imageLink}}" width="250" height="250"/>
-            <h2 th:text="|*{firstName} *{lastName}|"/>
-        <th:block th:case="'DoctorData'">
-            <p th:text="|Experience: *{experienceAge} years|"/>
-            <p th:text="|Room: *{room}|"/>
+    <div th:switch="${userRole}" th:object="${requiredUser}"  class="container">
+        <th:block th:case="'ApplicationUserClient'">
+            <img th:src="@{'/images/' + *{imageLink}}" width="250" height="250"/>
+            <h2 th:text="|*{clientData.firstName} *{clientData.lastName}|"/>
+        </th:block>
+        <th:block th:case="'ApplicationUserDoctor'">
+            <img th:src="@{'/images/' + *{imageLink}}" width="250" height="250"/>
+            <h2 th:text="|*{doctorData.firstName} *{doctorData.lastName}|"/>
+            <p th:text="|Experience: *{doctorData.experienceAge} years|"/>
+            <p th:text="|Room: *{doctorData.room}|"/>
         </th:block>
     </div>
 </main>

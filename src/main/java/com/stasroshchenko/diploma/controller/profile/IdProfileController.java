@@ -1,12 +1,11 @@
 package com.stasroshchenko.diploma.controller.profile;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
-import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,12 +40,12 @@ public class IdProfileController {
                     applicationUserService.getByUsername(username);
 
             if (isAnonymous &&
-                    !(userByUsername.getPersonData() instanceof DoctorData)) {
+                    !(userByUsername instanceof ApplicationUserDoctor)) {
 
                 throw new AccessDeniedException("Forbidden");
             }
 
-            model.addAttribute("userRole", userByUsername.getPersonData().getClass().getSimpleName());
+            model.addAttribute("userRole", userByUsername.getClass().getSimpleName());
             model.addAttribute("requiredUser", userByUsername);
 
         } catch (IllegalStateException ex) {

@@ -1,6 +1,8 @@
 package com.stasroshchenko.diploma.repository;
 
-import com.stasroshchenko.diploma.entity.database.ApplicationUser;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
+import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,7 +21,5 @@ public interface ApplicationUserRepository
     // ignores case
     @Query("SELECT au FROM ApplicationUser au WHERE LOWER(au.email) = LOWER(?1)")
     Optional<ApplicationUser> findByEmail(String email);
-
-    Optional<ApplicationUser> findByPersonData(PersonData personData);
 
 }
