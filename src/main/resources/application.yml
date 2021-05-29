@@ -8,7 +8,7 @@ spring:
     location: banner.txt
   datasource:
     password: 258456
-    url: jdbc:postgresql://localhost:5432/diploma
+    url: jdbc:postgresql://localhost:5432/diploma2
     username: postgres
   jpa:
     hibernate:
