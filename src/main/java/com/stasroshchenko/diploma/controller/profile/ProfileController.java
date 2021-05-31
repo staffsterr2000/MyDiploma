@@ -6,6 +6,7 @@ import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.service.PersonDataService;
 import com.stasroshchenko.diploma.service.VisitService;
+import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/profile")
@@ -61,9 +65,21 @@ public class ProfileController {
         ApplicationUserDoctor principal =
                 (ApplicationUserDoctor) authentication.getPrincipal();
         model.addAttribute("principal", principal);
+
         List<Visit> allVisits = visitService
                 .getAllVisitsByDoctor(principal.getDoctorData());
-        model.addAttribute("allVisits", allVisits);
+
+        List<Visit> allSentVisits = allVisits.stream()
+                .filter(visit -> visit.getStatus().equals(VisitStatus.SENT))
+                .collect(Collectors.toList());
+        model.addAttribute("allSentVisits", allSentVisits);
+
+        List<Visit> alreadyAcceptedVisits = new ArrayList<>(allVisits);
+        alreadyAcceptedVisits.removeAll(allSentVisits);
+        model.addAttribute("alreadyAcceptedVisits", alreadyAcceptedVisits);
+
+        model.addAttribute("visitToAccept", new Visit());
+
         return "doctor_profile";
     }
 

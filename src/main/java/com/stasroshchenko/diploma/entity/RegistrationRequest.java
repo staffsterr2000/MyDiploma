@@ -14,6 +14,7 @@ import java.time.format.DateTimeParseException;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 @PasswordMatchConstraint
 public class RegistrationRequest {
 

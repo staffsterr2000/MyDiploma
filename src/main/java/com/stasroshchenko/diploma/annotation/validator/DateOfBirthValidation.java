@@ -14,9 +14,9 @@ public class DateOfBirthValidation implements ConstraintValidator<DateOfBirthCon
     }
 
     @Override
-    public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
-        return localDate.isAfter(LocalDate.of(1900, Month.JANUARY, 1)) &&
-                localDate.isBefore(LocalDate.now().minusYears(18));
+    public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext constraintValidatorContext) {
+        return dateOfBirth.isAfter(LocalDate.of(1900, Month.JANUARY, 1)) &&
+                dateOfBirth.isBefore(LocalDate.now().minusYears(18));
     }
 
 }

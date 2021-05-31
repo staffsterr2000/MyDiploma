@@ -49,10 +49,10 @@
     <hr/>
     <br/>
 
-    <section class="visits">
+    <section class="accepted_visits">
         <div class="container">
-            <h1 th:text="|Visiting you (${#lists.size(allVisits)}):|"/>
-            <th:block th:unless="${#lists.isEmpty(allVisits)}">
+            <h1 th:text="|All accepted visits (${#lists.size(alreadyAcceptedVisits)}):|"/>
+            <th:block th:unless="${#lists.isEmpty(alreadyAcceptedVisits)}">
                 <table>
                     <thead>
                     <tr>
@@ -64,7 +64,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="visit : ${allVisits}" th:object="${visit}">
+                    <tr th:each="visit : ${alreadyAcceptedVisits}" th:object="${visit}">
                         <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
                         <td th:text="*{complaint}"/>
                         <td th:text="*{acceptedAt}"/>
@@ -81,15 +81,86 @@
     <hr/>
     <br/>
 
-    <section class="">
-
+    <section class="sent_visits">
+        <div class="container">
+            <h1 th:text="|All sent visits (${#lists.size(allSentVisits)}):|"/>
+            <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client name</th>
+                        <th>Complaint</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="visit : ${allSentVisits}" th:object="${visit}">
+                        <td th:text="*{id}"/>
+                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
+                        <td th:text="*{complaint}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </th:block>
+        </div>
     </section>
 
     <br/>
     <hr/>
     <br/>
 
-<!--    <section class="">-->
+    <section class="accept">
+        <div class="container">
+            <h1 th:text="|Manage requests(${#lists.size(allSentVisits)}):|"/>
+            <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
+                <form th:action="@{/visit/as-doctor/accept}" th:object="${visitToAccept}" method="post">
+                    <div>
+
+                        <select th:name="visitId">
+                            <option th:each="visit : ${allSentVisits}"
+                                    th:object="${visit}"
+                                    th:value="*{id}"
+                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <label for="appointment-date" class="form-label">Appointment time and date(HO:MI DA/MO/YEAR)</label>
+                        <input type="text" th:field="*{appointsAtInput}" class="form-control" id="appointment-date">
+                        <p th:if="${#fields.hasErrors('appointsAtInput')}"
+                           th:errors="*{appointsAtInput}" th:errorclass="error"/>
+                        <!--                    <p th:if="${!#fields.hasErrors('appointsAtInput')} and ${#fields.hasErrors('appointsAt')}"-->
+                        <!--                       th:errors="*{appointsAt}" th:errorclass="error"/>-->
+
+                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </th:block>
+        </div>
+    </section>
+
+    <br/>
+    <hr/>
+    <br/>
+
+<!--    <section class="make-appointment">-->
+<!--        <div class="container">-->
+<!--            <h1 th:text="'Manage requests:'"/>-->
+<!--            <form th:action="@{/visit/as-doctor/create}" th:object="${visitToSend}" method="post">-->
+<!--                <div>-->
+<!--                    <span>Describe your complaint</span>-->
+<!--                    <textarea th:field="*{complaint}" class="form-control"></textarea>-->
+
+<!--&lt;!&ndash;                    <input th:name="doctorDataId" hidden/>&ndash;&gt;-->
+
+<!--                    <button type="submit">Send</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </section>-->
+
+    <!--    <section class="">-->
 <!--        <div class="container">-->
 <!--            <h1>Make an appointment:</h1>-->
 <!--            <form th:action="@{/visit/as-client/create}" th:object="${visitToSend}" method="post">-->
