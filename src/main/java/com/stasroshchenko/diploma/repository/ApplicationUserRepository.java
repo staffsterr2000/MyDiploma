@@ -1,9 +1,6 @@
 package com.stasroshchenko.diploma.repository;
 
-import com.stasroshchenko.diploma.entity.database.person.ClientData;
-import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
-import com.stasroshchenko.diploma.entity.database.person.PersonData;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

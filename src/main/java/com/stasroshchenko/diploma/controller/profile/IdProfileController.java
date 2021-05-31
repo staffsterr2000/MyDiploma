@@ -36,6 +36,8 @@ public class IdProfileController {
         ApplicationUser authenticatedUser =
                 (ApplicationUser) authentication.getPrincipal();
 
+        model.addAttribute("auth", authentication);
+
         model.addAttribute("isAuthUserClient",
                 authenticatedUser instanceof ApplicationUserClient);
 

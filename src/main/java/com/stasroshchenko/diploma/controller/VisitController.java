@@ -27,7 +27,8 @@ public class VisitController {
             @RequestParam("doctorDataId") Long doctorDataId,
             @ModelAttribute("visitToSend") Visit visit,
             Authentication authentication) {
-        ApplicationUserClient principal = (ApplicationUserClient) authentication.getPrincipal();
+        ApplicationUserClient principal = (ApplicationUserClient)
+                authentication.getPrincipal();
 
         visit.setClientData(principal.getClientData());
 

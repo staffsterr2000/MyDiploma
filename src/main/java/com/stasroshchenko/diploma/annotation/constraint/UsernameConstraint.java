@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UsernameConstraint {
 
-    String message() default "Invalid username. Try using no symbols except(_)";
+    String message() default "Invalid username. Try using only \"_\" symbol";
     Class<?> [] groups() default {};
     Class<? extends Payload> [] payload() default {};
 

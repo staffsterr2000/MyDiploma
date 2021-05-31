@@ -6,25 +6,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>"${requiredUser.username}"</title>
+    <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <!--    <link rel="stylesheet" href="css/main.css">-->
-    <link rel="stylesheet" href="css/stas_style.css">
 </head>
 
 <body>
 <header>
-    <div class="container-fluid bg_menu">
+    <div class="container-fluid">
         <div class="navbar">
-            <div class="nav-logo">
+            <div class="nav_logo">
                 <a th:href="@{/}">DeDentist?</a>
             </div>
 
-            <div class="right-menu">
-                <a th:href="@{/profile}">Profile</a>
-                <a th:href="@{/logout}">Log out</a>
-            </div>
+            <th:block th:switch="${auth.principal}">
+                <div th:case="'anonymousUser'" class="right-menu">
+                    <a th:href="@{/registration}">Sign up</a>
+                    <a th:href="@{/login}">Sign in</a>
+                </div>
+                <div th:case="*" class="right-menu">
+                    <a th:href="@{/profile}">Profile</a>
+                    <a th:href="@{/logout}">Log out</a>
+                </div>
+            </th:block>
         </div>
     </div>
 </header>
@@ -32,11 +37,7 @@
     <section class="profile">
         <div th:object="${requiredUser}"  class="container">
 
-            <br/>
-            <br/>
-            <br/>
-
-            <img th:src="@{'/img/avatar/' + *{imageLink}}" width="250" height="250"/>
+            <img th:src="@{'/images/' + *{imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{clientData.firstName} *{clientData.lastName}|"/>
 
         </div>

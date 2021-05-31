@@ -275,6 +275,21 @@ class ApplicationUserServiceReal implements UserDetailsService {
             );
             user7.setImageLink("romanenko_gleb.jpg");
             signUpInitialUser(user7);
+
+            ApplicationUser user8 = new ApplicationUserDoctor(
+                    new DoctorData(
+                            "Phil",
+                            "Richards",
+                            LocalDate.of(1984, Month.OCTOBER, 5),
+                            21,
+                            1
+                    ),
+                    "american_boy",
+                    "uedu_s_toboy@gmail.com",
+                    "password"
+            );
+            user8.setImageLink("richards_phil.jpg");
+            signUpInitialUser(user8);
         };
     }
 

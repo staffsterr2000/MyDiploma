@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
-
+      xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,15 +8,14 @@
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-<!--    <link rel="stylesheet" href="css/main.css">-->
-    <link rel="stylesheet" href="css/stas_style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 <header>
-    <div class="container-fluid bg_menu">
+    <div class="container-fluid">
         <div class="navbar">
-            <div class="nav-logo">
+            <div class="nav_logo">
                 <a th:href="@{/}">DeDentist?</a>
             </div>
 
@@ -31,12 +29,7 @@
 <main>
     <section class="profile">
         <div th:object="${principal.clientData}"  class="container">
-
-            <br/>
-            <br/>
-            <br/>
-
-            <img th:src="@{'/img/avatar/' + ${principal.imageLink}}" width="250" height="250"/>
+            <img th:src="@{'/images/' + ${principal.imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{firstName} *{lastName}|"/>
         </div>
     </section>
@@ -45,7 +38,7 @@
     <br/>
     <section class="visits">
         <div class="container">
-            <h1 th:text="|Your visits (${#lists.size(allVisits)}):|"/>
+            <h1 th:text="'Your visits (' + ${#lists.size(allVisits)} + '):'"/>
             <th:block th:unless="${#lists.isEmpty(allVisits)}">
                 <table>
                     <thead>
@@ -58,7 +51,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="visit : ${allVisits}" th:object="${visit}">
-                        <td th:text="*{doctorData.firstName} + ' ' + *{doctorData.lastName}"/>
+                        <td th:text="*{doctorData.firstName} + *{doctorData.lastName}"/>
                         <td th:text="*{complaint}"/>
                         <td th:text="*{appointsAt}"/>
                         <td th:text="*{status}"/>
