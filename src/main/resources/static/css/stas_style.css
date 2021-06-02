@@ -4,3 +4,10 @@ td {
   border: 1px solid black;
   padding: 3px 3px 3px 3px;
 }
+
+.error,
+.globalError {
+  color: red;
+  text-align: center;
+  margin: 8px 8px 8px 8px;
+}

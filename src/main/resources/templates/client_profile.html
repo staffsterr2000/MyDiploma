@@ -60,7 +60,7 @@
                     <tr th:each="visit : ${allVisits}" th:object="${visit}">
                         <td th:text="*{doctorData.firstName} + ' ' + *{doctorData.lastName}"/>
                         <td th:text="*{complaint}"/>
-                        <td th:text="*{appointsAt}"/>
+                        <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
                         <td th:text="*{status}"/>
                     </tr>
                     </tbody>
@@ -77,14 +77,12 @@
         <div class="container">
             <h1>Make an appointment:</h1>
             <form th:action="@{/visit/as-client/create}" th:object="${visitToSend}" method="post">
-<!--                <div class="input-group">-->
-<!--                    <span class="input-group-text">describe your complaint</span>-->
-<!--                    <textarea class="form-control" aria-label="With textarea"></textarea>-->
-<!--                    <button type="submit">sign up</button>-->
-<!--                </div>-->
-                <div>
+                <div id="send">
                     <span>Describe your complaint</span>
                     <textarea th:field="*{complaint}" class="form-control"></textarea>
+<!--                    <p th:if="${#fields.hasErrors('complaint')}"-->
+<!--                       th:errors="*{complaint}" th:errorclass="error"/>-->
+                    <p th:if="${complaintError != null}" th:text="${complaintError.defaultMessage}" th:class="error"/>
 
                     <select th:name="doctorDataId">
                         <option th:each="doctor : ${allDoctors}"
@@ -99,6 +97,11 @@
             </form>
         </div>
     </section>
+
+    <br/>
+    <hr/>
+    <br/>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

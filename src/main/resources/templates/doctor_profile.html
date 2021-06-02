@@ -51,11 +51,12 @@
 
     <section class="accepted_visits">
         <div class="container">
-            <h1 th:text="|All accepted visits (${#lists.size(alreadyAcceptedVisits)}):|"/>
-            <th:block th:unless="${#lists.isEmpty(alreadyAcceptedVisits)}">
+            <h1 th:text="|Accepted visits (${#lists.size(allAcceptedVisits)}):|"/>
+            <th:block th:unless="${#lists.isEmpty(allAcceptedVisits)}">
                 <table>
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Client name</th>
                         <th>Complaint</th>
                         <th>Accepted at</th>
@@ -64,15 +65,85 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="visit : ${alreadyAcceptedVisits}" th:object="${visit}">
+                    <tr th:each="visit : ${allAcceptedVisits}" th:object="${visit}">
+                        <td th:text="*{id}"/>
                         <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
                         <td th:text="*{complaint}"/>
-                        <td th:text="*{acceptedAt}"/>
-                        <td th:text="*{appointsAt}"/>
+                        <td th:text="${#temporals.format(visit.acceptedAt, 'dd-MM-yyyy HH:mm')}"/>
+                        <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
                         <td th:text="*{status}"/>
                     </tr>
                     </tbody>
                 </table>
+            </th:block>
+
+            <br/>
+
+            <th:block th:unless="${#lists.isEmpty(allActiveVisits)}">
+                <h1 th:text="'Manage visits:'"/>
+                <div>
+                    <h4 th:text="'Has occurred:'"/>
+                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                        <input th:name="status" th:value="'OCCURRED'" hidden/>
+                        <select th:name="visitId">
+                            <option th:each="visit : ${allActiveVisits}"
+                                    th:object="${visit}"
+                                    th:value="*{id}"
+                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <br/>
+
+                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+                        <button type="submit">Occurred</button>
+                    </form>
+                </div>
+
+                <br/>
+
+                <div>
+                    <h4 th:text="'Has not occurred:'"/>
+                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                        <input th:name="status" th:value="'NOT_OCCURRED'" hidden/>
+                        <select th:name="visitId">
+                            <option th:each="visit : ${allActiveVisits}"
+                                    th:object="${visit}"
+                                    th:value="*{id}"
+                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <br/>
+
+                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+                        <button type="submit">Not occurred</button>
+                    </form>
+                </div>
+
+                <br/>
+
+                <div>
+                    <h4 th:text="'Cancel:'"/>
+                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                        <input th:name="status" th:value="'CANCELLED'" hidden/>
+                        <select th:name="visitId">
+                            <option th:each="visit : ${allActiveVisits}"
+                                    th:object="${visit}"
+                                    th:value="*{id}"
+                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <br/>
+
+                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+                        <button type="submit">Cancel</button>
+                    </form>
+                </div>
             </th:block>
         </div>
     </section>
@@ -83,7 +154,7 @@
 
     <section class="sent_visits">
         <div class="container">
-            <h1 th:text="|All sent visits (${#lists.size(allSentVisits)}):|"/>
+            <h1 th:text="|Received visits (${#lists.size(allSentVisits)}):|"/>
             <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
                 <table>
                     <thead>
@@ -102,20 +173,14 @@
                     </tbody>
                 </table>
             </th:block>
-        </div>
-    </section>
 
-    <br/>
-    <hr/>
-    <br/>
 
-    <section class="accept">
-        <div class="container">
-            <h1 th:text="|Manage requests(${#lists.size(allSentVisits)}):|"/>
             <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
-                <form th:action="@{/visit/as-doctor/accept}" th:object="${visitToAccept}" method="post">
-                    <div>
-
+                <br/>
+                <h1 th:text="'Manage requests:'"/>
+                <div>
+                    <h4 th:text="'Accept:'"/>
+                    <form th:action="@{/visit/accept}" th:object="${visitToManage}" method="post">
                         <select th:name="visitId">
                             <option th:each="visit : ${allSentVisits}"
                                     th:object="${visit}"
@@ -125,17 +190,35 @@
                             </option>
                         </select>
 
-                        <label for="appointment-date" class="form-label">Appointment time and date(HO:MI DA/MO/YEAR)</label>
+                        <label for="appointment-date" class="form-label">Appointment time and date(dd-MM-yyyy HH:mm)</label>
                         <input type="text" th:field="*{appointsAtInput}" class="form-control" id="appointment-date">
-                        <p th:if="${#fields.hasErrors('appointsAtInput')}"
-                           th:errors="*{appointsAtInput}" th:errorclass="error"/>
-                        <!--                    <p th:if="${!#fields.hasErrors('appointsAtInput')} and ${#fields.hasErrors('appointsAt')}"-->
-                        <!--                       th:errors="*{appointsAt}" th:errorclass="error"/>-->
+                        <p th:if="${dateValidError != null}" th:text="${dateValidError.defaultMessage}" th:class="error"/>
+                        <p th:if="${timeAlreadyTakenError != null}" th:text="${timeAlreadyTakenError.defaultMessage}" th:class="error"/>
+
+                        <button type="submit">Accept</button>
+                    </form>
+                </div>
+
+                <br/>
+
+                <div>
+                    <h4 th:text="'Decline:'"/>
+                    <form th:action="@{/visit/decline}" th:object="${visitToManage}" method="post">
+                        <select th:name="visitId">
+                            <option th:each="visit : ${allSentVisits}"
+                                    th:object="${visit}"
+                                    th:value="*{id}"
+                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <br/>
 
                         <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
-                        <button type="submit">Submit</button>
-                    </div>
-                </form>
+                        <button type="submit">Decline</button>
+                    </form>
+                </div>
             </th:block>
         </div>
     </section>
@@ -143,6 +226,11 @@
     <br/>
     <hr/>
     <br/>
+
+
+<!--    <br/>-->
+<!--    <hr/>-->
+<!--    <br/>-->
 
 <!--    <section class="make-appointment">-->
 <!--        <div class="container">-->
@@ -187,10 +275,6 @@
 <!--        </div>-->
 <!--    </section>-->
 </main>
-
-<br/>
-<hr/>
-<br/>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
