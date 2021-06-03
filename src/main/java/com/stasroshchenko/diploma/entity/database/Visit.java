@@ -3,7 +3,6 @@ package com.stasroshchenko.diploma.entity.database;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.util.VisitStatus;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import java.time.format.DateTimeParseException;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 
 @Entity
 public class Visit {
@@ -74,7 +72,23 @@ public class Visit {
             appointsAt = LocalDateTime.MIN;
 
         }
-
     }
 
+    public Visit(
+            DoctorData doctorData,
+            ClientData clientData,
+            String complaint,
+            LocalDateTime acceptedAt,
+            LocalDateTime appointsAt,
+            String appointsAtInput,
+            VisitStatus status) {
+
+        this.doctorData = doctorData;
+        this.clientData = clientData;
+        this.complaint = complaint;
+        this.acceptedAt = acceptedAt;
+        this.appointsAt = appointsAt;
+        this.appointsAtInput = appointsAtInput;
+        this.status = status;
+    }
 }

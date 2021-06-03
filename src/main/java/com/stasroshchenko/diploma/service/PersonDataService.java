@@ -39,4 +39,12 @@ public class PersonDataService {
                 .orElseThrow(() -> new IllegalStateException("Person with id " + id + " doesn't exist"));
     }
 
+    public void signUpClientData(ClientData clientData) {
+        boolean clientExists = getAllClients().stream()
+                .anyMatch(c -> c.equals(clientData));
+
+        if (!clientExists) {
+            clientDataRepository.save(clientData);
+        }
+    }
 }

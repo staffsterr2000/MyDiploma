@@ -1,4 +1,4 @@
-package com.stasroshchenko.diploma.entity;
+package com.stasroshchenko.diploma.entity.request;
 
 import com.stasroshchenko.diploma.annotation.constraint.*;
 import lombok.*;

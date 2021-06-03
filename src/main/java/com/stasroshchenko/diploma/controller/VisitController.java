@@ -1,10 +1,11 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.entity.database.Visit;
+import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.request.visit.*;
+import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
-import com.stasroshchenko.diploma.service.PersonDataService;
 import com.stasroshchenko.diploma.service.VisitService;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
@@ -28,38 +29,55 @@ import java.time.LocalDateTime;
 public class VisitController {
 
     private final VisitService visitService;
-    private final PersonDataService personDataService;
 
     @PreAuthorize("hasAuthority('ROLE_CLIENT')")
-    @PostMapping("/as-client/create")
-    public String createVisitAsClient(
-            @RequestParam("doctorDataId") Long doctorDataId,
-            @ModelAttribute("visitToSend") Visit visit,
+    @PostMapping("/send")
+    public String sendVisit(
+            @Valid @ModelAttribute("sendRequest") SendVisitRequest request,
             BindingResult result,
-            Authentication authentication,
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes,
+            Authentication authentication) {
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
+        }
 
         ApplicationUserClient principal = (ApplicationUserClient)
                 authentication.getPrincipal();
+        ClientData clientUser = principal.getClientData();
 
-        visit.setClientData(principal.getClientData());
+        visitService.sendVisit(clientUser, request);
 
-        DoctorData doctorData =
-                personDataService.getDoctorById(doctorDataId);
-        visit.setDoctorData(doctorData);
+        return "redirect:/profile";
+    }
 
-        visit.setStatus(VisitStatus.SENT);
+    @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
+    @PostMapping("/create")
+    public String createVisit(
+            @Valid @ModelAttribute("createRequest") CreateVisitRequest request,
+            BindingResult result,
+            RedirectAttributes redirectAttributes,
+            Authentication authentication) {
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
+        }
+
+        ApplicationUserDoctor principal = (ApplicationUserDoctor)
+                authentication.getPrincipal();
+        DoctorData doctorUser = principal.getDoctorData();
 
         try {
-            visitService.saveVisit(visit);
+            visitService.createVisit(doctorUser, request);
+
         } catch (IllegalStateException ex) {
-            result.addError(new ObjectError("complaintError", ex.getMessage()));
+            result.addError(new ObjectError("createDateValidError", ex.getMessage()));
         }
 
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("bindingResult", result);
-            return "redirect:/profile-error";
         }
 
         return "redirect:/profile";
@@ -68,36 +86,30 @@ public class VisitController {
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/accept")
     public String acceptVisit(
-            @RequestParam("visitId") Long visitId,
-            @Valid @ModelAttribute("visitToAccept") Visit visitToAccept,
+            @Valid @ModelAttribute("acceptRequest") AcceptVisitRequest request,
             BindingResult result,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            Authentication authentication) {
 
-        LocalDateTime visitDate = visitToAccept.getAppointsAt();
-
-        if (!visitService.isDateValid(visitDate)) {
-            result.addError(new ObjectError("dateValidError",
-                    "Date is invalid. Try using \"0\" before another number. Example (08:09 11/01/2000)"));
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
         }
 
-        if (!visitService.isTimeFree(visitDate)) {
-            result.addError(new ObjectError("timeAlreadyTakenError",
-                    "This time has already been taken for another visit. Try another time"));
+        ApplicationUserDoctor principal = (ApplicationUserDoctor)
+                authentication.getPrincipal();
+        DoctorData doctorUser = principal.getDoctorData();
+
+        try {
+            visitService.acceptVisit(doctorUser, request);
+
+        } catch (IllegalStateException ex) {
+            result.addError(new ObjectError("acceptDateValidError", ex.getMessage()));
         }
 
         if(result.hasErrors()) {
             redirectAttributes.addFlashAttribute("bindingResult", result);
-            return "redirect:/profile-error";
         }
-
-        Visit visitFromDatabase =
-                visitService.getVisitById(visitId);
-
-        visitFromDatabase.setAppointsAt(visitToAccept.getAppointsAt());
-        visitFromDatabase.setAcceptedAt(LocalDateTime.now());
-        visitFromDatabase.setStatus(VisitStatus.ACTIVE);
-
-        visitService.saveVisit(visitFromDatabase);
 
         return "redirect:/profile";
     }
@@ -106,13 +118,21 @@ public class VisitController {
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/decline")
     public String declineVisit(
-            @RequestParam("visitId") Long visitId,
+            @Valid @ModelAttribute("declineRequest") DeclineVisitRequest request,
+            BindingResult result,
+            RedirectAttributes redirectAttributes,
             Authentication authentication) {
 
-        ApplicationUserDoctor applicationUserDoctor =
-                (ApplicationUserDoctor) authentication.getPrincipal();
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
+        }
 
-        visitService.declineVisit(visitId, applicationUserDoctor.getDoctorData());
+        ApplicationUserDoctor principal =
+                (ApplicationUserDoctor) authentication.getPrincipal();
+        DoctorData doctorUser = principal.getDoctorData();
+
+        visitService.declineVisit(doctorUser, request);
 
         return "redirect:/profile";
     }
@@ -120,16 +140,33 @@ public class VisitController {
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/pass")
     public String passVisit(
-            @RequestParam("visitId") Long visitId,
-            @RequestParam("status") String status,
+            @RequestParam("status") VisitStatus status,
+            @Valid @ModelAttribute("passRequest") PassVisitRequest request,
+            BindingResult result,
+            RedirectAttributes redirectAttributes,
             Authentication authentication) {
 
-        VisitStatus visitStatus = VisitStatus.valueOf(status);
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
+        }
 
-        ApplicationUserDoctor applicationUserDoctor =
+        ApplicationUserDoctor principal =
                 (ApplicationUserDoctor) authentication.getPrincipal();
+        DoctorData doctorUser = principal.getDoctorData();
 
-        visitService.passVisit(visitId, visitStatus, applicationUserDoctor.getDoctorData());
+        request.setStatus(status);
+
+        try {
+            visitService.passVisit(doctorUser, request);
+
+        } catch (IllegalStateException ex) {
+            result.addError(new ObjectError("passVisitError", ex.getMessage()));
+        }
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+        }
 
         return "redirect:/profile";
     }

@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.annotation.validator;
 
 import com.stasroshchenko.diploma.annotation.constraint.PasswordMatchConstraint;
-import com.stasroshchenko.diploma.entity.RegistrationRequest;
+import com.stasroshchenko.diploma.entity.request.RegistrationRequest;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

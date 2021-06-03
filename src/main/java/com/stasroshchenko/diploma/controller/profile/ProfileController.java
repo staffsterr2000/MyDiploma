@@ -1,5 +1,6 @@
 package com.stasroshchenko.diploma.controller.profile;
 
+import com.stasroshchenko.diploma.entity.request.visit.*;
 import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
@@ -13,9 +14,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -35,12 +36,17 @@ public class ProfileController {
             Authentication authentication,
             Model model) {
 
+        BindingResult bindingResult = (BindingResult) model.getAttribute("bindingResult");
+        boolean error = bindingResult != null;
+
         for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
             switch (grantedAuthority.getAuthority()) {
                 case "ROLE_CLIENT":
-                    return getClientProfileView(authentication, model);
+                    return (!error) ? getClientProfileView(authentication, model) :
+                            getClientProfileErrorView(authentication, model, bindingResult);
                 case "ROLE_DOCTOR":
-                    return getDoctorProfileView(authentication, model);
+                    return (!error) ? getDoctorProfileView(authentication, model) :
+                            getDoctorProfileErrorView(authentication, model, bindingResult);
             }
         }
 
@@ -48,68 +54,15 @@ public class ProfileController {
     }
 
     public String getClientProfileView(Authentication authentication, Model model) {
-        ApplicationUserClient principal =
-                (ApplicationUserClient) authentication.getPrincipal();
-        model.addAttribute("principal", principal);
+        initiateClientProfile(authentication, model);
 
-        List<Visit> allVisits = visitService
-                .getAllVisitsByClientOrdered(principal.getClientData());
-        model.addAttribute("allVisits", allVisits);
-
-        List<DoctorData> allDoctors =
-                personDataService.getAllDoctors();
-        model.addAttribute("allDoctors", allDoctors);
-
-        model.addAttribute("visitToSend", new Visit());
         return "client_profile";
     }
 
     public String getDoctorProfileView(Authentication authentication, Model model) {
-        ApplicationUserDoctor principal =
-                (ApplicationUserDoctor) authentication.getPrincipal();
-        model.addAttribute("principal", principal);
-
-        List<Visit> allVisits = visitService
-                .getAllVisitsByDoctorOrdered(principal.getDoctorData());
-        List<Visit> allVisitsExceptCancelled = allVisits.stream()
-                .filter(visit -> !visit.getStatus().equals(VisitStatus.CANCELLED))
-                .collect(Collectors.toList());
-
-        List<Visit> allSentVisits = allVisits.stream()
-                .filter(visit -> visit.getStatus().equals(VisitStatus.SENT))
-                .collect(Collectors.toList());
-        model.addAttribute("allSentVisits", allSentVisits);
-
-        List<Visit> allActiveVisits = allVisits.stream()
-                .filter(visit -> visit.getStatus().equals(VisitStatus.ACTIVE))
-                .collect(Collectors.toList());
-        model.addAttribute("allActiveVisits", allActiveVisits);
-
-        List<Visit> alreadyAcceptedVisits = new ArrayList<>(allVisitsExceptCancelled);
-        alreadyAcceptedVisits.removeAll(allSentVisits);
-        model.addAttribute("allAcceptedVisits", alreadyAcceptedVisits);
-
-        model.addAttribute("visitToManage", new Visit());
+        initiateDoctorProfile(authentication, model);
 
         return "doctor_profile";
-    }
-
-    @GetMapping("/profile-error")
-    public String getProfileErrorView(
-            Authentication authentication,
-            Model model,
-            @ModelAttribute("bindingResult") BindingResult bindingResult) {
-
-        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
-            switch (grantedAuthority.getAuthority()) {
-                case "ROLE_CLIENT":
-                    return getClientProfileErrorView(authentication, model, bindingResult);
-                case "ROLE_DOCTOR":
-                    return getDoctorProfileErrorView(authentication, model, bindingResult);
-            }
-        }
-
-        throw new IllegalStateException("Unknown role");
     }
 
     public String getClientProfileErrorView(
@@ -121,19 +74,12 @@ public class ProfileController {
             model.addAttribute(objectError.getObjectName(), objectError);
         }
 
-        ApplicationUserClient principal =
-                (ApplicationUserClient) authentication.getPrincipal();
-        model.addAttribute("principal", principal);
+        for (FieldError fieldError : result.getFieldErrors()) {
+            model.addAttribute(fieldError.getObjectName() + "_" + fieldError.getField() + "Error", fieldError);
+        }
 
-        List<Visit> allVisits = visitService
-                .getAllVisitsByClientOrdered(principal.getClientData());
-        model.addAttribute("allVisits", allVisits);
+        initiateClientProfile(authentication, model);
 
-        List<DoctorData> allDoctors =
-                personDataService.getAllDoctors();
-        model.addAttribute("allDoctors", allDoctors);
-
-        model.addAttribute("visitToSend", new Visit());
         return "client_profile";
     }
 
@@ -146,28 +92,58 @@ public class ProfileController {
             model.addAttribute(objectError.getObjectName(), objectError);
         }
 
+        for (FieldError fieldError : result.getFieldErrors()) {
+            model.addAttribute(fieldError.getObjectName() + "_" + fieldError.getField() + "Error", fieldError);
+        }
+
+        initiateDoctorProfile(authentication, model);
+
+        return "doctor_profile";
+    }
+
+    private void initiateDoctorProfile(Authentication authentication,
+                                      Model model) {
+
         ApplicationUserDoctor principal =
                 (ApplicationUserDoctor) authentication.getPrincipal();
         model.addAttribute("principal", principal);
 
-        List<Visit> allVisits = visitService
-                .getAllVisitsByDoctorOrdered(principal.getDoctorData());
-        List<Visit> allVisitsExceptCancelled = allVisits.stream()
-                .filter(visit -> !visit.getStatus().equals(VisitStatus.CANCELLED))
-                .collect(Collectors.toList());
-
-        List<Visit> allSentVisits = allVisits.stream()
-                .filter(visit -> visit.getStatus().equals(VisitStatus.SENT))
-                .collect(Collectors.toList());
+        List<Visit> allSentVisits = visitService
+                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT);
         model.addAttribute("allSentVisits", allSentVisits);
 
-        List<Visit> alreadyAcceptedVisits = new ArrayList<>(allVisitsExceptCancelled);
-        alreadyAcceptedVisits.removeAll(allSentVisits);
-        model.addAttribute("allAcceptedVisits", alreadyAcceptedVisits);
+        List<Visit> allActiveVisits = visitService
+                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.ACTIVE);
+        model.addAttribute("allActiveVisits", allActiveVisits);
 
-        model.addAttribute("visitToManage", new Visit());
+        List<Visit> allAcceptedVisits = visitService
+                .getAllVisitsExceptVisitsWithSomeStatusesOrdered(VisitStatus.SENT,
+                        VisitStatus.CANCELLED);
+        model.addAttribute("allAcceptedVisits", allAcceptedVisits);
 
-        return "doctor_profile";
+        model.addAttribute("acceptRequest", new AcceptVisitRequest());
+        model.addAttribute("declineRequest", new DeclineVisitRequest());
+        model.addAttribute("passRequest", new PassVisitRequest());
+        model.addAttribute("createRequest", new CreateVisitRequest());
+
+    }
+
+    private void initiateClientProfile(Authentication authentication,
+                                      Model model) {
+
+        ApplicationUserClient principal =
+                (ApplicationUserClient) authentication.getPrincipal();
+        model.addAttribute("principal", principal);
+
+        List<Visit> allVisits = visitService
+                .getAllVisitsByClientOrdered(principal.getClientData());
+        model.addAttribute("allVisits", allVisits);
+
+        List<DoctorData> allDoctors =
+                personDataService.getAllDoctors();
+        model.addAttribute("allDoctors", allDoctors);
+
+        model.addAttribute("sendRequest", new SendVisitRequest());
     }
 
 }

@@ -76,15 +76,15 @@
     <section class="make-appointment">
         <div class="container">
             <h1>Make an appointment:</h1>
-            <form th:action="@{/visit/as-client/create}" th:object="${visitToSend}" method="post">
+            <form th:action="@{/visit/send}" th:object="${sendRequest}" method="post">
                 <div id="send">
                     <span>Describe your complaint</span>
                     <textarea th:field="*{complaint}" class="form-control"></textarea>
 <!--                    <p th:if="${#fields.hasErrors('complaint')}"-->
 <!--                       th:errors="*{complaint}" th:errorclass="error"/>-->
-                    <p th:if="${complaintError != null}" th:text="${complaintError.defaultMessage}" th:class="error"/>
+                    <p th:if="${sendRequest_complaintError != null}" th:text="${sendRequest_complaintError.defaultMessage}" th:class="error"/>
 
-                    <select th:name="doctorDataId">
+                    <select th:field="*{doctorDataId}">
                         <option th:each="doctor : ${allDoctors}"
                                 th:value="${doctor.id}"
                                 th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">

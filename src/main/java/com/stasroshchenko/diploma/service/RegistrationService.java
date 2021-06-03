@@ -5,7 +5,7 @@ import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import com.stasroshchenko.diploma.service.email.EmailSender;
-import com.stasroshchenko.diploma.entity.RegistrationRequest;
+import com.stasroshchenko.diploma.entity.request.RegistrationRequest;
 import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

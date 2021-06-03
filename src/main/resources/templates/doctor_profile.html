@@ -81,22 +81,23 @@
 
             <th:block th:unless="${#lists.isEmpty(allActiveVisits)}">
                 <h1 th:text="'Manage visits:'"/>
+                <p th:if="${passVisitError != null}" th:text="${passVisitError.defaultMessage}" th:class="error"></p>
+
                 <div>
                     <h4 th:text="'Has occurred:'"/>
-                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                    <form th:action="@{/visit/pass}" th:object="${passRequest}" method="post">
                         <input th:name="status" th:value="'OCCURRED'" hidden/>
-                        <select th:name="visitId">
+<!--                        <input th:field="*{statusInput}" th:value="'OCCURRED'" hidden/>-->
+                        <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
-                                    th:object="${visit}"
-                                    th:value="*{id}"
-                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
 
                             </option>
                         </select>
 
                         <br/>
 
-                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
                         <button type="submit">Occurred</button>
                     </form>
                 </div>
@@ -104,21 +105,20 @@
                 <br/>
 
                 <div>
-                    <h4 th:text="'Has not occurred:'"/>
-                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                    <h4 th:text="'Has not occurred:'"></h4>
+                    <form th:action="@{/visit/pass}" th:object="${passRequest}" method="post">
                         <input th:name="status" th:value="'NOT_OCCURRED'" hidden/>
-                        <select th:name="visitId">
+<!--                            <input th:field="*{statusInput}" th:value="'NOT_OCCURRED'" hidden/>-->
+                        <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
-                                    th:object="${visit}"
-                                    th:value="*{id}"
-                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
 
                             </option>
                         </select>
 
                         <br/>
 
-                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
                         <button type="submit">Not occurred</button>
                     </form>
                 </div>
@@ -126,21 +126,20 @@
                 <br/>
 
                 <div>
-                    <h4 th:text="'Cancel:'"/>
-                    <form th:action="@{/visit/pass}" th:object="${visitToManage}" method="post">
+                    <h4 th:text="'Cancel:'"></h4>
+                    <form th:action="@{/visit/pass}" th:object="${passRequest}" method="post">
                         <input th:name="status" th:value="'CANCELLED'" hidden/>
-                        <select th:name="visitId">
+<!--                        <input th:field="*{statusInput}" th:value="'CANCELLED'" hidden/>-->
+                        <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
-                                    th:object="${visit}"
-                                    th:value="*{id}"
-                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
 
                             </option>
                         </select>
 
                         <br/>
 
-                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
                         <button type="submit">Cancel</button>
                     </form>
                 </div>
@@ -154,7 +153,7 @@
 
     <section class="sent_visits">
         <div class="container">
-            <h1 th:text="|Received visits (${#lists.size(allSentVisits)}):|"/>
+            <h1 th:text="|Received visits (${#lists.size(allSentVisits)}):|"></h1>
             <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
                 <table>
                     <thead>
@@ -166,9 +165,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="visit : ${allSentVisits}" th:object="${visit}">
-                        <td th:text="*{id}"/>
-                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
-                        <td th:text="*{complaint}"/>
+                        <td th:text="*{id}"></td>
+                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"></td>
+                        <td th:text="*{complaint}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -177,23 +176,21 @@
 
             <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
                 <br/>
-                <h1 th:text="'Manage requests:'"/>
+                <h1 th:text="'Manage requests:'"></h1>
                 <div>
-                    <h4 th:text="'Accept:'"/>
-                    <form th:action="@{/visit/accept}" th:object="${visitToManage}" method="post">
-                        <select th:name="visitId">
+                    <h4 th:text="'Accept:'"></h4>
+                    <form th:action="@{/visit/accept}" th:object="${acceptRequest}" method="post">
+                        <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentVisits}"
-                                    th:object="${visit}"
-                                    th:value="*{id}"
-                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
 
-                            </option>
                         </select>
 
                         <label for="appointment-date" class="form-label">Appointment time and date(dd-MM-yyyy HH:mm)</label>
                         <input type="text" th:field="*{appointsAtInput}" class="form-control" id="appointment-date">
-                        <p th:if="${dateValidError != null}" th:text="${dateValidError.defaultMessage}" th:class="error"/>
-                        <p th:if="${timeAlreadyTakenError != null}" th:text="${timeAlreadyTakenError.defaultMessage}" th:class="error"/>
+                        <p th:if="${acceptRequest_appointsAtInputError != null}" th:text="${acceptRequest_appointsAtInputError.defaultMessage}" th:class="error"></p>
+                        <p th:if="${acceptDateValidError != null}" th:text="${acceptDateValidError.defaultMessage}" th:class="error"></p>
 
                         <button type="submit">Accept</button>
                     </form>
@@ -202,20 +199,19 @@
                 <br/>
 
                 <div>
-                    <h4 th:text="'Decline:'"/>
-                    <form th:action="@{/visit/decline}" th:object="${visitToManage}" method="post">
-                        <select th:name="visitId">
+                    <h4 th:text="'Decline:'"></h4>
+                    <form th:action="@{/visit/decline}" th:object="${declineRequest}" method="post">
+                        <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentVisits}"
-                                    th:object="${visit}"
-                                    th:value="*{id}"
-                                    th:text="|ID:*{id}, Name: *{clientData.firstName} *{clientData.lastName}|">
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
 
                             </option>
                         </select>
 
                         <br/>
 
-                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError" />
+                        <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}" th:class="globalError"></p>
                         <button type="submit">Decline</button>
                     </form>
                 </div>
@@ -227,10 +223,52 @@
     <hr/>
     <br/>
 
+    <section class="make-appointment">
+        <div class="container">
+            <h1>Create visit:</h1>
+            <form th:action="@{/visit/create}" th:object="${createRequest}" method="post">
+                <div id="create">
 
-<!--    <br/>-->
-<!--    <hr/>-->
-<!--    <br/>-->
+                    <!-- client's first name -->
+                    <label for="firstName" class="form-label">Client's First Name</label>
+                    <input type="text" th:field="*{clientFirstName}" class="form-control" id="firstName">
+                    <p th:if="${createRequest_clientFirstNameError != null}" th:text="${createRequest_clientFirstNameError.defaultMessage}" th:class="error"></p>
+
+                    <!-- last name -->
+                    <label for="lastName" class="form-label">Client's Last Name</label>
+                    <input type="text" th:field="*{clientLastName}" class="form-control" id="lastName">
+                    <p th:if="${createRequest_clientLastNameError != null}" th:text="${createRequest_clientLastNameError.defaultMessage}" th:class="error"></p>
+
+                    <!-- date of birth -->
+                    <label for="date-of-birth" class="form-label">Client's Date of Birth (DD-MM-YYYY)</label>
+                    <input type="text" th:field="*{clientDateOfBirthInput}" class="form-control" id="date-of-birth">
+                    <p th:if="${createRequest_clientDateOfBirthInputError != null}"
+                       th:text="${createRequest_clientDateOfBirthInputError.defaultMessage}"
+                       th:class="error"></p>
+                    <p th:if="${createRequest_clientDateOfBirthInputError == null} and ${createRequest_clientDateOfBirthError != null}"
+                       th:text="${createRequest_clientDateOfBirthError.defaultMessage}"
+                       th:class="error"></p>
+
+                    <!-- complaint -->
+                    <p>Client's complaint</p>
+                    <textarea th:field="*{clientComplaint}" class="form-control"></textarea>
+                    <p th:if="${createRequest_clientComplaintError != null}" th:text="${createRequest_clientComplaintError.defaultMessage}" th:class="error"></p>
+
+                    <!-- appoint at -->
+                    <label for="appointment-date2" class="form-label">Appointment time and date(dd-MM-yyyy HH:mm)</label>
+                    <input type="text" th:field="*{appointsAtInput}" class="form-control" id="appointment-date2">
+                    <p th:if="${createRequest_appointsAtInputError != null}" th:text="${createRequest_appointsAtInputError.defaultMessage}" th:class="error"></p>
+                    <p th:if="${createDateValidError != null}" th:text="${createDateValidError.defaultMessage}" th:class="error"></p>
+
+                    <button type="submit">Send</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <br/>
+    <hr/>
+    <br/>
 
 <!--    <section class="make-appointment">-->
 <!--        <div class="container">-->
