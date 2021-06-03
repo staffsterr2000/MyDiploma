@@ -128,8 +128,8 @@
                 <div>
                     <h4 th:text="'Cancel:'"></h4>
                     <form th:action="@{/visit/pass}" th:object="${passRequest}" method="post">
-                        <input th:name="status" th:value="'CANCELLED'" hidden/>
-<!--                        <input th:field="*{statusInput}" th:value="'CANCELLED'" hidden/>-->
+                        <input th:name="status" th:value="'CANCELLED_BY_DOCTOR'" hidden/>
+<!--                        <input th:field="*{statusInput}" th:value="'CANCELLED_BY_DOCTOR'" hidden/>-->
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
                                     th:value="${visit.id}"

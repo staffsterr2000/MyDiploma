@@ -2,10 +2,9 @@ package com.stasroshchenko.diploma.controller;
 
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
-import com.stasroshchenko.diploma.entity.request.visit.*;
-import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
+import com.stasroshchenko.diploma.entity.request.visit.*;
 import com.stasroshchenko.diploma.service.VisitService;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/visit")
@@ -39,6 +37,7 @@ public class VisitController {
             Authentication authentication) {
 
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("sendRequest", request);
             redirectAttributes.addFlashAttribute("bindingResult", result);
             return "redirect:/profile";
         }
@@ -47,9 +46,44 @@ public class VisitController {
                 authentication.getPrincipal();
         ClientData clientUser = principal.getClientData();
 
-        visitService.sendVisit(clientUser, request);
+        try {
+            visitService.sendVisit(clientUser, request);
+
+        } catch (IllegalStateException ex) {
+            result.addError(new ObjectError("sendVisitError", ex.getMessage()));
+        }
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("sendRequest", request);
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+        }
 
         return "redirect:/profile";
+
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_CLIENT')")
+    @PostMapping("/cancel")
+    public String cancelVisit(
+            @Valid @ModelAttribute("cancelRequest") CancelVisitRequest request,
+            BindingResult result,
+            RedirectAttributes redirectAttributes,
+            Authentication authentication) {
+
+        if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("cancelRequest", request);
+            redirectAttributes.addFlashAttribute("bindingResult", result);
+            return "redirect:/profile";
+        }
+
+        ApplicationUserClient principal = (ApplicationUserClient)
+                authentication.getPrincipal();
+        ClientData clientUser = principal.getClientData();
+
+        visitService.cancelVisit(clientUser, request);
+
+        return "redirect:/profile";
+
     }
 
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
@@ -61,6 +95,7 @@ public class VisitController {
             Authentication authentication) {
 
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("createRequest", request);
             redirectAttributes.addFlashAttribute("bindingResult", result);
             return "redirect:/profile";
         }
@@ -77,6 +112,7 @@ public class VisitController {
         }
 
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("createRequest", request);
             redirectAttributes.addFlashAttribute("bindingResult", result);
         }
 
@@ -92,6 +128,7 @@ public class VisitController {
             Authentication authentication) {
 
         if (result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("acceptRequest", request);
             redirectAttributes.addFlashAttribute("bindingResult", result);
             return "redirect:/profile";
         }
@@ -108,6 +145,7 @@ public class VisitController {
         }
 
         if(result.hasErrors()) {
+            redirectAttributes.addFlashAttribute("acceptRequest", request);
             redirectAttributes.addFlashAttribute("bindingResult", result);
         }
 

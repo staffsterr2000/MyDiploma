@@ -66,6 +66,27 @@
                     </tbody>
                 </table>
             </th:block>
+
+            <th:block th:unless="${#lists.isEmpty(allSentAndActiveVisits)}">
+                <br/>
+                <h1 th:text="'Manage requests:'"></h1>
+                <div>
+                    <h4 th:text="'Cancel:'"></h4>
+                    <form th:action="@{/visit/cancel}" th:object="${cancelRequest}" method="post">
+                        <select th:field="*{visitId}">
+                            <option th:each="visit : ${allSentAndActiveVisits}"
+                                    th:value="${visit.id}"
+                                    th:text="|ID: ${visit.id}, Name: ${visit.doctorData.firstName} ${visit.doctorData.lastName}|">
+
+                            </option>
+                        </select>
+
+                        <br/>
+
+                        <button type="submit">Cancel</button>
+                    </form>
+                </div>
+            </th:block>
         </div>
     </section>
 
@@ -76,6 +97,7 @@
     <section class="make-appointment">
         <div class="container">
             <h1>Make an appointment:</h1>
+            <p th:if="${sendVisitError != null}" th:text="${sendVisitError.defaultMessage}" th:class="error"/>
             <form th:action="@{/visit/send}" th:object="${sendRequest}" method="post">
                 <div id="send">
                     <span>Describe your complaint</span>

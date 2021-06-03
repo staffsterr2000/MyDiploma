@@ -19,9 +19,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping
@@ -70,6 +68,8 @@ public class ProfileController {
             Model model,
             BindingResult result) {
 
+        initiateClientProfile(authentication, model);
+
         for (ObjectError objectError : result.getGlobalErrors()) {
             model.addAttribute(objectError.getObjectName(), objectError);
         }
@@ -77,8 +77,6 @@ public class ProfileController {
         for (FieldError fieldError : result.getFieldErrors()) {
             model.addAttribute(fieldError.getObjectName() + "_" + fieldError.getField() + "Error", fieldError);
         }
-
-        initiateClientProfile(authentication, model);
 
         return "client_profile";
     }
@@ -88,6 +86,8 @@ public class ProfileController {
             Model model,
             BindingResult result) {
 
+        initiateDoctorProfile(authentication, model);
+
         for (ObjectError objectError : result.getGlobalErrors()) {
             model.addAttribute(objectError.getObjectName(), objectError);
         }
@@ -95,8 +95,6 @@ public class ProfileController {
         for (FieldError fieldError : result.getFieldErrors()) {
             model.addAttribute(fieldError.getObjectName() + "_" + fieldError.getField() + "Error", fieldError);
         }
-
-        initiateDoctorProfile(authentication, model);
 
         return "doctor_profile";
     }
@@ -118,13 +116,21 @@ public class ProfileController {
 
         List<Visit> allAcceptedVisits = visitService
                 .getAllVisitsExceptVisitsWithSomeStatusesOrdered(VisitStatus.SENT,
-                        VisitStatus.CANCELLED);
+                        VisitStatus.CANCELLED_BY_DOCTOR, VisitStatus.CANCELLED_BY_CLIENT);
         model.addAttribute("allAcceptedVisits", allAcceptedVisits);
 
-        model.addAttribute("acceptRequest", new AcceptVisitRequest());
-        model.addAttribute("declineRequest", new DeclineVisitRequest());
-        model.addAttribute("passRequest", new PassVisitRequest());
-        model.addAttribute("createRequest", new CreateVisitRequest());
+        if (model.getAttribute("acceptRequest") == null) {
+            model.addAttribute("acceptRequest", new AcceptVisitRequest());
+        }
+        if (model.getAttribute("declineRequest") == null) {
+            model.addAttribute("declineRequest", new DeclineVisitRequest());
+        }
+        if (model.getAttribute("passRequest") == null) {
+            model.addAttribute("passRequest", new PassVisitRequest());
+        }
+        if (model.getAttribute("createRequest") == null) {
+            model.addAttribute("createRequest", new CreateVisitRequest());
+        }
 
     }
 
@@ -139,11 +145,21 @@ public class ProfileController {
                 .getAllVisitsByClientOrdered(principal.getClientData());
         model.addAttribute("allVisits", allVisits);
 
+        List<Visit> allSentAndActiveVisits = visitService
+                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT, VisitStatus.ACTIVE);
+        model.addAttribute("allSentAndActiveVisits", allSentAndActiveVisits);
+
         List<DoctorData> allDoctors =
                 personDataService.getAllDoctors();
         model.addAttribute("allDoctors", allDoctors);
 
-        model.addAttribute("sendRequest", new SendVisitRequest());
+        if (model.getAttribute("sendRequest") == null) {
+            model.addAttribute("sendRequest", new SendVisitRequest());
+        }
+        if (model.getAttribute("cancelRequest") == null) {
+            model.addAttribute("cancelRequest", new CancelVisitRequest());
+        }
+
     }
 
 }

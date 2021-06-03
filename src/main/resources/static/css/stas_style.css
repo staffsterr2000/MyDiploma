@@ -8,6 +8,6 @@ td {
 .error,
 .globalError {
   color: red;
-  text-align: center;
+  text-align: left;
   margin: 8px 8px 8px 8px;
 }

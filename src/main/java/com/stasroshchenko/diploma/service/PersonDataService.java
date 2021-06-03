@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -39,12 +40,21 @@ public class PersonDataService {
                 .orElseThrow(() -> new IllegalStateException("Person with id " + id + " doesn't exist"));
     }
 
-    public void signUpClientData(ClientData clientData) {
-        boolean clientExists = getAllClients().stream()
-                .anyMatch(c -> c.equals(clientData));
+    public ClientData signUpClientData(ClientData clientData) {
+        Optional<ClientData> clientOptional = getAllClients().stream()
+                .filter(c -> c.equals(clientData))
+                .findFirst();
 
-        if (!clientExists) {
-            clientDataRepository.save(clientData);
+        ClientData clientFromDB;
+
+        if (clientOptional.isEmpty()) {
+            clientFromDB = clientDataRepository.save(clientData);
+
+        } else {
+            clientFromDB = clientOptional.get();
         }
+
+        return clientFromDB;
+
     }
 }

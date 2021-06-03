@@ -9,11 +9,9 @@ import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -137,6 +135,17 @@ public class VisitService {
         }
     }
 
+    public boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
+        return getAllVisitsByClient(clientData).stream()
+                .filter(visit -> visit.getDoctorData().equals(doctorData))
+                .filter(visit -> {
+                    VisitStatus status = visit.getStatus();
+                    return status.equals(SENT) || status.equals(ACTIVE);
+                })
+                .findFirst()
+                .isEmpty();
+    }
+
     public void sendVisit(ClientData clientUser, SendVisitRequest request) {
         Long doctorDataId = request.getDoctorDataId();
         String complaint = request.getComplaint();
@@ -144,16 +153,11 @@ public class VisitService {
         DoctorData doctorData = personDataService
                 .getDoctorById(doctorDataId);
 
-        boolean clientHasNoActiveOrSentVisitsToDoctor = getAllVisitsByClient(clientUser).stream()
-                .filter(visit -> visit.getDoctorData().equals(doctorData))
-                .filter(visit -> {
-                    VisitStatus status = visit.getStatus();
-                    return !(status.equals(VisitStatus.SENT) || status.equals(VisitStatus.ACTIVE));
-                })
-                .findFirst()
-                .isEmpty();
+        boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
+                isClientAndDoctorHaveNeitherSentNorActiveVisit(clientUser, doctorData);
 
-        if (clientHasNoActiveOrSentVisitsToDoctor) {
+        if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
+//        if (true) {
             Visit visitToSend = new Visit(
                     doctorData,
                     clientUser,
@@ -161,39 +165,54 @@ public class VisitService {
                     null,
                     null,
                     null,
-                    VisitStatus.SENT
+                    SENT
             );
 
             visitRepository.save(visitToSend);
 
+        } else {
+            throw new IllegalStateException("You have already sent a request to this doctor.");
         }
 
     }
 
+    // 1. check for visits -> throw exception
+    // 2. check for date -> throw exception
+    // 3. register or just take client from db
+    // 4. create visit
     public void createVisit(DoctorData doctorUser, CreateVisitRequest request) {
         LocalDateTime visitDate = request.getAppointsAt();
 
-        isDateValid(visitDate);
-
-        ClientData clientData = new ClientData(
+        ClientData newClient = new ClientData(
                 request.getClientFirstName(),
                 request.getClientLastName(),
                 request.getClientDateOfBirth()
         );
 
-        personDataService.signUpClientData(clientData);
+        boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
+                isClientAndDoctorHaveNeitherSentNorActiveVisit(newClient, doctorUser);
 
-        Visit visit = new Visit(
-                doctorUser,
-                clientData,
-                request.getClientComplaint(),
-                LocalDateTime.now(),
-                visitDate,
-                request.getClientDateOfBirthInput(),
-                VisitStatus.ACTIVE
-        );
+        if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
+            isDateValid(visitDate);
 
-        visitRepository.save(visit);
+            ClientData clientDataFromDB = personDataService
+                    .signUpClientData(newClient);
+
+            Visit visit = new Visit(
+                    doctorUser,
+                    clientDataFromDB,
+                    request.getClientComplaint(),
+                    LocalDateTime.now(),
+                    visitDate,
+                    request.getClientDateOfBirthInput(),
+                    ACTIVE
+            );
+
+            visitRepository.save(visit);
+
+        } else {
+            throw new IllegalStateException("You have already has a visit with this client.");
+        }
 
     }
 
@@ -205,12 +224,12 @@ public class VisitService {
 
         Visit visitFromDatabase = getVisitById(visitId);
 
-        if (visitFromDatabase.getStatus().equals(VisitStatus.SENT) &&
+        if (visitFromDatabase.getStatus().equals(SENT) &&
                 doctorUser.equals(visitFromDatabase.getDoctorData())) {
 
             visitFromDatabase.setAppointsAt(visitDate);
             visitFromDatabase.setAcceptedAt(LocalDateTime.now());
-            visitFromDatabase.setStatus(VisitStatus.ACTIVE);
+            visitFromDatabase.setStatus(ACTIVE);
 
             visitRepository.save(visitFromDatabase);
         }
@@ -222,13 +241,27 @@ public class VisitService {
 
         Visit visit = getVisitById(visitId);
 
-        if (visit.getStatus().equals(VisitStatus.SENT) &&
+        if (visit.getStatus().equals(SENT) &&
                 doctorUser.equals(visit.getDoctorData())) {
 
-            visit.setStatus(CANCELLED);
+            visit.setStatus(CANCELLED_BY_DOCTOR);
             visitRepository.save(visit);
         }
 
+    }
+
+    public void cancelVisit(ClientData clientUser, CancelVisitRequest request) {
+        Long visitId = request.getVisitId();
+
+        Visit visit = getVisitById(visitId);
+
+        if ((visit.getStatus().equals(ACTIVE) ||
+                (visit.getStatus().equals(SENT))) &&
+                clientUser.equals(visit.getClientData())) {
+
+            visit.setStatus(CANCELLED_BY_CLIENT);
+            visitRepository.save(visit);
+        }
     }
 
     public void passVisit(DoctorData doctorUser, PassVisitRequest request) {
@@ -240,17 +273,17 @@ public class VisitService {
         switch (visitStatus) {
             case OCCURRED:
             case NOT_OCCURRED:
-            case CANCELLED:
+            case CANCELLED_BY_DOCTOR:
                 break;
             default:
                 throw new IllegalStateException("Status " + visitStatus + " is wrong.");
         }
 
-        if (visit.getStatus().equals(VisitStatus.ACTIVE) &&
+        if (visit.getStatus().equals(ACTIVE) &&
                 doctorUser.equals(visit.getDoctorData())) {
 
             if (visit.getAppointsAt().isBefore(LocalDateTime.now()) ||
-                    visitStatus.equals(CANCELLED)) {
+                    visitStatus.equals(CANCELLED_BY_DOCTOR)) {
                 visit.setStatus(visitStatus);
                 visitRepository.save(visit);
             } else {

@@ -33,7 +33,7 @@ public class Visit {
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             nullable = false,
             name = "doctor_id",
@@ -41,7 +41,7 @@ public class Visit {
     )
     private DoctorData doctorData;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(
             nullable = false,
             name = "client_id",
