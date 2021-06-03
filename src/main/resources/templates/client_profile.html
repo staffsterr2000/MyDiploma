@@ -73,6 +73,8 @@
                 <div>
                     <h4 th:text="'Cancel:'"></h4>
                     <form th:action="@{/visit/cancel}" th:object="${cancelRequest}" method="post">
+                        <input th:name="redirectLink" th:value="${redirectLink}" hidden/>
+
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentAndActiveVisits}"
                                     th:value="${visit.id}"
@@ -99,6 +101,8 @@
             <h1>Make an appointment:</h1>
             <p th:if="${sendVisitError != null}" th:text="${sendVisitError.defaultMessage}" th:class="error"/>
             <form th:action="@{/visit/send}" th:object="${sendRequest}" method="post">
+                <input th:name="redirectLink" th:value="${redirectLink}" hidden/>
+
                 <div id="send">
                     <span>Describe your complaint</span>
                     <textarea th:field="*{complaint}" class="form-control"></textarea>
