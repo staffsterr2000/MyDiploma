@@ -7,8 +7,11 @@ import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
 import com.stasroshchenko.diploma.entity.request.visit.*;
+import com.stasroshchenko.diploma.service.user.ApplicationUserService;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,15 +19,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ProfileService {
 
+    private final static Logger LOGGER =
+            LoggerFactory.getLogger(ProfileService.class);
+
     private final VisitService visitService;
     private final PersonDataService personDataService;
+    private final ApplicationUserService applicationUserService;
 
     public List<Visit> remainOnlyOneClientDataVisitsInList(
             ClientData clientData,
@@ -44,6 +53,47 @@ public class ProfileService {
                 .filter(visit -> visit.getDoctorData()
                         .equals(doctorData))
                 .collect(Collectors.toList());
+    }
+
+    public Map<Visit, ApplicationUserClient> addClientUsersFromVisitToAllDoctorVisits(List<Visit> visits) {
+        Map<Visit, ApplicationUserClient>
+                allVisitsByDoctorWithItsClientUsers = new HashMap<>();
+
+        for (Visit visit : visits) {
+            ClientData clientData = visit.getClientData();
+            ApplicationUserClient applicationUserClient;
+            try {
+                applicationUserClient = applicationUserService.getByClientData(clientData);
+
+            } catch (Exception ex) {
+                LOGGER.error(ex.getMessage());
+                applicationUserClient = null;
+            }
+
+            allVisitsByDoctorWithItsClientUsers.put(visit, applicationUserClient);
+        }
+
+        return allVisitsByDoctorWithItsClientUsers;
+    }
+
+    public Map<Visit, ApplicationUserDoctor> addDoctorUsersFromVisitToAllClientVisits(List<Visit> visits) {
+        Map<Visit, ApplicationUserDoctor>
+                allVisitsByClientWithItsDoctorUsers = new HashMap<>();
+
+        for (Visit visit : visits) {
+            DoctorData doctorData = visit.getDoctorData();
+            ApplicationUserDoctor applicationUserDoctor;
+            try {
+                applicationUserDoctor = applicationUserService.getByDoctorData(doctorData);
+            } catch (Exception ex) {
+                LOGGER.error(ex.getMessage());
+                applicationUserDoctor = null;
+            }
+
+            allVisitsByClientWithItsDoctorUsers.put(visit, applicationUserDoctor);
+        }
+
+        return allVisitsByClientWithItsDoctorUsers;
     }
 
 
@@ -78,21 +128,22 @@ public class ProfileService {
         if (authenticatedUser instanceof ApplicationUserDoctor) {
             ApplicationUserDoctor authenticatedDoctorUser =
                     (ApplicationUserDoctor) authenticatedUser;
+            DoctorData doctorUser = authenticatedDoctorUser.getDoctorData();
 
             model.addAttribute("isAuthUserDoctor", true);
 
             List<Visit> allVisits = visitService
-                    .getAllVisitsByDoctorOrdered(authenticatedDoctorUser.getDoctorData());
+                    .getAllVisitsByDoctor(doctorUser);
             allVisits = remainOnlyOneClientDataVisitsInList(requiredUser.getClientData(), allVisits);
             model.addAttribute("allVisits", allVisits);
 
             List<Visit> allSentVisits = visitService
-                    .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT);
+                    .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.SENT);
             allSentVisits = remainOnlyOneClientDataVisitsInList(requiredUser.getClientData(), allSentVisits);
             model.addAttribute("allSentVisits", allSentVisits);
 
             List<Visit> allActiveVisits = visitService
-                    .getAllVisitsWithSomeStatusesOrdered(VisitStatus.ACTIVE);
+                    .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.ACTIVE);
             allActiveVisits = remainOnlyOneClientDataVisitsInList(requiredUser.getClientData(), allActiveVisits);
             model.addAttribute("allActiveVisits", allActiveVisits);
 
@@ -120,16 +171,17 @@ public class ProfileService {
         if (authenticatedUser instanceof ApplicationUserClient) {
             ApplicationUserClient authenticatedClientUser =
                     (ApplicationUserClient) authenticatedUser;
+            ClientData clientUser = authenticatedClientUser.getClientData();
 
             model.addAttribute("isAuthUserClient", true);
 
             List<Visit> allVisits = visitService
-                    .getAllVisitsByClientOrdered(authenticatedClientUser.getClientData());
+                    .getAllVisitsByClient(clientUser);
             allVisits = remainOnlyOneDoctorDataVisitsInList(requiredUser.getDoctorData(), allVisits);
             model.addAttribute("allVisits", allVisits);
 
             List<Visit> allSentAndActiveVisits = visitService
-                    .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT, VisitStatus.ACTIVE);
+                    .getAllVisitsWithSomeStatusesDoneByClient(clientUser, VisitStatus.SENT, VisitStatus.ACTIVE);
             allSentAndActiveVisits = remainOnlyOneDoctorDataVisitsInList(requiredUser.getDoctorData(), allSentAndActiveVisits);
             model.addAttribute("allSentAndActiveVisits", allSentAndActiveVisits);
 
@@ -151,18 +203,29 @@ public class ProfileService {
                 (ApplicationUserDoctor) authentication.getPrincipal();
         model.addAttribute("principal", principal);
 
+        DoctorData doctorUser = principal.getDoctorData();
+
         List<Visit> allSentVisits = visitService
-                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT);
+                .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.SENT);
         model.addAttribute("allSentVisits", allSentVisits);
 
+        Map<Visit, ApplicationUserClient> allSentVisitsByDoctorWithItsClientUsers =
+                addClientUsersFromVisitToAllDoctorVisits(allSentVisits);
+        model.addAttribute("allSentVisitsMap", allSentVisitsByDoctorWithItsClientUsers);
+
         List<Visit> allActiveVisits = visitService
-                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.ACTIVE);
+                .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.ACTIVE);
         model.addAttribute("allActiveVisits", allActiveVisits);
 
         List<Visit> allAcceptedVisits = visitService
-                .getAllVisitsExceptVisitsWithSomeStatusesOrdered(VisitStatus.SENT,
+                .getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.SENT,
                         VisitStatus.CANCELLED_BY_DOCTOR, VisitStatus.CANCELLED_BY_CLIENT);
         model.addAttribute("allAcceptedVisits", allAcceptedVisits);
+
+        Map<Visit, ApplicationUserClient> allAcceptedVisitsByDoctorWithItsClientUsers =
+                addClientUsersFromVisitToAllDoctorVisits(allAcceptedVisits);
+        model.addAttribute("allAcceptedVisitsMap", allAcceptedVisitsByDoctorWithItsClientUsers);
+
 
         if (model.getAttribute("acceptRequest") == null) {
             model.addAttribute("acceptRequest", new AcceptVisitRequest());
@@ -187,12 +250,18 @@ public class ProfileService {
                 (ApplicationUserClient) authentication.getPrincipal();
         model.addAttribute("principal", principal);
 
+        ClientData clientUser = principal.getClientData();
+
         List<Visit> allVisits = visitService
-                .getAllVisitsByClientOrdered(principal.getClientData());
+                .getAllVisitsByClient(clientUser);
         model.addAttribute("allVisits", allVisits);
 
+        Map<Visit, ApplicationUserDoctor> allVisitsByClientWithItsDoctorUsers =
+                addDoctorUsersFromVisitToAllClientVisits(allVisits);
+        model.addAttribute("allVisitsMap", allVisitsByClientWithItsDoctorUsers);
+
         List<Visit> allSentAndActiveVisits = visitService
-                .getAllVisitsWithSomeStatusesOrdered(VisitStatus.SENT, VisitStatus.ACTIVE);
+                .getAllVisitsWithSomeStatusesDoneByClient(clientUser, VisitStatus.SENT, VisitStatus.ACTIVE);
         model.addAttribute("allSentAndActiveVisits", allSentAndActiveVisits);
 
         List<DoctorData> allDoctors =

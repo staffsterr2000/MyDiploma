@@ -26,23 +26,7 @@ public class VisitService {
     private final PersonDataService personDataService;
 
     public List<Visit> getAllVisits() {
-        return visitRepository.findAll();
-    }
-
-    public List<Visit> getAllVisitsOrdered() {
         return visitRepository.findAllOrdered();
-    }
-
-    public List<Visit> getAllVisitsByClientOrdered(ClientData clientData) {
-        return getAllVisitsOrdered().stream()
-                .filter(visit -> visit.getClientData().equals(clientData))
-                .collect(Collectors.toList());
-    }
-
-    public List<Visit> getAllVisitsByDoctorOrdered(DoctorData doctorData) {
-        return getAllVisitsOrdered().stream()
-                .filter(visit -> visit.getDoctorData().equals(doctorData))
-                .collect(Collectors.toList());
     }
 
     public List<Visit> getAllVisitsByClient(ClientData clientData) {
@@ -57,30 +41,38 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesOrdered(VisitStatus... statuses) {
-        return getAllVisitsOrdered().stream()
+    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
+        return getAllVisitsByClient(clientData).stream()
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
                         .reduce(true, (acc, x) -> acc && x)
                 )
                 .collect(Collectors.toList());
 
-//        List<Visit> visits = new ArrayList<>();
-//        for (Visit visitFromDB : getAllVisitsOrdered()) {
-//            boolean answer = true;
-//            for (VisitStatus status : statuses) {
-//                answer &= !visitFromDB.getStatus().equals(status);
-//            }
-//
-//            if (answer) visits.add(visitFromDB);
-//        }
-//        return visits;
+    }
+
+    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+        return getAllVisitsByDoctor(doctorData).stream()
+                .filter(visit -> Arrays.stream(statuses)
+                        .map(status -> !visit.getStatus().equals(status))
+                        .reduce(true, (acc, x) -> acc && x)
+                )
+                .collect(Collectors.toList());
+
     }
 
     // check for bugs
-    public List<Visit> getAllVisitsWithSomeStatusesOrdered(VisitStatus... statuses) {
+    public List<Visit> getAllVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
         return Arrays.stream(statuses)
-                .flatMap(status -> getAllVisitsOrdered().stream()
+                .flatMap(status -> getAllVisitsByClient(clientData).stream()
+                        .filter(visit -> visit.getStatus().equals(status)))
+                .collect(Collectors.toList());
+    }
+
+    // check for bugs
+    public List<Visit> getAllVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+        return Arrays.stream(statuses)
+                .flatMap(status -> getAllVisitsByDoctor(doctorData).stream()
                         .filter(visit -> visit.getStatus().equals(status)))
                 .collect(Collectors.toList());
     }
@@ -93,14 +85,13 @@ public class VisitService {
 
 
     public void saveVisit(Visit visit) {
-
         visitRepository.save(visit);
     }
 
     private boolean isTimeFree(LocalDateTime visitDate) {
         if (visitDate == null) return false;
 
-        return getAllVisitsOrdered().stream()
+        return getAllVisits().stream()
                 .filter(visit -> visit.getStatus().equals(VisitStatus.ACTIVE))
                 .filter(visit -> {
                     LocalDateTime appointsAt = visit.getAppointsAt();
@@ -156,8 +147,8 @@ public class VisitService {
         boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
                 isClientAndDoctorHaveNeitherSentNorActiveVisit(clientUser, doctorData);
 
-        if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
-//        if (true) {
+//        if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
+        if (true) {
             Visit visitToSend = new Visit(
                     doctorData,
                     clientUser,

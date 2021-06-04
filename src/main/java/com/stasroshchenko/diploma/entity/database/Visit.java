@@ -30,7 +30,7 @@ public class Visit {
             strategy = GenerationType.SEQUENCE,
             generator = SEQUENCE_NAME
     )
-    @EqualsAndHashCode.Exclude
+//    @EqualsAndHashCode.Exclude
     private Long id;
 
     @ManyToOne

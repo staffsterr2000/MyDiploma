@@ -65,13 +65,26 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="visit : ${allAcceptedVisits}" th:object="${visit}">
-                        <td th:text="*{id}"/>
-                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
-                        <td th:text="*{complaint}"/>
-                        <td th:text="${#temporals.format(visit.acceptedAt, 'dd-MM-yyyy HH:mm')}"/>
-                        <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
-                        <td th:text="*{status}"/>
+                    <tr th:each="visit : ${allAcceptedVisitsMap}" th:object="${visit}">
+                        <td th:text="*{key.id}"/>
+                        <th:block th:switch="*{value}">
+                            <th:block th:case="null">
+                                <td th:text="*{key.clientData.firstName} + ' ' + *{key.clientData.lastName}"></td>
+                            </th:block>
+
+                            <th:block th:case="*">
+                                <td>
+                                    <a th:href="@{'/id/' + *{value.username}}"
+                                       th:text="*{key.clientData.firstName} + ' ' + *{key.clientData.lastName}">
+
+                                    </a>
+                                </td>
+                            </th:block>
+                        </th:block>
+                        <td th:text="*{key.complaint}"/>
+                        <td th:text="${#temporals.format(visit.key.acceptedAt, 'dd-MM-yyyy HH:mm')}"/>
+                        <td th:text="${#temporals.format(visit.key.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
+                        <td th:text="*{key.status}"/>
                     </tr>
                     </tbody>
                 </table>
@@ -170,10 +183,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="visit : ${allSentVisits}" th:object="${visit}">
-                        <td th:text="*{id}"></td>
-                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"></td>
-                        <td th:text="*{complaint}"></td>
+                    <tr th:each="visit : ${allSentVisitsMap}" th:object="${visit}">
+                        <td th:text="*{key.id}"></td>
+
+                        <th:block th:switch="*{value}">
+                            <th:block th:case="null">
+                                <td th:text="*{key.clientData.firstName} + ' ' + *{key.clientData.lastName}">
+                            </th:block>
+
+                            <th:block th:case="*">
+                                <td>
+                                    <a th:href="@{'/id/' + *{value.username}}"
+                                       th:text="*{key.clientData.firstName} + ' ' + *{key.clientData.lastName}">
+                                    </a>
+                                </td>
+                            </th:block>
+                        </th:block>
+
+                        <td th:text="*{key.complaint}"></td>
                     </tr>
                     </tbody>
                 </table>
@@ -227,7 +254,7 @@
     </section>
 
     <br/>
-    <hr/>
+    <br/>
     <br/>
 
     <section class="make-appointment">

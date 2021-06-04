@@ -57,11 +57,24 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="visit : ${allVisits}" th:object="${visit}">
-                        <td th:text="*{doctorData.firstName} + ' ' + *{doctorData.lastName}"/>
-                        <td th:text="*{complaint}"/>
-                        <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
-                        <td th:text="*{status}"/>
+                    <tr th:each="visit : ${allVisitsMap}" th:object="${visit}">
+                        <th:block th:switch="*{key}">
+                            <th:block th:case="null">
+                                <td th:text="*{key.doctorData.firstName} + ' ' + *{key.doctorData.lastName}"></td>
+                            </th:block>
+
+                            <th:block th:case="*">
+                                <td>
+                                    <a th:href="@{'/id/' + *{value.username}}"
+                                       th:text="*{key.doctorData.firstName} + ' ' + *{key.doctorData.lastName}">
+                                    </a>
+                                </td>
+                            </th:block>
+
+                        </th:block>
+                        <td th:text="*{key.complaint}"/>
+                        <td th:text="${#temporals.format(visit.key.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
+                        <td th:text="*{key.status}"/>
                     </tr>
                     </tbody>
                 </table>
@@ -125,7 +138,7 @@
     </section>
 
     <br/>
-    <hr/>
+    <br/>
     <br/>
 
 </main>

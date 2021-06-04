@@ -50,7 +50,7 @@ public class RegistrationRequest {
 
     public void setDateOfBirthInput(String dateOfBirthInput) {
         this.dateOfBirthInput = dateOfBirthInput;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         try {
             this.dateOfBirth = LocalDate.parse(dateOfBirthInput, formatter);

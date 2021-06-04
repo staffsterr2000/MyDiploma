@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--    <title>"${requiredUser.username}"</title>-->
-    <title>Profile</title>
+    <title th:text="${requiredUser.username}"></title>
+<!--    <title>Profile</title>-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <!--    <link rel="stylesheet" href="css/main.css">-->
@@ -151,34 +151,14 @@
         </div>
     </section>
 
-    <section class="sent_visits">
+    <section th:if="${isAuthUserDoctor}" class="sent_visits">
 
         <br/>
         <hr/>
         <br/>
 
         <div class="container">
-<!--            <h1 th:text="|Received visits (${#lists.size(allSentVisits)}):|"></h1>-->
             <th:block th:unless="${#lists.isEmpty(allSentVisits)}">
-<!--                <table>-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>ID</th>-->
-<!--                        <th>Client name</th>-->
-<!--                        <th>Complaint</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-<!--                    <tbody>-->
-<!--                    <tr th:each="visit : ${allSentVisits}" th:object="${visit}">-->
-<!--                        <td th:text="*{id}"></td>-->
-<!--                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"></td>-->
-<!--                        <td th:text="*{complaint}"></td>-->
-<!--                    </tr>-->
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            -->
-<!--                <br/>-->
-
                 <h1 th:text="'Manage requests:'"></h1>
                 <div>
                     <h4 th:text="'Accept:'"></h4>
