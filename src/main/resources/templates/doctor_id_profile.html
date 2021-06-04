@@ -37,10 +37,11 @@
             <br/>
             <br/>
 
-            <img th:src="@{'/img/avatar/' + *{imageLink}}" width="250" height="250"/>
-            <h2 th:text="|*{doctorData.firstName} *{doctorData.lastName}|"/>
-            <p th:text="|Experience: *{doctorData.experienceAge} years|"/>
-            <p th:text="|Room: *{doctorData.room}|"/>
+            <img src="#" th:src="@{'/img/avatar/' + *{imageLink}}" width="250" height="250"/>
+            <h2 th:text="|*{doctorData.firstName} *{doctorData.lastName}|"></h2>
+            <p th:text="|Experience: *{doctorData.experienceAge} years|"></p>
+            <p th:text="|Room: *{doctorData.room}|"></p>
+            <p th:if="*{doctorData.description != null}" th:text="*{doctorData.description}"></p>
         </div>
     </section>
 

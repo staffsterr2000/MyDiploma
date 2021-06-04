@@ -42,6 +42,9 @@ public class RegistrationRequest {
     @EmailConstraint
     private String email;
 
+    @UniqueClientPassportIdConstraint
+    private Long passportId;
+
     @Size(min = 8, max = 24, message = "Password must have from 8 to 24 symbols")
     private String password;
 

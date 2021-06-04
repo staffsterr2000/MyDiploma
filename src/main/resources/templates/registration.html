@@ -15,14 +15,14 @@
     <div class="sign-up">
         <form th:object="${request}" th:action="@{/registration}" method="post">
             <div class="mb-3">
-                <label for="firstName" class="form-label">First Name</label>
-                <input type="text" th:field="*{firstName}" class="form-control" id="firstName">
+                <label for="first-name" class="form-label">First Name</label>
+                <input type="text" th:field="*{firstName}" class="form-control" id="first-name">
             </div>
             <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" th:errorclass="error"/>
 
             <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name</label>
-                <input type="text" th:field="*{lastName}" class="form-control" id="lastName">
+                <label for="last-name" class="form-label">Last Name</label>
+                <input type="text" th:field="*{lastName}" class="form-control" id="last-name">
             </div>
             <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" th:errorclass="error"/>
 
@@ -34,6 +34,12 @@
                th:errors="*{dateOfBirthInput}" th:errorclass="error"/>
             <p th:if="${!#fields.hasErrors('dateOfBirthInput')} and ${#fields.hasErrors('dateOfBirth')}"
                th:errors="*{dateOfBirth}" th:errorclass="error"/>
+
+            <div class="mb-3">
+                <label for="passport-id" class="form-label">Password Id</label>
+                <input type="text" th:field="*{passportId}" class="form-control" id="passport-id">
+            </div>
+            <p th:if="${#fields.hasErrors('passportId')}" th:errors="*{passportId}" th:errorclass="error"/>
 
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -52,8 +58,8 @@
                 <input type="password" th:field="*{password}" class="form-control" id="password">
             </div>
             <div class="mb-3">
-                <label for="repeatedPassword" class="form-label">Repeat Your Password</label>
-                <input type="password" th:field="*{repeatedPassword}" class="form-control" id="repeatedPassword">
+                <label for="repeated-password" class="form-label">Repeat Your Password</label>
+                <input type="password" th:field="*{repeatedPassword}" class="form-control" id="repeated-password">
             </div>
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"/>
 

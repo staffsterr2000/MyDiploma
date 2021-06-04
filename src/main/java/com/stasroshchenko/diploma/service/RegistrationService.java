@@ -27,7 +27,8 @@ public class RegistrationService {
                 new ClientData(
                         request.getFirstName(),
                         request.getLastName(),
-                        request.getDateOfBirth()
+                        request.getDateOfBirth(),
+                        request.getPassportId()
                 ),
                 request.getUsername(),
                 request.getEmail(),

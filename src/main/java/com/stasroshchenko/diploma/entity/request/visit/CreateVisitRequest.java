@@ -1,6 +1,7 @@
 package com.stasroshchenko.diploma.entity.request.visit;
 
 import com.stasroshchenko.diploma.annotation.constraint.DateOfBirthConstraint;
+import com.stasroshchenko.diploma.annotation.constraint.UniqueClientPassportIdConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,9 @@ public class CreateVisitRequest {
 
     @NotBlank
     private String clientLastName;
+
+    @UniqueClientPassportIdConstraint
+    private Long clientPassportId;
 
     @DateOfBirthConstraint
     private LocalDate clientDateOfBirth;

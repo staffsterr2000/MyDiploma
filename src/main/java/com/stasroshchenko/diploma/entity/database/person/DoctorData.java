@@ -30,16 +30,25 @@ public class DoctorData extends PersonData {
     )
     @EqualsAndHashCode.Exclude
     private Long id;
+
+    @Column
     private Integer room;
+
+    @Column
     private Integer experienceAge;
+
+    @EqualsAndHashCode.Exclude
+    @Column(length = 1024)
+    private String description;
 
     public DoctorData(String firstName,
                       String lastName,
                       LocalDate dateOfBirth,
+                      Long passportId,
                       Integer room,
                       Integer experienceAge) {
 
-        super(firstName, lastName, dateOfBirth);
+        super(firstName, lastName, dateOfBirth, passportId);
         this.room = room;
         this.experienceAge = experienceAge;
     }

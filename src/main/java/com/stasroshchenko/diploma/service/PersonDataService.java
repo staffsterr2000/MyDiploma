@@ -26,6 +26,18 @@ public class PersonDataService {
         return clientDataRepository.findAll();
     }
 
+    public boolean isClientTableHasPasswordId(Long passwordId) {
+//        boolean isDoctorTableHasPasswordId =
+//                getAllDoctors().stream()
+//                        .anyMatch(doctorData -> doctorData.getPassportId().equals(passwordId));
+//        boolean isClientTableHasPasswordId =
+        return getAllClients().stream()
+                        .anyMatch(clientData ->
+                                clientData.getPassportId().equals(passwordId));
+
+//        return isDoctorTableHasPasswordId || isClientTableHasPasswordId;
+    }
+
     public ClientData getClientById(Long id) {
         return clientDataRepository.findAll().stream()
                 .filter(personData -> id.equals(personData.getId()))

@@ -40,8 +40,9 @@
 
             <img src="#" th:src="@{'/img/avatar/' + ${principal.imageLink}}" width="250" height="250"/>
             <h2 th:text="|*{firstName} *{lastName}|"></h2>
-<!--            <p th:text="|Experience: *{experienceAge} years|"/>-->
-<!--            <p th:text="|Room: *{room}|"/>-->
+            <p th:text="|Experience: *{experienceAge} years|"></p>
+            <p th:text="|Room: *{room}|"></p>
+            <p th:if="*{description} != null" th:text="*{description}"></p>
         </div>
     </section>
 
@@ -284,6 +285,12 @@
                     <p th:if="${createRequest_clientDateOfBirthInputError == null} and ${createRequest_clientDateOfBirthError != null}"
                        th:text="${createRequest_clientDateOfBirthError.defaultMessage}"
                        th:class="error"></p>
+
+                    <!-- passport id -->
+                    <label for="passport-id" class="form-label">Client's Passport Id</label>
+                    <input type="text" th:field="*{clientPassportId}" class="form-control" id="passport-id">
+                    <p th:if="${createRequest_clientPassportIdError != null}" th:text="${createRequest_clientPassportIdError.defaultMessage}" th:class="error"></p>
+
 
                     <!-- complaint -->
                     <p>Client's complaint</p>

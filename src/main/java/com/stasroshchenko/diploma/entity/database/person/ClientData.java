@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 
 @Entity(name = "client_data")
-//@DiscriminatorValue(value = "CLIENT")
 public class ClientData extends PersonData {
 
     private static final String SEQUENCE_NAME = "client_data_sequence";
@@ -32,9 +31,10 @@ public class ClientData extends PersonData {
 
     public ClientData(String firstName,
                       String lastName,
-                      LocalDate dateOfBirth) {
+                      LocalDate dateOfBirth,
+                      Long passportId) {
 
-        super(firstName, lastName, dateOfBirth);
+        super(firstName, lastName, dateOfBirth, passportId);
     }
 
 }

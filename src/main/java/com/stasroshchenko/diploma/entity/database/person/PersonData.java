@@ -13,14 +13,23 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class PersonData {
 
+    @Column
     protected String firstName;
+
+    @Column
     protected String lastName;
+
+    @Column
     protected LocalDate dateOfBirth;
 
-    public PersonData(String firstName, String lastName, LocalDate dateOfBirth) {
+    @Column(unique = true)
+    protected Long passportId;
+
+    public PersonData(String firstName, String lastName, LocalDate dateOfBirth, Long passportId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
+        this.passportId = passportId;
     }
 
 }

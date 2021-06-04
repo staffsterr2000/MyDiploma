@@ -177,7 +177,8 @@ public class VisitService {
         ClientData newClient = new ClientData(
                 request.getClientFirstName(),
                 request.getClientLastName(),
-                request.getClientDateOfBirth()
+                request.getClientDateOfBirth(),
+                request.getClientPassportId()
         );
 
         boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
