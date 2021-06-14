@@ -57,7 +57,8 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Doctor name</th>
+                        <th>ID</th>
+<!--                        <th>Doctor name</th>-->
                         <th>Complaint</th>
                         <th>Appoints at</th>
                         <th>Status</th>
@@ -65,7 +66,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="visit : ${allVisits}" th:object="${visit}">
-                        <td th:text="*{doctorData.firstName} + ' ' + *{doctorData.lastName}"/>
+                        <td th:text="*{id}"/>
+<!--                        <td th:text="*{doctorData.firstName} + ' ' + *{doctorData.lastName}"/>-->
                         <td th:text="*{complaint}"/>
                         <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
                         <td th:text="*{status}"/>
@@ -87,9 +89,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentAndActiveVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.doctorData.firstName} ${visit.doctorData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                             </option>
+<!--                            th:text="|ID: ${visit.id}, Name: ${visit.doctorData.firstName} ${visit.doctorData.lastName}|">-->
                         </select>
 
                         <br/>

@@ -50,6 +50,7 @@
                 <table>
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Doctor name</th>
                         <th>Complaint</th>
                         <th>Appoints at</th>
@@ -58,6 +59,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="visit : ${allVisitsMap}" th:object="${visit}">
+                        <td th:text="*{key.id}"/>
                         <th:block th:switch="*{key}">
                             <th:block th:case="null">
                                 <td th:text="*{key.doctorData.firstName} + ' ' + *{key.doctorData.lastName}"></td>

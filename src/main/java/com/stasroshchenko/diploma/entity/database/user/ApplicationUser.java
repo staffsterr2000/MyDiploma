@@ -21,7 +21,7 @@ public abstract class ApplicationUser implements UserDetails {
     @SequenceGenerator(
             name = SEQUENCE_NAME,
             sequenceName = SEQUENCE_NAME,
-            initialValue = 1
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,

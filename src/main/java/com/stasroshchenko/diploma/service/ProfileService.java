@@ -20,6 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -57,7 +58,7 @@ public class ProfileService {
 
     public Map<Visit, ApplicationUserClient> addClientUsersFromVisitToAllDoctorVisits(List<Visit> visits) {
         Map<Visit, ApplicationUserClient>
-                allVisitsByDoctorWithItsClientUsers = new HashMap<>();
+                allVisitsByDoctorWithItsClientUsers = new LinkedHashMap<>();
 
         for (Visit visit : visits) {
             ClientData clientData = visit.getClientData();
@@ -78,7 +79,7 @@ public class ProfileService {
 
     public Map<Visit, ApplicationUserDoctor> addDoctorUsersFromVisitToAllClientVisits(List<Visit> visits) {
         Map<Visit, ApplicationUserDoctor>
-                allVisitsByClientWithItsDoctorUsers = new HashMap<>();
+                allVisitsByClientWithItsDoctorUsers = new LinkedHashMap<>();
 
         for (Visit visit : visits) {
             DoctorData doctorData = visit.getDoctorData();

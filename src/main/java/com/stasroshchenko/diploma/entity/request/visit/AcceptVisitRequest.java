@@ -26,7 +26,6 @@ public class AcceptVisitRequest {
     @NotBlank
     private String appointsAtInput;
 
-    // @Annotation
     private LocalDateTime appointsAt;
 
     public void setAppointsAtInput(String appointsAtInput) {

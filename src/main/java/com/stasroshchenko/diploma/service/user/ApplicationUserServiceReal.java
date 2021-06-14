@@ -228,113 +228,113 @@ class ApplicationUserServiceReal implements UserDetailsService {
             user1.setImageLink("lobanov_semen.jpg");
             signUpInitialUser(user1);
 
-            ApplicationUserDoctor user2 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Varvara",
-                            "Chernous",
-                            LocalDate.of(1988, Month.APRIL, 14),
-                            generatePassportId(),
-                            10,
-                            3
-                    ),
-                    "varya69",
-                    "varya69@gmail.com",
-                    "password"
-            );
-            DoctorData doctor2 = user2.getDoctorData();
-            doctor2.setDescription(getDescriptionForDoctor(doctor2));
-            user2.setImageLink("chernous_varvara.jpg");
-            signUpInitialUser(user2);
-
-            ApplicationUserDoctor user3 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Phil",
-                            "Richards",
-                            LocalDate.of(1984, Month.OCTOBER, 5),
-                            generatePassportId(),
-                            21,
-                            1
-                    ),
-                    "american_boy",
-                    "uedu_s_toboy@gmail.com",
-                    "password"
-            );
-            DoctorData doctor3 = user3.getDoctorData();
-            doctor3.setDescription(getDescriptionForDoctor(doctor3));
-            user3.setImageLink("richards_phil.jpg");
-            signUpInitialUser(user3);
-
-            ApplicationUserDoctor user4 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Andrey",
-                            "Bikov",
-                            LocalDate.of(1966, Month.JULY, 22),
-                            generatePassportId(),
-                            5,
-                            25
-                    ),
-                    "bikov_v_kedah",
-                    "bikov@gmail.com",
-                    "password"
-            );
-            DoctorData doctor4 = user4.getDoctorData();
-            doctor4.setDescription(getDescriptionForDoctor(doctor4));
-            user4.setImageLink("bikov_andrey.jpg");
-            signUpInitialUser(user4);
-
-            ApplicationUserDoctor user5 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Boris",
-                            "Levin",
-                            LocalDate.of(1986, Month.JANUARY, 15),
-                            generatePassportId(),
-                            5,
-                           10
-                    ),
-                    "levin_v_kedah",
-                    "levin_borya@gmail.com",
-                    "password"
-            );
-            DoctorData doctor5 = user5.getDoctorData();
-            doctor5.setDescription(getDescriptionForDoctor(doctor5));
-            user5.setImageLink("levin_boris.jpg");
-            signUpInitialUser(user5);
-
-            ApplicationUserDoctor user6 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Ivan",
-                            "Kupitman",
-                            LocalDate.of(1963, Month.MARCH, 13),
-                            generatePassportId(),
-                            33,
-                           19
-                    ),
-                    "kupi_dom",
-                    "kupitman_vanya@gmail.com",
-                    "password"
-            );
-            DoctorData doctor6 = user6.getDoctorData();
-            doctor6.setDescription(getDescriptionForDoctor(doctor6));
-            user6.setImageLink("kupitman_ivan.jpg");
-            signUpInitialUser(user6);
-
-            ApplicationUserDoctor user7 = new ApplicationUserDoctor(
-                    new DoctorData(
-                            "Gleb",
-                            "Romanenko",
-                            LocalDate.of(1984, Month.SEPTEMBER, 19),
-                            generatePassportId(),
-                            14,
-                            6
-                    ),
-                    "gleb_roma",
-                    "glebgleb@gmail.com",
-                    "password"
-            );
-            DoctorData doctor7 = user7.getDoctorData();
-            doctor7.setDescription(getDescriptionForDoctor(doctor7));
-            user7.setImageLink("romanenko_gleb.jpg");
-            signUpInitialUser(user7);
+//            ApplicationUserDoctor user2 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Varvara",
+//                            "Chernous",
+//                            LocalDate.of(1988, Month.APRIL, 14),
+//                            generatePassportId(),
+//                            10,
+//                            3
+//                    ),
+//                    "varya69",
+//                    "varya69@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor2 = user2.getDoctorData();
+//            doctor2.setDescription(getDescriptionForDoctor(doctor2));
+//            user2.setImageLink("chernous_varvara.jpg");
+//            signUpInitialUser(user2);
+//
+//            ApplicationUserDoctor user3 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Phil",
+//                            "Richards",
+//                            LocalDate.of(1984, Month.OCTOBER, 5),
+//                            generatePassportId(),
+//                            21,
+//                            1
+//                    ),
+//                    "american_boy",
+//                    "uedu_s_toboy@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor3 = user3.getDoctorData();
+//            doctor3.setDescription(getDescriptionForDoctor(doctor3));
+//            user3.setImageLink("richards_phil.jpg");
+//            signUpInitialUser(user3);
+//
+//            ApplicationUserDoctor user4 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Andrey",
+//                            "Bikov",
+//                            LocalDate.of(1966, Month.JULY, 22),
+//                            generatePassportId(),
+//                            5,
+//                            25
+//                    ),
+//                    "bikov_v_kedah",
+//                    "bikov@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor4 = user4.getDoctorData();
+//            doctor4.setDescription(getDescriptionForDoctor(doctor4));
+//            user4.setImageLink("bikov_andrey.jpg");
+//            signUpInitialUser(user4);
+//
+//            ApplicationUserDoctor user5 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Boris",
+//                            "Levin",
+//                            LocalDate.of(1986, Month.JANUARY, 15),
+//                            generatePassportId(),
+//                            5,
+//                           10
+//                    ),
+//                    "levin_v_kedah",
+//                    "levin_borya@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor5 = user5.getDoctorData();
+//            doctor5.setDescription(getDescriptionForDoctor(doctor5));
+//            user5.setImageLink("levin_boris.jpg");
+//            signUpInitialUser(user5);
+//
+//            ApplicationUserDoctor user6 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Ivan",
+//                            "Kupitman",
+//                            LocalDate.of(1963, Month.MARCH, 13),
+//                            generatePassportId(),
+//                            33,
+//                           19
+//                    ),
+//                    "kupi_dom",
+//                    "kupitman_vanya@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor6 = user6.getDoctorData();
+//            doctor6.setDescription(getDescriptionForDoctor(doctor6));
+//            user6.setImageLink("kupitman_ivan.jpg");
+//            signUpInitialUser(user6);
+//
+//            ApplicationUserDoctor user7 = new ApplicationUserDoctor(
+//                    new DoctorData(
+//                            "Gleb",
+//                            "Romanenko",
+//                            LocalDate.of(1984, Month.SEPTEMBER, 19),
+//                            generatePassportId(),
+//                            14,
+//                            6
+//                    ),
+//                    "gleb_roma",
+//                    "glebgleb@gmail.com",
+//                    "password"
+//            );
+//            DoctorData doctor7 = user7.getDoctorData();
+//            doctor7.setDescription(getDescriptionForDoctor(doctor7));
+//            user7.setImageLink("romanenko_gleb.jpg");
+//            signUpInitialUser(user7);
         };
     }
 

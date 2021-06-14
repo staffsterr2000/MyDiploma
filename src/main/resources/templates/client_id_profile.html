@@ -56,7 +56,7 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Client name</th>
+<!--                        <th>Client name</th>-->
                         <th>Complaint</th>
                         <th>Accepted at</th>
                         <th>Appoints at</th>
@@ -66,7 +66,7 @@
                     <tbody>
                     <tr th:each="visit : ${allVisits}" th:object="${visit}">
                         <td th:text="*{id}"/>
-                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>
+<!--                        <td th:text="*{clientData.firstName} + ' ' + *{clientData.lastName}"/>-->
                         <td th:text="*{complaint}"/>
                         <td th:text="${#temporals.format(visit.acceptedAt, 'dd-MM-yyyy HH:mm')}"/>
                         <td th:text="${#temporals.format(visit.appointsAt, 'dd-MM-yyyy HH:mm')}"/>
@@ -91,9 +91,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                             </option>
+<!--                            th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">-->
                         </select>
 
                         <br/>
@@ -114,9 +115,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                             </option>
+<!--                            th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">-->
                         </select>
 
                         <br/>
@@ -137,9 +139,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allActiveVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                             </option>
+<!--                            th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">-->
                         </select>
 
                         <br/>
@@ -168,9 +171,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                         </select>
+<!--                        th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">-->
 
                         <label for="appointment-date" class="form-label">Appointment time and date(dd-MM-yyyy HH:mm)</label>
                         <input type="text" th:field="*{appointsAtInput}" class="form-control" id="appointment-date">
@@ -191,9 +195,10 @@
                         <select th:field="*{visitId}">
                             <option th:each="visit : ${allSentVisits}"
                                     th:value="${visit.id}"
-                                    th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">
+                                    th:text="|ID: ${visit.id}|">
 
                             </option>
+<!--                            th:text="|ID: ${visit.id}, Name: ${visit.clientData.firstName} ${visit.clientData.lastName}|">-->
                         </select>
 
                         <br/>

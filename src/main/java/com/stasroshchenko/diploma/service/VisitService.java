@@ -1,9 +1,9 @@
 package com.stasroshchenko.diploma.service;
 
-import com.stasroshchenko.diploma.entity.request.visit.*;
 import com.stasroshchenko.diploma.entity.database.Visit;
 import com.stasroshchenko.diploma.entity.database.person.ClientData;
 import com.stasroshchenko.diploma.entity.database.person.DoctorData;
+import com.stasroshchenko.diploma.entity.request.visit.*;
 import com.stasroshchenko.diploma.repository.VisitRepository;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,35 +43,61 @@ public class VisitService {
     }
 
     public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
+//        Comparator<VisitStatus> comparator =
+//                Comparator.comparing(VisitStatus::getValue);
+//        Arrays.sort(statuses, comparator);
+
         return getAllVisitsByClient(clientData).stream()
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
                         .reduce(true, (acc, x) -> acc && x)
                 )
                 .collect(Collectors.toList());
-
     }
 
     public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+//        Comparator<VisitStatus> comparator =
+//                Comparator.comparing(VisitStatus::getValue);
+//        Arrays.sort(statuses, comparator);
+
         return getAllVisitsByDoctor(doctorData).stream()
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
                         .reduce(true, (acc, x) -> acc && x)
                 )
                 .collect(Collectors.toList());
-
     }
 
-    // check for bugs
     public List<Visit> getAllVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
+//        Comparator<VisitStatus> comparator =
+//                Comparator.comparing(VisitStatus::getValue);
+//        Arrays.sort(statuses, comparator);
+
+//        return getAllVisitsByClient(clientData).stream()
+//                .filter(visit -> Arrays.stream(statuses)
+//                        .map(status -> visit.getStatus().equals(status))
+//                        .findFirst()
+//                        .isPresent()
+//                )
+//                .collect(Collectors.toList());
         return Arrays.stream(statuses)
                 .flatMap(status -> getAllVisitsByClient(clientData).stream()
                         .filter(visit -> visit.getStatus().equals(status)))
                 .collect(Collectors.toList());
     }
 
-    // check for bugs
     public List<Visit> getAllVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+//        Comparator<VisitStatus> comparator =
+//                Comparator.comparing(VisitStatus::getValue);
+//        Arrays.sort(statuses, comparator);
+
+//        return getAllVisitsByDoctor(doctorData).stream()
+//                .filter(visit -> Arrays.stream(statuses)
+//                        .map(status -> visit.getStatus().equals(status))
+//                        .findFirst()
+//                        .isPresent()
+//                )
+//                .collect(Collectors.toList());
         return Arrays.stream(statuses)
                 .flatMap(status -> getAllVisitsByDoctor(doctorData).stream()
                         .filter(visit -> visit.getStatus().equals(status)))
@@ -110,16 +137,19 @@ public class VisitService {
 
         LocalTime timeWorkdayStarts = LocalTime.of(8, 0);
         LocalTime timeWorkdayEnds = LocalTime.of(18, 0);
+        LocalTime timeWorkdayEndsMinusOneHour = timeWorkdayEnds.minusHours(1);
         LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
 
-        return visitDate.isAfter(LocalDateTime.of(today, timeWorkdayStarts)) &&
-                visitDate.toLocalTime().isAfter(timeWorkdayStarts) &&
-                visitDate.toLocalTime().isBefore(timeWorkdayEnds);
+        return (visitDate.isAfter(LocalDateTime.of(tomorrow, timeWorkdayStarts)) ||
+                visitDate.isEqual(LocalDateTime.of(tomorrow, timeWorkdayStarts))) &&
+                (visitDate.toLocalTime().isBefore(timeWorkdayEndsMinusOneHour) ||
+                        visitDate.toLocalTime().equals(timeWorkdayEndsMinusOneHour));
     }
 
     public void isDateValid(LocalDateTime visitDate) {
         if (!isDateIsWithinWorkdayAndAtLeastTomorrow(visitDate)) {
-            throw new IllegalStateException("Date is invalid. Try using \"0\" before another number. Example (08:09 11/01/2000)");
+            throw new IllegalStateException("Date is invalid. Try using \"0\" before the next digit or time within 8 and 18 o'clock from tomorrow. Example (08:09 11/01/2000)");
         }
         if (!isTimeFree(visitDate)) {
             throw new IllegalStateException("This time has already been taken for another visit. Try another time");

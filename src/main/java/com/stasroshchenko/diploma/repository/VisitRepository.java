@@ -23,8 +23,4 @@ public interface VisitRepository
             "v.id")
     List<Visit> findAllOrdered();
 
-//    List<Visit> findByClientData(ClientData clientData);
-//
-//    List<Visit> findByDoctorData(DoctorData doctorData);
-
 }

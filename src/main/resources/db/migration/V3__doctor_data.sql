@@ -1,0 +1,5 @@
+--INSERT INTO doctor_data (first_name, last_name, passport_id, date_of_birth, experience_age, room)
+--    VALUES ('Lobanov', 'Semen', 0987654321, '2000-07-10', 6, 29);
+--
+--INSERT INTO application_user (role, image_link, username, email, password, is_account_locked, is_enabled)
+--    VALUES ('DOCTOR', 'lobanov_semen.jpg', 'lobanov_semen', 'lobanov_semen@gmail.com', 'password', FALSE, TRUE);
