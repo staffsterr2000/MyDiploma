@@ -1,10 +1,10 @@
 package com.stasroshchenko.diploma.controller.profile;
 
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
-import com.stasroshchenko.diploma.service.ProfileService;
-import com.stasroshchenko.diploma.service.user.ApplicationUserService;
+import com.stasroshchenko.diploma.entity.user.ApplicationUser;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserDoctor;
+import com.stasroshchenko.diploma.model.service.ProfileService;
+import com.stasroshchenko.diploma.model.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;

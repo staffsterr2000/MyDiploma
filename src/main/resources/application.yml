@@ -8,18 +8,22 @@ spring:
     baseline-on-migrate: true
   banner:
     location: banner.txt
-  datasource:
-    password: 258456
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:diploma3}
-    username: postgres
+
+  datasource:               # налаштування конекту
+    username: postgres      # ім'я юзера для входу у postgres
+    password: 258456        # пароль від postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:diploma3}   # стандартне підключення до
+                                    # postgres:
+                                    # jdbc:postgresql://ХОСТ:ПОРТ/НАЗВА_БД
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop      # автоматичне створення та заповнення БД
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
-    show-sql: true
+    show-sql: true          # заповнення через SQL
+                            # та відображення у логах також через SQL
 
 
   mail:

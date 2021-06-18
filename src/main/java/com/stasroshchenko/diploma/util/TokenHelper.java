@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.util;
 
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUser;
-import com.stasroshchenko.diploma.entity.database.ConfirmationToken;
+import com.stasroshchenko.diploma.entity.user.ApplicationUser;
+import com.stasroshchenko.diploma.entity.ConfirmationToken;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

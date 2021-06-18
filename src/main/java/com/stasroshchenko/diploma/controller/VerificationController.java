@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.entity.request.RegistrationRequest;
-import com.stasroshchenko.diploma.service.RegistrationService;
+import com.stasroshchenko.diploma.request.RegistrationRequest;
+import com.stasroshchenko.diploma.model.service.RegistrationService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

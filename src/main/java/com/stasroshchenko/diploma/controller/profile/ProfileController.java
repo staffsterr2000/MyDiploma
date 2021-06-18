@@ -1,6 +1,6 @@
 package com.stasroshchenko.diploma.controller.profile;
 
-import com.stasroshchenko.diploma.service.ProfileService;
+import com.stasroshchenko.diploma.model.service.ProfileService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,11 +1,11 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.entity.database.person.ClientData;
-import com.stasroshchenko.diploma.entity.database.person.DoctorData;
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUserClient;
-import com.stasroshchenko.diploma.entity.database.user.ApplicationUserDoctor;
-import com.stasroshchenko.diploma.entity.request.visit.*;
-import com.stasroshchenko.diploma.service.VisitService;
+import com.stasroshchenko.diploma.entity.person.ClientData;
+import com.stasroshchenko.diploma.entity.person.DoctorData;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserDoctor;
+import com.stasroshchenko.diploma.request.visit.*;
+import com.stasroshchenko.diploma.model.service.VisitService;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
