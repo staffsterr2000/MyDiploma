@@ -24,13 +24,16 @@ public class EmailService implements EmailSender {
     @Async
     public void send(String to, String email) {
         try {
+            // створення листу
             MimeMessage mimeMessage = mailSender.createMimeMessage();
             MimeMessageHelper helper =
                     new MimeMessageHelper(mimeMessage, "utf-8");
-            helper.setText(email, true);
-            helper.setTo(to);
-            helper.setSubject("Confirmation");
-            helper.setFrom("admin@gmail.com");
+            // налаштування
+            helper.setText(email, true);           // контент листа
+            helper.setTo(to);                           // отримувач листа
+            helper.setSubject("Confirmation");          // тема листа
+            helper.setFrom("admin@gmail.com");          // відправляч листа
+            // відправлення листа
             mailSender.send(mimeMessage);
 
         } catch (MessagingException e) {

@@ -12,10 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Configuration
+@AllArgsConstructor
+
+@Configuration      // цей компонент конфігурацією
+
+// включаємо веб захист
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-@AllArgsConstructor
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
@@ -24,28 +27,39 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                // відключити csrf
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/registration/**", "/verification/**", "/id/**", "/index", "/css/**", "/img/**", "/js/**").permitAll()
+
+                // дозволити доступ до всіх нижче написаних ресурсів без автентифікації
+                .antMatchers("/", "/registration/**", "/verification/**",
+                        "/id/**", "/index", "/css/**", "/img/**", "/js/**").permitAll()
+
+                // інші реквести мають бути автентифікованими
                 .anyRequest().authenticated()
                 .and()
+
+                // налаштування логіну
                 .formLogin()
+                // посилання для логіну
                     .loginPage("/login").permitAll()
+                    // переадресація після входу
                     .defaultSuccessUrl("/", true)
+                    // переадресація після невдачі
                     .failureForwardUrl("/login-error")
                 .and()
+
+                // налаштування логауту
                 .logout()
+                    // посилання для логауту
                     .logoutUrl("/logout").permitAll()
+                    // переадресація при виході
                     .logoutSuccessUrl("/");
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(getDaoAuthenticationProvider());
-
-        auth.inMemoryAuthentication().withUser("admin")
-                    .password(passwordEncoder.encode("admin"))
-                    .roles("ADMIN");
     }
 
     @Bean

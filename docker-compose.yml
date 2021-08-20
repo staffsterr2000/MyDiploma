@@ -2,34 +2,35 @@ version: "3.9"
 services:
   db:
     image: postgres:13.3-alpine
-    container_name: postgres
+    container_name: diploma-db-container
     ports:
-      - "5432:5432"
+      - "5444:5432"
     volumes:
       - ./pg_data:/var/lib/postgresql/data/pgdata
     environment:
-      POSTGRES_PASSWORD: 258456
-      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
       POSTGRES_DB: diploma
       PGDATA: /var/lib/postgresql/data/pgdata
     restart: always
+
   app:
-    build: .
-    container_name: application
+    image: staffsterr2000/diploma-app:1.0.0
+    container_name: diploma-app-container
     ports:
       - "8080:8080"
     environment:
-      APPLICATION_HOST: app
-      MAILDEV_HOST: mail
-      POSTGRES_HOST: db
-      POSTGRES_DB: diploma
+      DATASOURCE_HOST: db
+      DATASOURCE_PORT: 5432
+      DATASOURCE_DB: diploma
     restart: always
     links:
       - db
-  mail:
-    image: maildev/maildev
-    container_name: maildev
-    command: bin/maildev -w 1080 -s 1025
-    ports:
-      - "1025:25"
-      - "1080:1080"
+
+#  mail:
+#    image: maildev/maildev
+#    container_name: diploma-mail-container
+#    command: bin/maildev -w 1080 -s 1025
+#    ports:
+#      - "1025:25"
+#      - "1080:1080"

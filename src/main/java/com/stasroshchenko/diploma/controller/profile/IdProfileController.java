@@ -54,7 +54,7 @@ public class IdProfileController {
             BindingResult result) {
 
         profileService.initiateClientIdProfile(requiredUser, authentication, model);
-        profileService.addObjectAndFieldErrorsIntoModel(model, result);
+        profileService.addErrorsIntoModel(model, result);
 
         return "client_id_profile";
     }
@@ -66,7 +66,7 @@ public class IdProfileController {
             BindingResult result) {
 
         profileService.initiateDoctorIdProfile(requiredUser, authentication, model);
-        profileService.addObjectAndFieldErrorsIntoModel(model, result);
+        profileService.addErrorsIntoModel(model, result);
 
         return "doctor_id_profile";
     }

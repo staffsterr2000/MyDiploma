@@ -26,6 +26,7 @@ public class DoctorData extends PersonData {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
+//            strategy = GenerationType.IDENTITY,
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude

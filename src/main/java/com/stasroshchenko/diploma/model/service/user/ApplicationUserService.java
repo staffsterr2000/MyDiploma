@@ -19,20 +19,12 @@ public class ApplicationUserService {
 
     private final ApplicationUserServiceReal applicationUserServiceReal;
 
-    public ApplicationUser getByUsernameOrEmail(String input) throws UsernameNotFoundException {
-        return applicationUserServiceReal.loadUserByUsername(input);
-    }
-
     public ApplicationUser getByUsername(String username) {
         return applicationUserServiceReal.loadUserByOnlyUsername(username);
     }
 
     public ApplicationUser getByEmail(String email) {
         return applicationUserServiceReal.loadUserByOnlyEmail(email);
-    }
-
-    public ApplicationUser getByUser(ApplicationUser user) {
-        return applicationUserServiceReal.loadUserByUser(user);
     }
 
     public ApplicationUserClient getByClientData(ClientData clientData) {

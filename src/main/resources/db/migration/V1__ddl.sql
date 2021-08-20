@@ -1,11 +1,11 @@
-CREATE SEQUENCE application_user_sequence START 1 INCREMENT 1 AS BIGINT;
-CREATE SEQUENCE client_data_sequence START 1 INCREMENT 1 AS BIGINT;
-CREATE SEQUENCE doctor_data_sequence START 1 INCREMENT 1 AS BIGINT;
-CREATE SEQUENCE confirmation_token_sequence START 1 INCREMENT 1 AS BIGINT;
-CREATE SEQUENCE visit_sequence START 1 INCREMENT 1 AS BIGINT;
+--CREATE SEQUENCE application_user_sequence START 1 INCREMENT 1 AS BIGINT;
+--CREATE SEQUENCE client_data_sequence START 1 INCREMENT 1 AS BIGINT;
+--CREATE SEQUENCE doctor_data_sequence START 1 INCREMENT 1 AS BIGINT;
+--CREATE SEQUENCE confirmation_token_sequence START 1 INCREMENT 1 AS BIGINT;
+--CREATE SEQUENCE visit_sequence START 1 INCREMENT 1 AS BIGINT;
 
-CREATE TABLE application_user (
-    id BIGINT PRIMARY KEY nextval('application_user_sequence'),
+CREATE TABLE IF NOT EXISTS application_user (
+    id BIGSERIAL PRIMARY KEY,
     role VARCHAR(8) NOT NULL,
     image_link VARCHAR(255) NOT NULL,
     username VARCHAR(255) NOT NULL,
@@ -15,26 +15,26 @@ CREATE TABLE application_user (
     is_enabled BOOLEAN NOT NULL
 );
 
-CREATE TABLE application_user_client (
+CREATE TABLE IF NOT EXISTS application_user_client (
     id BIGINT NOT NULL,
     client_data_id BIGINT NOT NULL
 );
 
-CREATE TABLE application_user_doctor (
+CREATE TABLE IF NOT EXISTS application_user_doctor (
     id BIGINT NOT NULL,
     doctor_data_id BIGINT NOT NULL
 );
 
-CREATE TABLE client_data (
-    id BIGINT PRIMARY KEY nextval('client_data_sequence'),
+CREATE TABLE IF NOT EXISTS client_data (
+    id BIGSERIAL PRIMARY KEY,
     passport_id BIGINT NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     date_of_birth DATE NOT NULL
 );
 
-CREATE TABLE doctor_data (
-    id BIGINT PRIMARY KEY nextval('doctor_data_sequence'),
+CREATE TABLE IF NOT EXISTS doctor_data (
+    id BIGSERIAL PRIMARY KEY,
     passport_id BIGINT NOT NULL,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -44,8 +44,8 @@ CREATE TABLE doctor_data (
     description VARCHAR(1024)
 );
 
-CREATE TABLE visit (
-    id BIGINT PRIMARY KEY nextval('visit_sequence'),
+CREATE TABLE IF NOT EXISTS visit (
+    id BIGSERIAL PRIMARY KEY,
     doctor_id BIGINT NOT NULL,
     client_id BIGINT NOT NULL,
     complaint VARCHAR(255) NOT NULL,
@@ -54,8 +54,8 @@ CREATE TABLE visit (
     status VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE confirmation_token (
-    id BIGINT PRIMARY KEY nextval('confirmation_token_sequence'),
+CREATE TABLE IF NOT EXISTS confirmation_token (
+    id BIGSERIAL PRIMARY KEY,
     app_user_id BIGINT NOT NULL,
     token VARCHAR(255) NOT NULL,
     confirmed_at TIMESTAMP,

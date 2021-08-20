@@ -4,20 +4,23 @@ server:
     include-binding-errors: always
 
 spring:
-  flyway:
-    baseline-on-migrate: true
+#  flyway:
+#    baseline-on-migrate: true
   banner:
     location: banner.txt
 
   datasource:               # налаштування конекту
+#    username: admin
     username: postgres      # ім'я юзера для входу у postgres
+#    password: admin
     password: 258456        # пароль від postgres
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:5432/${POSTGRES_DB:diploma3}   # стандартне підключення до
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:5432}/${DATASOURCE_DB:diploma4}   # стандартне підключення до
                                     # postgres:
                                     # jdbc:postgresql://ХОСТ:ПОРТ/НАЗВА_БД
   jpa:
     hibernate:
-      ddl-auto: create-drop      # автоматичне створення та заповнення БД
+#      ddl-auto: none        # автоматичне створення та заповнення БД
+      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -26,13 +29,18 @@ spring:
                             # та відображення у логах також через SQL
 
 
+  # standard
   mail:
+    # хост та порт, на який будуть
+    # відсилатися листи
     host: localhost
     port: 1025
+    username: username
+    password: password
 
     properties:
       mail:
-        smtp:
+        smtp:       # налаштування протоколу smtp
           ssl:
             trust: "*"
           auth: true

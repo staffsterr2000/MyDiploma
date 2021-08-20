@@ -22,7 +22,7 @@ public class RegistrationService {
     private final EmailSender emailSender;
     private final ConfirmationTokenService confirmationTokenService;
 
-    public ApplicationUser convertRegistrationRequestToApplicationUser(RegistrationRequest request) {
+    private ApplicationUser convertRegistrationRequestToApplicationUser(RegistrationRequest request) {
         return new ApplicationUserClient(
                 new ClientData(
                         request.getFirstName(),

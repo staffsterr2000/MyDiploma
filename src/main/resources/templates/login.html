@@ -30,7 +30,9 @@
             <p th:if="${loginError}" th:class="error">Wrong login or password!</p>
             <button type="submit" class="btn btn-primary">Submit</button>
 
-<!--            <a class="underlineHover" href="#">Forgot Password?</a>-->
+            <br/>
+            <br/>
+            <a th:href="@{/registration}">Don't have an account?</a>
         </form>
     </div>
 </div>

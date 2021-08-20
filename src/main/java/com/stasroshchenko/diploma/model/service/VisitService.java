@@ -41,7 +41,8 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
+    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(
+            ClientData clientData, VisitStatus... statuses) {
         return getAllVisitsByClient(clientData).stream()
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
@@ -50,7 +51,8 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+    public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(
+            DoctorData doctorData, VisitStatus... statuses) {
         return getAllVisitsByDoctor(doctorData).stream()
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
@@ -59,14 +61,16 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsWithSomeStatusesDoneByClient(ClientData clientData, VisitStatus... statuses) {
+    public List<Visit> getAllVisitsWithSomeStatusesDoneByClient(
+            ClientData clientData, VisitStatus... statuses) {
         return Arrays.stream(statuses)
                 .flatMap(status -> getAllVisitsByClient(clientData).stream()
                         .filter(visit -> visit.getStatus().equals(status)))
                 .collect(Collectors.toList());
     }
 
-    public List<Visit> getAllVisitsWithSomeStatusesDoneByDoctor(DoctorData doctorData, VisitStatus... statuses) {
+    public List<Visit> getAllVisitsWithSomeStatusesDoneByDoctor(
+            DoctorData doctorData, VisitStatus... statuses) {
         return Arrays.stream(statuses)
                 .flatMap(status -> getAllVisitsByDoctor(doctorData).stream()
                         .filter(visit -> visit.getStatus().equals(status)))
@@ -101,7 +105,7 @@ public class VisitService {
                 .isEmpty();
     }
 
-    private boolean isDateIsWithinWorkdayAndAtLeastTomorrow(LocalDateTime visitDate) {
+    private boolean isDateWithinWorkdayAndAtLeastTomorrow(LocalDateTime visitDate) {
         if (visitDate == null) return false;
 
         LocalTime timeWorkdayStarts = LocalTime.of(8, 0);
@@ -116,8 +120,8 @@ public class VisitService {
                         visitDate.toLocalTime().equals(timeWorkdayEndsMinusOneHour));
     }
 
-    public void isDateValidForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
-        if (!isDateIsWithinWorkdayAndAtLeastTomorrow(visitDate)) {
+    private void isDateValidForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
+        if (!isDateWithinWorkdayAndAtLeastTomorrow(visitDate)) {
             throw new IllegalStateException("Date is invalid. Try using \"0\" before the next digit or time within 8 and 18 o'clock from tomorrow. Example (08:09 11/01/2000)");
         }
         if (!isTimeFreeForDoctor(doctorUser, visitDate)) {
@@ -125,7 +129,7 @@ public class VisitService {
         }
     }
 
-    public boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
+    private boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
         return getAllVisitsByClient(clientData).stream()
                 .filter(visit -> visit.getDoctorData().equals(doctorData))
                 .filter(visit -> {

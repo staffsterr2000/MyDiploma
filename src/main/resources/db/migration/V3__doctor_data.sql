@@ -1,5 +1,11 @@
---INSERT INTO doctor_data (first_name, last_name, passport_id, date_of_birth, experience_age, room)
---    VALUES ('Lobanov', 'Semen', 0987654321, '2000-07-10', 6, 29);
+--INSERT INTO doctor_data (id, first_name, last_name, passport_id, date_of_birth, experience_age, room)
+--    VALUES
+--        (1, 'Semen', 'Lobanov', 1111111111, '1983-11-22', 5, 29),
+--        (2, 'Varvara', 'Chernous', 2222222222, '1988-04-14', 3, 10),
+--        (3, 'Phil', 'Richards', 3333333333, '1984-10-5', 1, 21),
+--        (4, 'Andrey', 'Bikov', 4444444444, '1966-07-22', 25, 5),
+--        (5, 'Boris', 'Levin', 5555555555, '1986-01-15', 5, 10),
+--        (6, 'Ivan', 'Kupitman', 6666666666, '1963-04-13', 33, 19),
+--        (7, 'Gleb', 'Romanenko', 7777777777, '1984-09-19', 6, 14);
 --
---INSERT INTO application_user (role, image_link, username, email, password, is_account_locked, is_enabled)
---    VALUES ('DOCTOR', 'lobanov_semen.jpg', 'lobanov_semen', 'lobanov_semen@gmail.com', 'password', FALSE, TRUE);
+--SELECT setval('doctor_data_id_seq', 8);

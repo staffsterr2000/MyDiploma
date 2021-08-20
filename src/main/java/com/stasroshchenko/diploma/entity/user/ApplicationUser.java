@@ -28,13 +28,14 @@ public abstract class ApplicationUser implements UserDetails {
     private static final String SEQUENCE_NAME = "application_user_sequence";
 
     @Id         // вказуємо що цей стовпець типу ID
-    @SequenceGenerator(     // створюємо sequence
-            name = SEQUENCE_NAME,
-            sequenceName = SEQUENCE_NAME,
-            allocationSize = 1
-    )
+//    @SequenceGenerator(     // створюємо sequence
+//            name = SEQUENCE_NAME,
+//            sequenceName = SEQUENCE_NAME,
+//            allocationSize = 1
+//    )
     @GeneratedValue(        // вказуємо генерацію значень
-            strategy = GenerationType.SEQUENCE,
+//            strategy = GenerationType.SEQUENCE,
+            strategy = GenerationType.IDENTITY,
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude

@@ -56,7 +56,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
                 .orElseThrow(() -> new IllegalStateException("User with " + email + " email doesn't exist"));
     }
 
-    public ApplicationUser loadUserByUser(ApplicationUser rawUser) {
+    private ApplicationUser loadUserByUser(ApplicationUser rawUser) {
         String userUsername = rawUser.getUsername();
         String userEmail = rawUser.getEmail();
 
@@ -190,8 +190,9 @@ class ApplicationUserServiceReal implements UserDetailsService {
     }
 
     @Bean
-    public CommandLineRunner initiateClients() {
-        return (args) -> {
+    public CommandLineRunner initiateClients() {    // метод, який створює анонімно
+        return (args) -> {                          // бін CommandLineRunner'а у якому:
+            // 1. створюється новий клієнт-юзер
             ApplicationUserClient user1 = new ApplicationUserClient(
                     new ClientData(
                             "Stanislav",
@@ -203,6 +204,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
                     "roshchenko_stas@gmail.com",
                     "password"
             );
+            // 2. він додається до нашої БД
             signUpInitialUser(user1);
         };
     }
@@ -245,6 +247,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
             doctor2.setDescription(getDescriptionForDoctor(doctor2));
             user2.setImageLink("chernous_varvara.jpg");
             signUpInitialUser(user2);
+
 
             ApplicationUserDoctor user3 = new ApplicationUserDoctor(
                     new DoctorData(
@@ -289,7 +292,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
                             LocalDate.of(1986, Month.JANUARY, 15),
                             generatePassportId(),
                             5,
-                           10
+                            10
                     ),
                     "levin_v_kedah",
                     "levin_borya@gmail.com",
@@ -307,7 +310,7 @@ class ApplicationUserServiceReal implements UserDetailsService {
                             LocalDate.of(1963, Month.MARCH, 13),
                             generatePassportId(),
                             33,
-                           19
+                            19
                     ),
                     "kupi_dom",
                     "kupitman_vanya@gmail.com",

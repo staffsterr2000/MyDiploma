@@ -18,7 +18,7 @@ public class UniqueClientPassportIdValidator implements ConstraintValidator<Uniq
 
     @Override
     public boolean isValid(Long passportId, ConstraintValidatorContext constraintValidatorContext) {
-        return !personDataService.isClientTableHasPasswordId(passportId);
+        return !personDataService.isAnyClientHasSuchPassportId(passportId);
     }
 
 }

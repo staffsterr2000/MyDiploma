@@ -65,7 +65,7 @@ public class ProfileController {
             BindingResult result) {
 
         profileService.initiateClientProfile(authentication, model);
-        profileService.addObjectAndFieldErrorsIntoModel(model, result);
+        profileService.addErrorsIntoModel(model, result);
 
         return "client_profile";
     }
@@ -76,7 +76,7 @@ public class ProfileController {
             BindingResult result) {
 
         profileService.initiateDoctorProfile(authentication, model);
-        profileService.addObjectAndFieldErrorsIntoModel(model, result);
+        profileService.addErrorsIntoModel(model, result);
 
         return "doctor_profile";
     }

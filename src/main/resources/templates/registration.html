@@ -36,7 +36,7 @@
                th:errors="*{dateOfBirth}" th:errorclass="error"/>
 
             <div class="mb-3">
-                <label for="passport-id" class="form-label">Password Id</label>
+                <label for="passport-id" class="form-label">Passport Id</label>
                 <input type="text" th:field="*{passportId}" class="form-control" id="passport-id">
             </div>
             <p th:if="${#fields.hasErrors('passportId')}" th:errors="*{passportId}" th:errorclass="error"/>

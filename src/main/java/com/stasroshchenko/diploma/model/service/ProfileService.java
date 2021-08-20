@@ -55,7 +55,7 @@ public class ProfileService {
                 .collect(Collectors.toList());
     }
 
-    public Map<Visit, ApplicationUserClient> addClientUsersFromVisitToAllDoctorVisits(List<Visit> visits) {
+    public Map<Visit, ApplicationUserClient> getDoctorVisitsAndClientUsersInMap(List<Visit> visits) {
         Map<Visit, ApplicationUserClient>
                 allVisitsByDoctorWithItsClientUsers = new LinkedHashMap<>();
 
@@ -76,7 +76,7 @@ public class ProfileService {
         return allVisitsByDoctorWithItsClientUsers;
     }
 
-    public Map<Visit, ApplicationUserDoctor> addDoctorUsersFromVisitToAllClientVisits(List<Visit> visits) {
+    public Map<Visit, ApplicationUserDoctor> getClientVisitsAndDoctorUsersInMap(List<Visit> visits) {
         Map<Visit, ApplicationUserDoctor>
                 allVisitsByClientWithItsDoctorUsers = new LinkedHashMap<>();
 
@@ -99,7 +99,7 @@ public class ProfileService {
 
 
 
-    public void addObjectAndFieldErrorsIntoModel(
+    public void addErrorsIntoModel(
             Model model,
             BindingResult result) {
 
@@ -210,7 +210,7 @@ public class ProfileService {
         model.addAttribute("allSentVisits", allSentVisits);
 
         Map<Visit, ApplicationUserClient> allSentVisitsByDoctorWithItsClientUsers =
-                addClientUsersFromVisitToAllDoctorVisits(allSentVisits);
+                getDoctorVisitsAndClientUsersInMap(allSentVisits);
         model.addAttribute("allSentVisitsMap", allSentVisitsByDoctorWithItsClientUsers);
 
         List<Visit> allActiveVisits = visitService
@@ -223,7 +223,7 @@ public class ProfileService {
         model.addAttribute("allAcceptedVisits", allAcceptedVisits);
 
         Map<Visit, ApplicationUserClient> allAcceptedVisitsByDoctorWithItsClientUsers =
-                addClientUsersFromVisitToAllDoctorVisits(allAcceptedVisits);
+                getDoctorVisitsAndClientUsersInMap(allAcceptedVisits);
         model.addAttribute("allAcceptedVisitsMap", allAcceptedVisitsByDoctorWithItsClientUsers);
 
 
@@ -257,7 +257,7 @@ public class ProfileService {
         model.addAttribute("allVisits", allVisits);
 
         Map<Visit, ApplicationUserDoctor> allVisitsByClientWithItsDoctorUsers =
-                addDoctorUsersFromVisitToAllClientVisits(allVisits);
+                getClientVisitsAndDoctorUsersInMap(allVisits);
         model.addAttribute("allVisitsMap", allVisitsByClientWithItsDoctorUsers);
 
         List<Visit> allSentAndActiveVisits = visitService
