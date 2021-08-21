@@ -15,8 +15,7 @@ services:
     restart: always
 
   app:
-    image: staffsterr2000/clinic-app:1.0.2
-#    build: .
+    image: staffsterr2000/clinic-app:1.0.3
     container_name: clinic-app-container
     ports:
       - "8080:8080"
@@ -26,14 +25,15 @@ services:
       DATASOURCE_HOST: ${DATASOURCE_HOST}
       DATASOURCE_PORT: ${DATASOURCE_PORT}
       DATASOURCE_DB: ${DATASOURCE_DB}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_RECEIVE_PORT: ${MAIL_RECEIVE_PORT}
     restart: always
     links:
       - db
 
-#  mail:
-#    image: maildev/maildev
-#    container_name: clinic-mail-container
-#    command: bin/maildev -w 1080 -s 1025
-#    ports:
-#      - "1025:25"
-#      - "1080:1080"
+  mail:
+    image: maildev/maildev
+    container_name: clinic-mail-container
+    ports:
+      - "1080:80"
+      - "1025:25"

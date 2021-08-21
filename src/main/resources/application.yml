@@ -27,8 +27,8 @@ spring:
   mail:
     # хост та порт, на який будуть
     # відсилатися листи
-    host: localhost
-    port: 1025
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_RECEIVE_PORT:1025}
     username: username
     password: password
 
