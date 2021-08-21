@@ -6,7 +6,6 @@ import com.stasroshchenko.diploma.entity.user.ApplicationUser;
 import com.stasroshchenko.diploma.entity.user.ApplicationUserClient;
 import com.stasroshchenko.diploma.entity.user.ApplicationUserDoctor;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +40,13 @@ public class ApplicationUserService {
 
     public List<ApplicationUserDoctor> getAllUserDoctors() {
         return applicationUserServiceReal.loadAllUserDoctors();
+    }
+
+    public boolean isUsernameAndEmailAbsent(ApplicationUser rawUser) {
+        return applicationUserServiceReal.isUsernameAndEmailAbsent(rawUser);
+    }
+    public ApplicationUser checkUsernameAndEmailPresence(ApplicationUser rawUser) {
+        return applicationUserServiceReal.checkUsernameAndEmailPresence(rawUser);
     }
 
     public void enableUserByEmail(String email) {
