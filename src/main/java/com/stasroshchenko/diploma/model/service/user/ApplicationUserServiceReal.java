@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 class ApplicationUserServiceReal implements UserDetailsService {
 
     private final ApplicationUserRepository applicationUserRepository;
-
     private final PasswordEncoder passwordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 

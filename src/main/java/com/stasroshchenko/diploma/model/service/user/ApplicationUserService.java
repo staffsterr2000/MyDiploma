@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 // applicationUserService delegator
-
 @Service
 @AllArgsConstructor
 public class ApplicationUserService {
@@ -45,6 +44,7 @@ public class ApplicationUserService {
     public boolean isUsernameAndEmailAbsent(ApplicationUser rawUser) {
         return applicationUserServiceReal.isUsernameAndEmailAbsent(rawUser);
     }
+
     public ApplicationUser checkUsernameAndEmailPresence(ApplicationUser rawUser) {
         return applicationUserServiceReal.checkUsernameAndEmailPresence(rawUser);
     }

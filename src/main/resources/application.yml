@@ -8,11 +8,9 @@ spring:
     location: banner.txt
 
   datasource:               # налаштування конекту
-#    username: admin
-    username: postgres      # ім'я юзера для входу у postgres
-#    password: admin
-    password: 258456        # пароль від postgres
-    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:5432}/${DATASOURCE_DB:diploma4}   # стандартне підключення до
+    username: ${DATASOURCE_USER:postgres}       # ім'я юзера для входу у postgres
+    password: ${DATASOURCE_PASSWORD:258456}     # пароль від postgres
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:5432}/${DATASOURCE_DB:clinic}   # стандартне підключення до
                                     # postgres:
                                     # jdbc:postgresql://ХОСТ:ПОРТ/НАЗВА_БД
   jpa:
