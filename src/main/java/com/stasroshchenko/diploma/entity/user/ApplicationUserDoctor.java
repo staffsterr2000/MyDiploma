@@ -1,6 +1,7 @@
 package com.stasroshchenko.diploma.entity.user;
 
 import com.google.common.collect.Sets;
+import com.stasroshchenko.diploma.entity.person.ClientData;
 import com.stasroshchenko.diploma.entity.person.DoctorData;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,12 +13,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Collection;
 
+/**
+ * Adapter-entity for user and doctor data entities
+ * @author staffsterr2000
+ * @version 1.0
+ * @see ApplicationUser
+ * @see DoctorData
+ */
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
 @NoArgsConstructor
-
 @DiscriminatorValue("DOCTOR")
+@PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "FK_DOCTOR_USER"))
 @Entity
 public class ApplicationUserDoctor extends ApplicationUser {
 
@@ -29,6 +37,13 @@ public class ApplicationUserDoctor extends ApplicationUser {
     )
     private DoctorData doctorData;
 
+    /**
+     * Gets all the doctor user's authorities
+     * @return Collection of authorities the user has
+     * @since 1.0
+     * @see GrantedAuthority
+     * @see SimpleGrantedAuthority
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_DOCTOR"));

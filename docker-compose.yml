@@ -15,7 +15,7 @@ services:
     restart: always
 
   app:
-    image: staffsterr2000/clinic-app:1.0.3
+    image: staffsterr2000/clinic-app:1.0.4
     container_name: clinic-app-container
     ports:
       - "8080:8080"

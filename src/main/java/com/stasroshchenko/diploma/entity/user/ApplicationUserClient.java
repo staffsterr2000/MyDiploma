@@ -12,12 +12,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import javax.persistence.*;
 import java.util.Collection;
 
+/**
+ * Adapter-entity for user and client data entities
+ * @author staffsterr2000
+ * @version 1.0
+ * @see ApplicationUser
+ * @see ClientData
+ */
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@NoArgsConstructor
 @Data
-
+@NoArgsConstructor
 @DiscriminatorValue("CLIENT")
+@PrimaryKeyJoinColumn(foreignKey = @ForeignKey(name = "FK_CLIENT_USER"))
 @Entity
 public class ApplicationUserClient extends ApplicationUser {
 
@@ -29,6 +36,13 @@ public class ApplicationUserClient extends ApplicationUser {
     )
     private ClientData clientData;
 
+    /**
+     * Gets all the client user's authorities
+     * @return Collection of authorities the user has
+     * @since 1.0
+     * @see GrantedAuthority
+     * @see SimpleGrantedAuthority
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_CLIENT"));

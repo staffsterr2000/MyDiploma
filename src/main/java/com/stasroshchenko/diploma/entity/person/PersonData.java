@@ -6,9 +6,13 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Represents data about person separately to the user's data
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Data
 @NoArgsConstructor
-
 @MappedSuperclass
 public abstract class PersonData {
 

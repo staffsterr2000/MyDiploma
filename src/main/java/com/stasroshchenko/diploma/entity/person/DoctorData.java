@@ -8,11 +8,16 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Represents doctor data
+ * @author staffsterr2000
+ * @version 1.0
+ * @see PersonData
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
-
 @Entity(name = "doctor_data")
 public class DoctorData extends PersonData {
 
@@ -26,7 +31,6 @@ public class DoctorData extends PersonData {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-//            strategy = GenerationType.IDENTITY,
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude

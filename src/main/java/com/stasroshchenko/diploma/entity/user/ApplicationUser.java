@@ -7,41 +7,36 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
+/**
+ * Represents user entity, to enter the website profile
+ * @author staffsterr2000
+ * @version 1.0
+ * @see UserDetails
+ */
 @Data
 @NoArgsConstructor
-
-@Entity         // вказуємо, що цей клас є сутністю
-@Table(name = "application_user")   // назва таблиці
-
-// завдяки цій стратегії наслідування створюються: головна
-// таблиця; таблиці її наслідників, у яких буде батьківський
-// primary key (у нашому випадку це ID)
+@Entity
+@Table(name = "application_user")
 @Inheritance(strategy = InheritanceType.JOINED)
-
-// додаємо до таблиці application_user стовпець ROLE
-// у якому буде написано якого з наслідницьких типів буде
-// наш об'єкт
 @DiscriminatorColumn(name = "ROLE")
 public abstract class ApplicationUser implements UserDetails {
 
-    // назва sequence для цієї сутності
     private static final String SEQUENCE_NAME = "application_user_sequence";
 
-    @Id         // вказуємо що цей стовпець типу ID
-//    @SequenceGenerator(     // створюємо sequence
-//            name = SEQUENCE_NAME,
-//            sequenceName = SEQUENCE_NAME,
-//            allocationSize = 1
-//    )
-    @GeneratedValue(        // вказуємо генерацію значень
-//            strategy = GenerationType.SEQUENCE,
-            strategy = GenerationType.IDENTITY,
+    @Id
+    @SequenceGenerator(
+            name = SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME,
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude
     protected Long id;
 
-    @Column(nullable = false)   // прибираємо nullable у стовпчику
+    @Column(nullable = false)
     protected String username;
 
     @Column(nullable = false)
@@ -69,31 +64,65 @@ public abstract class ApplicationUser implements UserDetails {
         this.password = password;
     }
 
+    /**
+     * Gets the user's password
+     * @return user's password
+     * @since 1.0
+     */
     @Override
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Gets the user's username
+     * @return user's username
+     * @since 1.0
+     */
     @Override
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Gets the user's status of expiration
+     * true - the user's account isn't expired
+     * @return user's status of expiration
+     * @since 1.0 returns true because of absent of this logic
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * Gets the user's lock status
+     * true - the user's account isn't locked
+     * @return user's lock status
+     * @since 1.0
+     */
     @Override
     public boolean isAccountNonLocked() {
         return !isAccountLocked;
     }
 
+    /**
+     * Gets the user's credentials expiration status
+     * true - the user's credentials aren't expired
+     * @return user's credentials expiration status
+     * @since 1.0 returns true because of absent of this logic
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     * Gets the user's enable status
+     * true - the user's email is verified
+     * @return user's credentials expiration status
+     * @since 1.0
+     */
     @Override
     public boolean isEnabled() {
         return isEnabled;

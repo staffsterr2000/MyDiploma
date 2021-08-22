@@ -11,23 +11,29 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents visit entity, is used for tracking visits between a client and a doctor
+ * @author staffsterr2000
+ * @version 1.0
+ * @see DoctorData
+ * @see ClientData
+ * @see VisitStatus
+ */
 @Data
 @NoArgsConstructor
-
 @Entity
 public class Visit {
 
     private static final String SEQUENCE_NAME = "visit_sequence";
 
     @Id
-//    @SequenceGenerator(
-//            name = SEQUENCE_NAME,
-//            sequenceName = SEQUENCE_NAME,
-//            allocationSize = 1
-//    )
+    @SequenceGenerator(
+            name = SEQUENCE_NAME,
+            sequenceName = SEQUENCE_NAME,
+            allocationSize = 1
+    )
     @GeneratedValue(
-//            strategy = GenerationType.SEQUENCE,
-            strategy = GenerationType.IDENTITY,
+            strategy = GenerationType.SEQUENCE,
             generator = SEQUENCE_NAME
     )
     private Long id;
@@ -50,7 +56,9 @@ public class Visit {
 
     @Column(nullable = false)
     private String complaint;
+
     private LocalDateTime acceptedAt;
+
     private LocalDateTime appointsAt;
 
     @Transient
@@ -60,6 +68,11 @@ public class Visit {
     @Enumerated(EnumType.STRING)
     private VisitStatus status;
 
+    /**
+     * Parses appoint time from String to LocalDateTime and sets both of them to the fields
+     * @param appointsAtInput string that is parsed to date and is set to the field
+     * @see LocalDateTime
+     */
     public void setAppointsAtInput(String appointsAtInput) {
         this.appointsAtInput = appointsAtInput;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");

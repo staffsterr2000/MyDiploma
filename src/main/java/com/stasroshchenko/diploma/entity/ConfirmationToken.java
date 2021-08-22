@@ -9,10 +9,15 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Represents verification token entity, is used for enable user's account
+ * @author staffsterr2000
+ * @version 1.0
+ * @see ApplicationUser
+ */
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
 public class ConfirmationToken {
 
@@ -26,7 +31,6 @@ public class ConfirmationToken {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-//            strategy = GenerationType.IDENTITY,
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude

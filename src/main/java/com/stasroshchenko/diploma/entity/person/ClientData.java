@@ -3,14 +3,21 @@ package com.stasroshchenko.diploma.entity.person;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * Represents client data
+ * @author staffsterr2000
+ * @version 1.0
+ * @see PersonData
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @NoArgsConstructor
-
 @Entity(name = "client_data")
 public class ClientData extends PersonData {
 
@@ -24,7 +31,6 @@ public class ClientData extends PersonData {
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-//            strategy = GenerationType.IDENTITY
             generator = SEQUENCE_NAME
     )
     @EqualsAndHashCode.Exclude
