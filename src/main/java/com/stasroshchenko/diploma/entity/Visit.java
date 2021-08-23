@@ -24,8 +24,14 @@ import java.time.format.DateTimeParseException;
 @Entity
 public class Visit {
 
+    /**
+     * Name for the DB sequence
+     */
     private static final String SEQUENCE_NAME = "visit_sequence";
 
+    /**
+     * Visit's ID
+     */
     @Id
     @SequenceGenerator(
             name = SEQUENCE_NAME,
@@ -38,6 +44,9 @@ public class Visit {
     )
     private Long id;
 
+    /**
+     * Doctor that has the visit
+     */
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -46,6 +55,9 @@ public class Visit {
     )
     private DoctorData doctorData;
 
+    /**
+     * Client that has the visit
+     */
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -54,16 +66,32 @@ public class Visit {
     )
     private ClientData clientData;
 
+    /**
+     * Client's complaint with his health
+     */
     @Column(nullable = false)
     private String complaint;
 
+    /**
+     * The time the visit is accepted
+     */
     private LocalDateTime acceptedAt;
 
+    /**
+     * The time the visit occurs
+     */
     private LocalDateTime appointsAt;
 
+    /**
+     * Non parsed time of the visit
+     */
     @Transient
     private String appointsAtInput;
 
+    /**
+     * Status of the visit
+     * @see VisitStatus
+     */
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private VisitStatus status;
@@ -86,6 +114,16 @@ public class Visit {
         }
     }
 
+    /**
+     * Creates visit object with doctor, client, complaint, confirmation time, appointment time and status
+     * @param doctorData Doctor that has the visit
+     * @param clientData Client that has the visit
+     * @param complaint Client's complaint
+     * @param acceptedAt Time of the visit's confirmation
+     * @param appointsAt Time of the visit's appointment time
+     * @param appointsAtInput Appointment time input
+     * @param status Visit status
+     */
     public Visit(
             DoctorData doctorData,
             ClientData clientData,

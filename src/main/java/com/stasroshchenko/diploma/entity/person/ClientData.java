@@ -21,8 +21,14 @@ import java.time.LocalDate;
 @Entity(name = "client_data")
 public class ClientData extends PersonData {
 
+    /**
+     * Name for the DB sequence
+     */
     private static final String SEQUENCE_NAME = "client_data_sequence";
 
+    /**
+     * Client's ID
+     */
     @Id
     @SequenceGenerator(
             name = SEQUENCE_NAME,
@@ -36,6 +42,13 @@ public class ClientData extends PersonData {
     @EqualsAndHashCode.Exclude
     private Long id;
 
+    /**
+     * Creates client data object, with first name, last name, DoB and passport ID
+     * @param firstName Client's first name
+     * @param lastName Client's last name
+     * @param dateOfBirth Client's DoB
+     * @param passportId Client's passport ID
+     */
     public ClientData(String firstName,
                       String lastName,
                       LocalDate dateOfBirth,

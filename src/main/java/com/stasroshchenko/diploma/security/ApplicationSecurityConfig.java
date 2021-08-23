@@ -12,56 +12,81 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Configures web security of the application
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @AllArgsConstructor
-
-@Configuration      // цей компонент конфігурацією
-
-// включаємо веб захист
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Password encoder for {@link DaoAuthenticationProvider}
+     */
     private final PasswordEncoder passwordEncoder;
+
+    /**
+     * Service for working with users for {@link DaoAuthenticationProvider}
+     */
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Configures http security
+     * @param http builder for http security configuration
+     * @throws Exception exceptions that configuration may cause
+     * @since 1.0
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                // відключити csrf
+                // disable csrf
                 .csrf().disable()
                 .authorizeRequests()
 
-                // дозволити доступ до всіх нижче написаних ресурсів без автентифікації
+                // allow access to all following resources without authentication
                 .antMatchers("/", "/registration/**", "/verification/**",
                         "/id/**", "/index", "/css/**", "/img/**", "/js/**").permitAll()
 
-                // інші реквести мають бути автентифікованими
+                // other requests must be authenticated
                 .anyRequest().authenticated()
                 .and()
 
-                // налаштування логіну
+                // login setting
                 .formLogin()
-                // посилання для логіну
+                // link for login
                     .loginPage("/login").permitAll()
-                    // переадресація після входу
+                    // redirect after successful login
                     .defaultSuccessUrl("/", true)
-                    // переадресація після невдачі
+                    // redirect after failure
                     .failureForwardUrl("/login-error")
                 .and()
 
-                // налаштування логауту
+                // logout settings
                 .logout()
-                    // посилання для логауту
+                    // link for logout
                     .logoutUrl("/logout").permitAll()
-                    // переадресація при виході
+                    // redirect after logout
                     .logoutSuccessUrl("/");
     }
 
+    /**
+     * Configures authentication
+     * @param auth builder for authentication configuration
+     * @since 1.0
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(getDaoAuthenticationProvider());
     }
 
+    /**
+     * Creates bean that configures and returns {@link DaoAuthenticationProvider}
+     * @return authentication provider
+     * @since 1.0
+     */
     @Bean
     public DaoAuthenticationProvider getDaoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

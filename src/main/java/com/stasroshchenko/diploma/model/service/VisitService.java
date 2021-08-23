@@ -198,7 +198,7 @@ public class VisitService {
                     request.getClientComplaint(),
                     LocalDateTime.now(),
                     visitDate,
-                    request.getClientDateOfBirthInput(),
+                    request.getAppointsAtInput(),
                     ACTIVE
             );
 

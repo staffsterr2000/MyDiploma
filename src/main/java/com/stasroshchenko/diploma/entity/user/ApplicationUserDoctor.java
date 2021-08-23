@@ -29,6 +29,9 @@ import java.util.Collection;
 @Entity
 public class ApplicationUserDoctor extends ApplicationUser {
 
+    /**
+     * The data about doctor user
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             nullable = false,
@@ -49,6 +52,13 @@ public class ApplicationUserDoctor extends ApplicationUser {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_DOCTOR"));
     }
 
+    /**
+     * Creates a doctor user
+     * @param doctorData User's data
+     * @param username User's username
+     * @param email User's email
+     * @param password User's password
+     */
     public ApplicationUserDoctor(
             DoctorData doctorData,
             String username,
@@ -56,7 +66,7 @@ public class ApplicationUserDoctor extends ApplicationUser {
             String password) {
 
         super(username, email, password);
-        this.doctorData= doctorData;
+        this.doctorData = doctorData;
     }
 
 }

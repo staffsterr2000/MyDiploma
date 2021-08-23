@@ -3,6 +3,7 @@ package com.stasroshchenko.diploma.request.visit;
 import com.stasroshchenko.diploma.util.annotation.constraint.DateOfBirthConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

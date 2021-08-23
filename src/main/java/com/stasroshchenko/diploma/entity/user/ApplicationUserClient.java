@@ -28,6 +28,9 @@ import java.util.Collection;
 @Entity
 public class ApplicationUserClient extends ApplicationUser {
 
+    /**
+     * The data about the client user
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(
             nullable = false,
@@ -48,6 +51,13 @@ public class ApplicationUserClient extends ApplicationUser {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_CLIENT"));
     }
 
+    /**
+     * Creates a client user
+     * @param clientData User's data
+     * @param username User's username
+     * @param email User's email
+     * @param password User's password
+     */
     public ApplicationUserClient(
             ClientData clientData,
             String username,

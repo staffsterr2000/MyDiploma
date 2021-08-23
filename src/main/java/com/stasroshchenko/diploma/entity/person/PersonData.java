@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Represents data about person separately to the user's data
+ * Represents data about abstract person separately to the user's data
  * @author staffsterr2000
  * @version 1.0
  */
@@ -16,18 +16,37 @@ import java.time.LocalDate;
 @MappedSuperclass
 public abstract class PersonData {
 
+    /**
+     * First name of the person
+     */
     @Column
     protected String firstName;
 
+    /**
+     * Last name of the person
+     */
     @Column
     protected String lastName;
 
+    /**
+     * Person's date of birth
+     */
     @Column
     protected LocalDate dateOfBirth;
 
+    /**
+     * Person's passport ID
+     */
     @Column(unique = true)
     protected Long passportId;
 
+    /**
+     * Super constructor, uses first name, last name, DoB and passport ID
+     * @param firstName Person's first name
+     * @param lastName Person's last name
+     * @param dateOfBirth Person's date of birth
+     * @param passportId Person's passport ID
+     */
     public PersonData(String firstName, String lastName, LocalDate dateOfBirth, Long passportId) {
         this.firstName = firstName;
         this.lastName = lastName;

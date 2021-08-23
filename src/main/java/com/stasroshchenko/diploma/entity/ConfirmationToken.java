@@ -21,8 +21,14 @@ import java.time.LocalDateTime;
 @Entity
 public class ConfirmationToken {
 
+    /**
+     * Name for the DB sequence
+     */
     private static final String SEQUENCE_NAME = "confirmation_token_sequence";
 
+    /**
+     * Token's ID
+     */
     @Id
     @SequenceGenerator(
             name = SEQUENCE_NAME,
@@ -36,6 +42,9 @@ public class ConfirmationToken {
     @EqualsAndHashCode.Exclude
     private Long id;
 
+    /**
+     * User, that has to confirm it, unless it is expired
+     */
     @ManyToOne
     @JoinColumn(
             nullable = false,
@@ -44,17 +53,36 @@ public class ConfirmationToken {
     )
     private ApplicationUser applicationUser;
 
+    /**
+     * Token's UUID
+     */
     @Column(nullable = false)
     private String token;
 
+    /**
+     * Token's time of creation
+     */
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    /**
+     * Token's time of expiration
+     */
     @Column(nullable = false)
     private LocalDateTime expiresAt;
 
+    /**
+     * Token's time of confirmation
+     */
     private LocalDateTime confirmedAt;
 
+    /**
+     * Creates token with UUID, user, creation time and expiration time
+     * @param token UUID
+     * @param applicationUser The user that received this token
+     * @param createdAt Time of the token's creation
+     * @param expiresAt Time of the token's expiration
+     */
     public ConfirmationToken(String token,
                              ApplicationUser applicationUser,
                              LocalDateTime createdAt,
