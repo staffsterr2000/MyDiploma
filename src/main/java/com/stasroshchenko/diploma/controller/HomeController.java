@@ -13,25 +13,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-// цей контролер працює з головною
-// всі реквести по посиланню host:port/ будуть надходити у цей контролер
+/**
+ * The controller works with Home page, all the requests
+ * by "localhost:8080/" come into this controller.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/")
 @AllArgsConstructor
 public class HomeController {
 
-    // зв'язок з сервісом юзерів
+    /**
+     * User service
+     */
     private final ApplicationUserService applicationUserService;
 
-    // за допомогою шару Моделі
-    // додає до моделі атрибутів всіх докторів-користувачів
+
+
+    /**
+     * Returns list of all doctor users to display them in the Home page
+     * Adds this list to Model.
+     * @return list of all doctor users
+     * @since 1.0
+     * @see ApplicationUserService
+     * @see ApplicationUserDoctor
+     */
     @ModelAttribute("allDoctorUsers")
     public List<ApplicationUserDoctor> getAllDoctorUsers() {
         return applicationUserService.getAllUserDoctors();
     }
 
-    // ця функція виконується при надходженні
-    // реквесту на посилання host:port/ за методом GET
+
+
+    /**
+     * Works on GET method of incoming request.
+     * Adds to Model current user's authentication.
+     * @param model Model of attributes
+     * @return View name
+     * @since 1.0
+     */
     @GetMapping
     public String getIndexView(Model model) {
         Authentication authentication =
@@ -39,11 +60,8 @@ public class HomeController {
                         .getContext()
                         .getAuthentication();
 
-        // також додає до моделі атрибутів
-        // поточну автентифікацію користувача
         model.addAttribute("auth", authentication);
 
-        // повертає Шаблон "index.html"
         return "index";
     }
 

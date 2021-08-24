@@ -18,13 +18,36 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+/**
+ * Works with all the POST requests incoming in "localhost:8080/visit".
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/visit")
 @AllArgsConstructor
 public class VisitController {
 
+    /**
+     * Connection with visit service
+     */
     private final VisitService visitService;
 
+
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a client user, the method tries to send the request to service
+     * and to redirect user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param request The filled-by-client-user SEND visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see SendVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_CLIENT')")
     @PostMapping("/send")
     public String sendVisit(
@@ -60,6 +83,21 @@ public class VisitController {
 
     }
 
+
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a client user, the method sends request to service and redirects
+     * user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param request The filled-by-client-user CANCEL visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see CancelVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_CLIENT')")
     @PostMapping("/cancel")
     public String cancelVisit(
@@ -85,6 +123,21 @@ public class VisitController {
 
     }
 
+
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a doctor user, the method tries to send the request to service and
+     * to redirect user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param request The filled-by-doctor-user CREATE visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see CreateVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/create")
     public String createVisit(
@@ -119,6 +172,21 @@ public class VisitController {
         return "redirect:/" + redirectLink;
     }
 
+
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a doctor user, the method tries to send the request to service and
+     * to redirect user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param request The filled-by-doctor-user ACCEPT visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see AcceptVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/accept")
     public String acceptVisit(
@@ -154,6 +222,20 @@ public class VisitController {
     }
 
 
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a doctor user, the method sends the request to service and redirects
+     * user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param request The filled-by-doctor-user DECLINE visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see DeclineVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/decline")
     public String declineVisit(
@@ -177,6 +259,22 @@ public class VisitController {
         return "redirect:/" + redirectLink;
     }
 
+
+
+    /**
+     * If request has no validation and binding errors, and user authorized
+     * as a doctor user, the method tries to send the request to service and
+     * to redirect user back to the previous page.
+     * @param redirectLink Previous link to redirect later
+     * @param status New visit status that user want to change certain visit's status to
+     * @param request The filled-by-doctor-user PASS visit request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @param authentication Current user's authentication
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see PassVisitRequest
+     */
     @PreAuthorize("hasAuthority('ROLE_DOCTOR')")
     @PostMapping("/pass")
     public String passVisit(

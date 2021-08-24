@@ -26,6 +26,8 @@ public abstract class ApplicationUser implements UserDetails {
      */
     private static final String SEQUENCE_NAME = "application_user_sequence";
 
+
+
     /**
      * User's ID, isn't in use while procedure of equaling and hashing
      */
@@ -80,6 +82,8 @@ public abstract class ApplicationUser implements UserDetails {
     @Column(nullable = false)
     protected boolean isEnabled = false;
 
+
+
     /**
      * Creates user with username, email and password
      * @param username User's username
@@ -96,6 +100,8 @@ public abstract class ApplicationUser implements UserDetails {
         this.password = password;
     }
 
+
+
     /**
      * Gets the user's password
      * @return User's password
@@ -106,6 +112,8 @@ public abstract class ApplicationUser implements UserDetails {
         return password;
     }
 
+
+
     /**
      * Gets the user's username
      * @return User's username
@@ -115,6 +123,8 @@ public abstract class ApplicationUser implements UserDetails {
     public String getUsername() {
         return username;
     }
+
+
 
     /**
      * Gets the user's status of expiration
@@ -127,6 +137,8 @@ public abstract class ApplicationUser implements UserDetails {
         return true;
     }
 
+
+
     /**
      * Gets the user's lock status
      * true - the user's account isn't locked
@@ -138,6 +150,8 @@ public abstract class ApplicationUser implements UserDetails {
         return !isAccountLocked;
     }
 
+
+
     /**
      * Gets the user's credentials expiration status
      * true - the user's credentials aren't expired
@@ -148,6 +162,8 @@ public abstract class ApplicationUser implements UserDetails {
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
+
 
     /**
      * Gets the user's enable status

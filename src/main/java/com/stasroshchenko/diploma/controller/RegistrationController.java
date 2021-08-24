@@ -1,7 +1,7 @@
 package com.stasroshchenko.diploma.controller;
 
-import com.stasroshchenko.diploma.request.RegistrationRequest;
 import com.stasroshchenko.diploma.model.service.RegistrationService;
+import com.stasroshchenko.diploma.request.RegistrationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,67 +12,91 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-// контролер який працює з посиланням host:port/registration
+/**
+ * Works with Registration page, all the requests at
+ * "localhost:8080/registration" are proceeded in this controller
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/registration")
 @AllArgsConstructor
 public class RegistrationController {
 
-    // зв'язок з сервісом реєстрації
+    /**
+     * Connection with registration service
+     */
     private final RegistrationService registrationService;
 
-    // виконується при надходженні запиту з методом GET
-    // за посиланням host:port/registration
+
+
+    /**
+     * Runs on GET request, creates new empty registration request
+     * object, that will be filled during user is filling and sends
+     * form back to server as one object.
+     * Adds the created registration request to Model.
+     * @param model Model of attributes
+     * @return View name
+     * @since 1.0
+     */
     @GetMapping
     public String getRegistrationView(Model model) {
-
-        // додає до моделі атрибутів новий реквест
-        // для подальшого заповнення
         model.addAttribute("request", new RegistrationRequest());
 
-        // повертає Шаблон registration.html
         return "registration";
     }
 
-    // виконується при надходженні запиту з методом POST
-    // за посиланням host:port/registration
+
+
+    /**
+     * Runs on POST request, if result has errors, sends view back.
+     * Otherwise, tries to send the request to the service and then redirect
+     * the user to Verification page.
+     * @param request The filled-by-user registration request, which is validated
+     * @param result Result of validation and binding (contains errors)
+     * @param redirectAttributes Attributes that will be redirected to next view
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see RegistrationService
+     */
     @PostMapping
     public String signUpUser(
-            // надходять:
-            // 1. заповнений реквест, який одразуж валідується
             @Valid @ModelAttribute("request") RegistrationRequest request,
-            // 2. модель помилок
             BindingResult result,
-            // 3. модель для пересилання атрибутів
-            RedirectAttributes redirectAttributes
-    ) {
+            RedirectAttributes redirectAttributes) {
 
-        // якщо є помилки у валідації, то повертаємо Шаблон
-        // у який додаються помилки пов'язані з валідацією
         if(result.hasErrors()) {
             return "registration";
         }
-
-        // намагаємося зареєструвати користувача
         try {
             registrationService.signUpUser(request);
         } catch (IllegalStateException ex) {
-            // якщо отримуємо ексепшн, то додаємо його до моделі помилок
-            result.addError(new ObjectError("error", ex.getMessage()));
-            // та повертаємо Шаблон registration.html
+            result.addError(
+                    new ObjectError("error", ex.getMessage())
+            );
             return "registration";
         }
 
-        // прокидуємо реквест на сторінку верифікації
         redirectAttributes.addFlashAttribute("redirectedRequest", request);
+
         return "redirect:/verification";
     }
 
+
+
+    /**
+     * Passes token to service and redirects to Login page.
+     * @param token Token to confirm
+     * @return Link where user will be redirected
+     * @since 1.0
+     * @see RegistrationService
+     */
     @GetMapping("/confirm")
     public String confirmToken(
             @RequestParam("token") String token) {
 
         registrationService.confirmToken(token);
+
         return "redirect:/login";
     }
 
