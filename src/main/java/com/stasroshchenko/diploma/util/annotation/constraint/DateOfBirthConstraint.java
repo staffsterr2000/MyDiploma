@@ -6,6 +6,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+/**
+ * Validates an user's date of birth format.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Documented
 @Constraint(validatedBy = DateOfBirthValidation.class)
 @Target({ ElementType.FIELD, ElementType.METHOD })

@@ -16,6 +16,7 @@ public class UsernameValidator
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
+        // sequence of letters, digits, '_' symbol
         return Pattern.matches("[A-Za-z0-9_]+", username);
     }
 

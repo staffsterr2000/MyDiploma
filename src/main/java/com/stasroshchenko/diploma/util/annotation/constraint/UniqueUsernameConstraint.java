@@ -6,6 +6,12 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+
+/**
+ * Validates that the username doesn't exist in the DB.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Documented
 @Constraint(validatedBy = UniqueUsernameValidator.class)
 @Target( { ElementType.FIELD, ElementType.METHOD } )

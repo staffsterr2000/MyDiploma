@@ -15,10 +15,10 @@ public class DateOfBirthValidation implements ConstraintValidator<DateOfBirthCon
 
     @Override
     public boolean isValid(LocalDate dateOfBirth, ConstraintValidatorContext constraintValidatorContext) {
-        return dateOfBirth      // щоб бути валідною, дата народження повинна:
-                // 1. бути після 01.01.1900
+        return dateOfBirth
+                // the DoB must be after 01.01.1900
                 .isAfter(LocalDate.of(1900, Month.JANUARY, 1)) &&
-                // 2. бути раніше ніж (зараз - 18 років) (тобто людина повинна бути повнолітня)
+                // the person must be adult
                 dateOfBirth.isBefore(LocalDate.now().minusYears(18));
     }
 

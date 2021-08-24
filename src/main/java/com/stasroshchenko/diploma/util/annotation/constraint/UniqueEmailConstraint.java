@@ -6,6 +6,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+/**
+ * Validates that the email doesn't exist in the DB.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Documented
 @Constraint(validatedBy = UniqueEmailValidator.class)
 @Target( { ElementType.FIELD, ElementType.METHOD } )

@@ -6,6 +6,11 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
+/**
+ * Validates do passwords match each other.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Documented
 @Constraint(validatedBy = PasswordMatchValidator.class)
 @Target( { ElementType.TYPE } )
