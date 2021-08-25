@@ -18,7 +18,7 @@ public class LoginController {
 
     /**
      * On GET request returns login view.
-     * @return View name
+     * @return view name
      * @since 1.0
      */
     @GetMapping("/login")
@@ -30,7 +30,7 @@ public class LoginController {
 
     /**
      * On login failure returns extended Model and the same view.
-     * @return View name
+     * @return view name
      * @since 1.0
      * @see ApplicationSecurityConfig
      */

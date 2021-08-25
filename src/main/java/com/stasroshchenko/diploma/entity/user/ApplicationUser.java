@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 
 /**
- * Represents user entity, to enter the clinic profile
+ * Represents user entity, to enter the clinic profile.
  * @author staffsterr2000
  * @version 1.0
  * @see UserDetails
@@ -69,14 +69,14 @@ public abstract class ApplicationUser implements UserDetails {
     protected String imageLink = "default.jpg";
 
     /**
-     * Gets the user's lock status
+     * Shows the user's lock status
      * true - the user's account is locked
      */
     @Column(nullable = false)
     protected boolean isAccountLocked;
 
     /**
-     * Gets the user's enable status
+     * Shows the user's enable status
      * true - the user's account is enabled
      */
     @Column(nullable = false)
@@ -86,9 +86,9 @@ public abstract class ApplicationUser implements UserDetails {
 
     /**
      * Creates user with username, email and password
-     * @param username User's username
-     * @param email User's email
-     * @param password User's password
+     * @param username user's username
+     * @param email user's email
+     * @param password user's password
      */
     public ApplicationUser(
             String username,
@@ -104,7 +104,7 @@ public abstract class ApplicationUser implements UserDetails {
 
     /**
      * Gets the user's password
-     * @return User's password
+     * @return user's password
      * @since 1.0
      */
     @Override
@@ -116,7 +116,7 @@ public abstract class ApplicationUser implements UserDetails {
 
     /**
      * Gets the user's username
-     * @return User's username
+     * @return user's username
      * @since 1.0
      */
     @Override
@@ -129,7 +129,7 @@ public abstract class ApplicationUser implements UserDetails {
     /**
      * Gets the user's status of expiration
      * true - the user's account isn't expired
-     * @return User's status of expiration
+     * @return user's status of expiration
      * @since 1.0
      */
     @Override
@@ -142,7 +142,7 @@ public abstract class ApplicationUser implements UserDetails {
     /**
      * Gets the user's lock status
      * true - the user's account isn't locked
-     * @return User's lock status
+     * @return user's lock status
      * @since 1.0
      */
     @Override
@@ -155,7 +155,7 @@ public abstract class ApplicationUser implements UserDetails {
     /**
      * Gets the user's credentials expiration status
      * true - the user's credentials aren't expired
-     * @return User's credentials expiration status
+     * @return user's credentials expiration status
      * @since 1.0
      */
     @Override
@@ -168,7 +168,7 @@ public abstract class ApplicationUser implements UserDetails {
     /**
      * Gets the user's enable status
      * true - the user's email is verified
-     * @return User's credentials expiration status
+     * @return user's credentials expiration status
      * @since 1.0
      */
     @Override

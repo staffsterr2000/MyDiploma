@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Creates and configures password encoder
+ * Creates and configures password encoder.
  * @author staffsterr2000
  * @version 1.0
  */

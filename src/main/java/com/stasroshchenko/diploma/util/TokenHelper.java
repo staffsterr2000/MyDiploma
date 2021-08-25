@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
- * Util final class for creation of confirmation tokens
+ * Util final class for creation of confirmation tokens.
  * @author staffsterr2000
  * @version 1.0
  * @see ConfirmationToken
@@ -19,10 +19,12 @@ public final class TokenHelper {
      */
     public final static Integer TOKEN_EXPIRE_TIMEOUT_MINUTES = 15;
 
+
+
     /**
      * Creates confirmation token and links it to the user, that has to confirm it
-     * @param user User, that has to confirm the token to become enabled
-     * @return The confirmation token
+     * @param user user, that has to confirm the token to become enabled
+     * @return the confirmation token
      * @since 1.0
      * @see ConfirmationToken
      * @see ApplicationUser
@@ -36,6 +38,8 @@ public final class TokenHelper {
                         .plusMinutes(TOKEN_EXPIRE_TIMEOUT_MINUTES)
         );
     }
+
+
 
     /**
      * Generates random string UUID

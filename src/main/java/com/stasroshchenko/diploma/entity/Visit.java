@@ -12,7 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents visit entity, is used for tracking visits between a client and a doctor
+ * Represents visit entity, is used for tracking visits between a client
+ * and a doctor.
  * @author staffsterr2000
  * @version 1.0
  * @see DoctorData
@@ -28,6 +29,8 @@ public class Visit {
      * Name for the DB sequence
      */
     private static final String SEQUENCE_NAME = "visit_sequence";
+
+
 
     /**
      * Visit's ID
@@ -96,6 +99,8 @@ public class Visit {
     @Enumerated(EnumType.STRING)
     private VisitStatus status;
 
+
+
     /**
      * Parses appoint time from String to LocalDateTime and sets both of them to the fields
      * @param appointsAtInput string that is parsed to date and is set to the field
@@ -115,14 +120,15 @@ public class Visit {
     }
 
     /**
-     * Creates visit object with doctor, client, complaint, confirmation time, appointment time and status
-     * @param doctorData Doctor that has the visit
-     * @param clientData Client that has the visit
-     * @param complaint Client's complaint
-     * @param acceptedAt Time of the visit's confirmation
-     * @param appointsAt Time of the visit's appointment time
-     * @param appointsAtInput Appointment time input
-     * @param status Visit status
+     * Creates visit object with doctor, client, complaint, confirmation time,
+     * appointment time and status
+     * @param doctorData doctor that has the visit
+     * @param clientData client that has the visit
+     * @param complaint client's complaint
+     * @param acceptedAt time of the visit's confirmation
+     * @param appointsAt time of the visit's appointment time
+     * @param appointsAtInput appointment time input
+     * @param status visit status
      */
     public Visit(
             DoctorData doctorData,

@@ -42,11 +42,11 @@ public class IdProfileController {
     /**
      * Gets profile view depending on whether current user is in a doctor's
      * profile or client's profile. Current user must be authenticated.
-     * @param username Username of the user, page of whom the current user
+     * @param username username of the user, page of whom the current user
      *                 has attended
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @return Either doctor's or client's standard/error view
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @return either doctor's or client's standard/error view
      * @since 1.0
      * @see ApplicationUserService
      */
@@ -85,10 +85,10 @@ public class IdProfileController {
 
     /**
      * Redirects params to the service for further initialization.
-     * @param requiredUser User whose page the current user has attended
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @return Client's view
+     * @param requiredUser user whose page the current user has attended
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @return client's view
      * @since 1.0
      * @see ProfileService
      */
@@ -106,10 +106,10 @@ public class IdProfileController {
 
     /**
      * Redirects params to the service for further initialization.
-     * @param requiredUser User whose page the current user has attended
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @return Doctor's view
+     * @param requiredUser user whose page the current user has attended
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @return doctor's view
      * @since 1.0
      * @see ProfileService
      */
@@ -127,11 +127,11 @@ public class IdProfileController {
 
     /**
      * Redirects params to the service for further initialization.
-     * @param requiredUser User whose page the current user has attended
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @param result Result of validation and binding (contains errors)
-     * @return Client's view
+     * @param requiredUser user whose page the current user has attended
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @param result result of validation and binding (contains errors)
+     * @return client's view
      * @since 1.0
      * @see ProfileService
      */
@@ -151,11 +151,11 @@ public class IdProfileController {
 
     /**
      * Redirects params to the service for further initialization.
-     * @param requiredUser User whose page the current user has attended
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @param result Result of validation and binding (contains errors)
-     * @return Doctor's view
+     * @param requiredUser user whose page the current user has attended
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @param result result of validation and binding (contains errors)
+     * @return doctor's view
      * @since 1.0
      * @see ProfileService
      */

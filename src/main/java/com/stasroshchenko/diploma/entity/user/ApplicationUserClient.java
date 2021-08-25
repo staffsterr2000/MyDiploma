@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Adapter-entity for user and client data entities
+ * Adapter-entity for user and client data entities.
  * @author staffsterr2000
  * @version 1.0
  * @see ApplicationUser
@@ -39,9 +39,12 @@ public class ApplicationUserClient extends ApplicationUser {
     )
     private ClientData clientData;
 
+
+
+
     /**
      * Gets all the client user's authorities
-     * @return Collection of authorities the user has
+     * @return collection of authorities the user has
      * @since 1.0
      * @see GrantedAuthority
      * @see SimpleGrantedAuthority
@@ -51,12 +54,15 @@ public class ApplicationUserClient extends ApplicationUser {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_CLIENT"));
     }
 
+
+
+
     /**
      * Creates a client user
-     * @param clientData User's data
-     * @param username User's username
-     * @param email User's email
-     * @param password User's password
+     * @param clientData user's data
+     * @param username user's username
+     * @param email user's email
+     * @param password user's password
      */
     public ApplicationUserClient(
             ClientData clientData,

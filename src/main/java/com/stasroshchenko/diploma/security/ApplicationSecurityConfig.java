@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * Configures web security of the application
+ * Configures web security of the application.
  * @author staffsterr2000
  * @version 1.0
  */
@@ -32,6 +32,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
      * Service for working with users for {@link DaoAuthenticationProvider}
      */
     private final UserDetailsService userDetailsService;
+
+
 
     /**
      * Configures http security
@@ -72,6 +74,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/");
     }
 
+
+
     /**
      * Configures authentication
      * @param auth builder for authentication configuration
@@ -81,6 +85,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(getDaoAuthenticationProvider());
     }
+
+
 
     /**
      * Creates bean that configures and returns {@link DaoAuthenticationProvider}

@@ -35,9 +35,10 @@ public class RegistrationController {
      * object, that will be filled during user is filling and sends
      * form back to server as one object.
      * Adds the created registration request to Model.
-     * @param model Model of attributes
-     * @return View name
+     * @param model model of attributes
+     * @return view name
      * @since 1.0
+     * @see RegistrationRequest
      */
     @GetMapping
     public String getRegistrationView(Model model) {
@@ -52,12 +53,13 @@ public class RegistrationController {
      * Runs on POST request, if result has errors, sends view back.
      * Otherwise, tries to send the request to the service and then redirect
      * the user to Verification page.
-     * @param request The filled-by-user registration request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @return Link where user will be redirected
+     * @param request the filled-by-user registration request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @return link where user will be redirected
      * @since 1.0
      * @see RegistrationService
+     * @see RegistrationRequest
      */
     @PostMapping
     public String signUpUser(
@@ -86,8 +88,8 @@ public class RegistrationController {
 
     /**
      * Passes token to service and redirects to Login page.
-     * @param token Token to confirm
-     * @return Link where user will be redirected
+     * @param token token to confirm
+     * @return link where user will be redirected
      * @since 1.0
      * @see RegistrationService
      */

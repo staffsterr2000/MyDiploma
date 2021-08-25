@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Represents data about abstract person separately to the user's data
+ * Represents data about abstract person separately to the user's data.
  * @author staffsterr2000
  * @version 1.0
  */
@@ -40,12 +40,14 @@ public abstract class PersonData {
     @Column(unique = true)
     protected Long passportId;
 
+
+
     /**
-     * Super constructor, uses first name, last name, DoB and passport ID
-     * @param firstName Person's first name
-     * @param lastName Person's last name
-     * @param dateOfBirth Person's date of birth
-     * @param passportId Person's passport ID
+     * Super constructor, uses first name, last name, DoB and passport ID.
+     * @param firstName person's first name
+     * @param lastName person's last name
+     * @param dateOfBirth person's date of birth
+     * @param passportId person's passport ID
      */
     public PersonData(String firstName, String lastName, LocalDate dateOfBirth, Long passportId) {
         this.firstName = firstName;

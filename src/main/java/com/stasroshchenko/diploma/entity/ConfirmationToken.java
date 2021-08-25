@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * Represents verification token entity, is used for enable user's account
+ * Represents verification token entity, is used for enable user's account.
  * @author staffsterr2000
  * @version 1.0
  * @see ApplicationUser
@@ -25,6 +25,8 @@ public class ConfirmationToken {
      * Name for the DB sequence
      */
     private static final String SEQUENCE_NAME = "confirmation_token_sequence";
+
+
 
     /**
      * Token's ID
@@ -76,12 +78,14 @@ public class ConfirmationToken {
      */
     private LocalDateTime confirmedAt;
 
+
+
     /**
      * Creates token with UUID, user, creation time and expiration time
      * @param token UUID
-     * @param applicationUser The user that received this token
-     * @param createdAt Time of the token's creation
-     * @param expiresAt Time of the token's expiration
+     * @param applicationUser the user that received this token
+     * @param createdAt time of the token's creation
+     * @param expiresAt time of the token's expiration
      */
     public ConfirmationToken(String token,
                              ApplicationUser applicationUser,

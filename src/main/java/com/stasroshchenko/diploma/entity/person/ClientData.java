@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Represents client data
+ * Represents client data.
  * @author staffsterr2000
  * @version 1.0
  * @see PersonData
@@ -25,6 +25,8 @@ public class ClientData extends PersonData {
      * Name for the DB sequence
      */
     private static final String SEQUENCE_NAME = "client_data_sequence";
+
+
 
     /**
      * Client's ID
@@ -42,12 +44,14 @@ public class ClientData extends PersonData {
     @EqualsAndHashCode.Exclude
     private Long id;
 
+
+
     /**
-     * Creates client data object, with first name, last name, DoB and passport ID
-     * @param firstName Client's first name
-     * @param lastName Client's last name
-     * @param dateOfBirth Client's DoB
-     * @param passportId Client's passport ID
+     * Creates client data object, with first name, last name, DoB and passport ID.
+     * @param firstName client's first name
+     * @param lastName client's last name
+     * @param dateOfBirth client's DoB
+     * @param passportId client's passport ID
      */
     public ClientData(String firstName,
                       String lastName,

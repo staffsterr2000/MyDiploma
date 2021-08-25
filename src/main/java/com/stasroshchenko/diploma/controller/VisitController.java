@@ -39,12 +39,12 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a client user, the method tries to send the request to service
      * and to redirect user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param request The filled-by-client-user SEND visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param request the filled-by-client-user SEND visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see SendVisitRequest
      */
@@ -89,12 +89,12 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a client user, the method sends request to service and redirects
      * user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param request The filled-by-client-user CANCEL visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param request the filled-by-client-user CANCEL visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see CancelVisitRequest
      */
@@ -129,12 +129,12 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a doctor user, the method tries to send the request to service and
      * to redirect user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param request The filled-by-doctor-user CREATE visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param request the filled-by-doctor-user CREATE visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see CreateVisitRequest
      */
@@ -178,12 +178,12 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a doctor user, the method tries to send the request to service and
      * to redirect user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param request The filled-by-doctor-user ACCEPT visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param request the filled-by-doctor-user ACCEPT visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see AcceptVisitRequest
      */
@@ -227,12 +227,12 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a doctor user, the method sends the request to service and redirects
      * user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param request The filled-by-doctor-user DECLINE visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param request the filled-by-doctor-user DECLINE visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see DeclineVisitRequest
      */
@@ -265,13 +265,13 @@ public class VisitController {
      * If request has no validation and binding errors, and user authorized
      * as a doctor user, the method tries to send the request to service and
      * to redirect user back to the previous page.
-     * @param redirectLink Previous link to redirect later
-     * @param status New visit status that user want to change certain visit's status to
-     * @param request The filled-by-doctor-user PASS visit request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @param authentication Current user's authentication
-     * @return Link where user will be redirected
+     * @param redirectLink previous link to redirect later
+     * @param status new visit status that user want to change certain visit's status to
+     * @param request the filled-by-doctor-user PASS visit request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @param authentication current user's authentication
+     * @return link where user will be redirected
      * @since 1.0
      * @see PassVisitRequest
      */

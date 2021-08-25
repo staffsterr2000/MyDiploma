@@ -49,8 +49,8 @@ public class HomeController {
     /**
      * Works on GET method of incoming request.
      * Adds to Model current user's authentication.
-     * @param model Model of attributes
-     * @return View name
+     * @param model model of attributes
+     * @return view name
      * @since 1.0
      */
     @GetMapping

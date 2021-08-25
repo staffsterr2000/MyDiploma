@@ -5,16 +5,16 @@ import com.stasroshchenko.diploma.entity.person.DoctorData;
 import java.time.LocalDate;
 
 /**
- * Util final class for generating doctor's biography
+ * Util final class for generating doctor's biography.
  * @author staffsterr2000
  * @version 1.0
  */
 public final class DoctorDescriptionHelper {
 
     /**
-     * Generates text-biography based on doctor's data
-     * @param doctorData Doctor's data
-     * @return Doctor's biography
+     * Generates text-biography based on doctor's data.
+     * @param doctorData doctor's data
+     * @return doctor's biography
      * @since 1.0
      */
     public static String getDescriptionForDoctor(DoctorData doctorData) {

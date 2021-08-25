@@ -31,8 +31,8 @@ public class ProfileController {
     /**
      * Gets profile view depending on whether it is doctor's or
      * client's profile.
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
+     * @param authentication current user's authentication
+     * @param model model of attributes
      * @return either doctor's or client's standard/error view
      * @since 1.0
      */
@@ -64,9 +64,9 @@ public class ProfileController {
 
     /**
      * Redirects to the service model and authentication for further initialization.
-     * @param authentication Current user's authentication.
-     * @param model Model of attributes
-     * @return Client view
+     * @param authentication current user's authentication.
+     * @param model model of attributes
+     * @return client view
      * @since 1.0
      * @see ProfileService
      */
@@ -83,9 +83,9 @@ public class ProfileController {
 
     /**
      * Redirects to the service model and authentication for further initialization.
-     * @param authentication Current user's authentication.
-     * @param model Model of attributes
-     * @return Doctor view
+     * @param authentication current user's authentication.
+     * @param model model of attributes
+     * @return doctor view
      * @since 1.0
      * @see ProfileService
      */
@@ -103,10 +103,10 @@ public class ProfileController {
     /**
      * Redirects to the service model, authentication and bindingResult for
      * further initialization.
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @param result Result of validation and binding (contains errors)
-     * @return Client view
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @param result result of validation and binding (contains errors)
+     * @return client view
      * @since 1.0
      * @see ProfileService
      */
@@ -126,10 +126,10 @@ public class ProfileController {
     /**
      * Redirects to the service model, authentication and bindingResult for
      * further initialization.
-     * @param authentication Current user's authentication
-     * @param model Model of attributes
-     * @param result Result of validation and binding (contains errors)
-     * @return Doctor view
+     * @param authentication current user's authentication
+     * @param model model of attributes
+     * @param result result of validation and binding (contains errors)
+     * @return doctor view
      * @since 1.0
      * @see ProfileService
      */

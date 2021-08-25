@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
- * Represents doctor data
+ * Represents doctor data.
  * @author staffsterr2000
  * @version 1.0
  * @see PersonData
@@ -25,6 +25,8 @@ public class DoctorData extends PersonData {
      * Name for the DB sequence
      */
     private static final String SEQUENCE_NAME = "doctor_data_sequence";
+
+
 
     /**
      * Doctor's ID
@@ -49,7 +51,7 @@ public class DoctorData extends PersonData {
     private Integer room;
 
     /**
-     * Quantity of years that the doctor spent working as a doctor
+     * Quantity of years that the doctor has spent working as a doctor
      */
     @Column
     private Integer experienceAge;
@@ -61,14 +63,16 @@ public class DoctorData extends PersonData {
     @Column(length = 1024)
     private String description;
 
+
+
     /**
-     * Creates doctor data object, with first name, last name, DoB, passport ID, visiting room and experience age
-     * @param firstName Doctor's first name
-     * @param lastName Doctor's last name
-     * @param dateOfBirth Doctor's DoB
-     * @param passportId Doctor's passport ID
-     * @param room Doctor's visiting room
-     * @param experienceAge Doctor's experience (in years)
+     * Creates doctor data object, with first name, last name, DoB, passport ID, visiting room and experience age.
+     * @param firstName doctor's first name
+     * @param lastName doctor's last name
+     * @param dateOfBirth doctor's DoB
+     * @param passportId doctor's passport ID
+     * @param room doctor's visiting room
+     * @param experienceAge doctor's experience (in years)
      */
     public DoctorData(String firstName,
                       String lastName,

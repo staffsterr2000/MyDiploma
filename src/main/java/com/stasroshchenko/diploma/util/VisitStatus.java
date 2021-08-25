@@ -1,12 +1,13 @@
 package com.stasroshchenko.diploma.util;
 
 /**
- * Represents possible visit statuses
+ * Represents possible visit statuses.
  * @author staffsterr2000
  * @version 1.0
  * @see com.stasroshchenko.diploma.entity.Visit
  */
 public enum VisitStatus {
+
     /**
      * The visit is confirmed by the doctor, and the appointment will occur soon.
      * Level of importance while sorting is 1.
@@ -44,23 +45,29 @@ public enum VisitStatus {
      */
     CANCELLED_BY_CLIENT(6);
 
+
+
     /**
      * Importance value of the status. Used for sorting visits by their visit statuses' values
      */
     private final Integer value;
 
+
+
     /**
      * Creates {@link VisitStatus} instance
-     * @param value Visit status's importance value
+     * @param value visit status's importance value
      * @since 1.0
      */
     VisitStatus(Integer value) {
         this.value = value;
     }
 
+
+
     /**
      * Gets importance value
-     * @return Visit status's value
+     * @return visit status's value
      * @since 1.0
      */
     public Integer getValue() {

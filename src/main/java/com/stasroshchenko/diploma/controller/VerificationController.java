@@ -33,8 +33,8 @@ public class VerificationController {
 
     /**
      * On GET request returns Verification view.
-     * @return View name
-     * @param request Redirected from Registration page, registration request
+     * @param request redirected from Registration page, registration request
+     * @return view name
      * @since 1.0
      */
     @GetMapping
@@ -51,10 +51,10 @@ public class VerificationController {
      * If request has no validation and binding errors, the method tries to pass
      * request to registration service. Saves request for successful redirection
      * and redirects to the Verification page.
-     * @param request The filled-by-user registration request, which is validated
-     * @param result Result of validation and binding (contains errors)
-     * @param redirectAttributes Attributes that will be redirected to next view
-     * @return Link where user will be redirected
+     * @param request the filled-by-user registration request, which is validated
+     * @param result result of validation and binding (contains errors)
+     * @param redirectAttributes attributes that will be redirected to next view
+     * @return link where user will be redirected
      * @since 1.0
      * @see RegistrationService
      */

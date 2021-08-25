@@ -14,7 +14,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Adapter-entity for user and doctor data entities
+ * Adapter-entity for user and doctor data entities.
  * @author staffsterr2000
  * @version 1.0
  * @see ApplicationUser
@@ -40,9 +40,11 @@ public class ApplicationUserDoctor extends ApplicationUser {
     )
     private DoctorData doctorData;
 
+
+
     /**
      * Gets all the doctor user's authorities
-     * @return Collection of authorities the user has
+     * @return collection of authorities the user has
      * @since 1.0
      * @see GrantedAuthority
      * @see SimpleGrantedAuthority
@@ -52,12 +54,14 @@ public class ApplicationUserDoctor extends ApplicationUser {
         return Sets.newHashSet(new SimpleGrantedAuthority("ROLE_DOCTOR"));
     }
 
+
+
     /**
      * Creates a doctor user
-     * @param doctorData User's data
-     * @param username User's username
-     * @param email User's email
-     * @param password User's password
+     * @param doctorData user's data
+     * @param username user's username
+     * @param email user's email
+     * @param password user's password
      */
     public ApplicationUserDoctor(
             DoctorData doctorData,
