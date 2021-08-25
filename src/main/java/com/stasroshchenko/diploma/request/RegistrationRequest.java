@@ -11,59 +11,103 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Made for both encapsulating all client user's registration data, entered
+ * in Registration page form and sending this data as one object to
+ * controller. Has fields with validation constraints.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
-@PasswordMatchConstraint        // паролі мають бути однакові
+@PasswordMatchConstraint
 public class RegistrationRequest {
 
+    /**
+     * Logging
+     */
     private final static Logger LOGGER =
             LoggerFactory.getLogger(RegistrationRequest.class);
 
-    @NotBlank       // поле має бути не пустим
+
+
+    /**
+     * Client's first name. Must be not empty.
+     */
+    @NotBlank
     private String firstName;
 
-    @NotBlank       // поле має бути не пустим
+    /**
+     * Client's last name. Must be not empty.
+     */
+    @NotBlank
     private String lastName;
 
-    @NotBlank       // поле має бути не пустим
+    /**
+     * Client's non parsed DoB. Must be not empty.
+     */
+    @NotBlank
     private String dateOfBirthInput;
 
-    @DateOfBirthConstraint      // дата народження має бути між 01.01.1900 та (сьогоднішний день - 18 років)
+    /**
+     * Client's DoB. Must be correct.
+     */
+    @DateOfBirthConstraint
     private LocalDate dateOfBirth;
 
-    @Size(min = 3, max = 24, message = "Username must have from 3 to 24 symbols")   // розмір вводу
-    @UniqueUsernameConstraint   // перевірка унікальності username
-    @UsernameConstraint         // перевірка правильності username [A-Za-z0-9_]+
+    /**
+     * Client user's username. Must be correct and unique.
+     */
+    @Size(min = 3, max = 24, message = "Username must have from 3 to 24 symbols")
+    @UniqueUsernameConstraint
+    @UsernameConstraint
     private String username;
 
-    @UniqueEmailConstraint      // перевірка унікальності email
-    @EmailConstraint            // перевірка правильності email
-    // ^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+)*
-    //                            @[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)+$
+    /**
+     * Client user's email. Must be correct and unique.
+     */
+    @UniqueEmailConstraint
+    @EmailConstraint
     private String email;
 
-    @UniqueClientPassportIdConstraint   // перевірка унікальності паспорт ID
+    /**
+     * Client's passport ID. Must be unique.
+     */
+    @UniqueClientPassportIdConstraint
     private Long passportId;
 
-    @Size(min = 8, max = 24, message = "Password must have from 8 to 24 symbols")   // розмір вводу
+    /**
+     * Client user's password. Must have correct length.
+     */
+    @Size(min = 8, max = 24, message = "Password must have from 8 to 24 symbols")
     private String password;
-    @Size(min = 8, max = 24, message = "Password must have from 8 to 24 symbols")   // розмір вводу
+
+    /**
+     * Client user's repeated password. Must match first one.
+     */
+    @Size(min = 8, max = 24, message = "Password must have from 8 to 24 symbols")
     private String repeatedPassword;
 
+
+
+    /**
+     * Tries to parse string DoB to date DoB and set these fields.
+     * @param dateOfBirthInput string to parse
+     * @since 1.0
+     */
     public void setDateOfBirthInput(String dateOfBirthInput) {
         this.dateOfBirthInput = dateOfBirthInput;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
         try {
-            this.dateOfBirth = LocalDate.parse(dateOfBirthInput, formatter);
-
+            this.dateOfBirth = LocalDate
+                    .parse(dateOfBirthInput, formatter);
         } catch (DateTimeParseException ex) {
-
+            // if exception is caught, it will be logged and date will be set to MIN,
+            // and following DateOfBirthConstraint will throw exception about the date
+            // of birth validness
             LOGGER.error(ex.getMessage());
             this.dateOfBirth = LocalDate.MIN;
-
         }
     }
 
