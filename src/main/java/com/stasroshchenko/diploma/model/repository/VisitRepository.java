@@ -7,14 +7,21 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repo for working with visit instances.
+ * @author staffsterr2000
+ * @version 1.0
+ * @see Visit
+ */
 @Repository
 public interface VisitRepository
         extends JpaRepository<Visit, Long> {
 
-    // сортує список усіх візитів по
-    // 1. статусу (спочатку ACTIVE, потмі SENT і так далі)
-    // 2. часу зустрічі (спочатку найближчі)
-    // 3. id візіту
+    /**
+     * Runs with SQL query and returns visits sorted by their importance.
+     * Sorting via visit status, time of visit and visit ID.
+     * @return list of visits
+     */
     @Query("FROM Visit v ORDER BY " +
             "CASE v.status " +
                 "WHEN 'ACTIVE' THEN 1 " +
