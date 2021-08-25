@@ -27,6 +27,8 @@ public interface ApplicationUserRepository
     @Query("SELECT au FROM ApplicationUser au WHERE LOWER(au.username) = LOWER(?1)")
     Optional<ApplicationUser> findByUsername(String username);
 
+
+
     /**
      * Finds application user by its email.
      * The search ignores the email's case.

@@ -18,65 +18,177 @@ import java.util.stream.Collectors;
 
 import static com.stasroshchenko.diploma.util.VisitStatus.*;
 
+/**
+ * Processes all visit business logic.
+ * @author staffsterr2000
+ * @version 1.0
+ */
 @Service
 @AllArgsConstructor
 public class VisitService {
 
+    /**
+     * Visit repo
+     */
     private final VisitRepository visitRepository;
+
+    /**
+     * Person data service
+     */
     private final PersonDataService personDataService;
 
+
+
+    /**
+     * Gets list of all visits.
+     * @return list of all visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisits() {
         return visitRepository.findAllOrdered();
     }
 
+
+
+    /**
+     * Gets list of visits by certain client.
+     * @param clientData client whose visits we're looking for.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsByClient(ClientData clientData) {
+        // stream of all visits
         return getAllVisits().stream()
+                // seek for client data matching
                 .filter(visit -> visit.getClientData().equals(clientData))
+                // collect the visits to list
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets list of visits by certain doctor.
+     * @param doctorData doctor whose visits we're looking for.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsByDoctor(DoctorData doctorData) {
+        // stream of all visits
         return getAllVisits().stream()
+                // seek for doctor data matching
                 .filter(visit -> visit.getDoctorData().equals(doctorData))
+                // collect the visits to list
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets list of visits both by certain client and non excluded
+     * visit statuses.
+     * @param clientData client whose visits we're looking for.
+     * @param statuses excluded statuses.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(
             ClientData clientData, VisitStatus... statuses) {
+        // stream of all visits by client
         return getAllVisitsByClient(clientData).stream()
+                // seek through the visits' statuses for non matching with statuses
+                // from method parameter 'statuses'
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
+                        // if the current visit from stream matches at least
+                        // one status from 'statuses' .filter will be false
+                        // and the visit won't be added to list.
                         .reduce(true, (acc, x) -> acc && x)
                 )
+                // collect all the visits
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets list of visits by both certain doctor and non excluded
+     * visit statuses.
+     * @param doctorData doctor whose visits we're looking for.
+     * @param statuses excluded statuses.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(
             DoctorData doctorData, VisitStatus... statuses) {
+        // stream of all visits by doctor
         return getAllVisitsByDoctor(doctorData).stream()
+                // seek through the visits' statuses for non matching with statuses
+                // from method parameter 'statuses'
                 .filter(visit -> Arrays.stream(statuses)
                         .map(status -> !visit.getStatus().equals(status))
+                        // if the current visit from stream matches at least
+                        // one status from 'statuses' .filter will be false
+                        // and the visit won't be added to list.
                         .reduce(true, (acc, x) -> acc && x)
                 )
+                // collect all the visits
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets list of visits by both certain client and included visit
+     * statuses.
+     * @param clientData client whose visits we're looking for.
+     * @param statuses included statuses.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsWithSomeStatusesDoneByClient(
             ClientData clientData, VisitStatus... statuses) {
+        // stream of all 'statuses'
         return Arrays.stream(statuses)
+                // the second stream - visits by client
                 .flatMap(status -> getAllVisitsByClient(clientData).stream()
+                        // if the visit status matches a status from 'statuses'
                         .filter(visit -> visit.getStatus().equals(status)))
+                // then collect the visit to list
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets list of visits by both certain doctor and included visit
+     * statuses.
+     * @param doctorData doctor whose visits we're looking for.
+     * @param statuses included statuses.
+     * @return list of visits.
+     * @since 1.0
+     */
     public List<Visit> getAllVisitsWithSomeStatusesDoneByDoctor(
             DoctorData doctorData, VisitStatus... statuses) {
+        // stream of all 'statuses'
         return Arrays.stream(statuses)
+                // the second stream - visits by doctor
                 .flatMap(status -> getAllVisitsByDoctor(doctorData).stream()
+                        // if the visit status matches a status from 'statuses'
                         .filter(visit -> visit.getStatus().equals(status)))
+                // then collect the visit to list
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Gets visit by its id.
+     * @param id id of the visit we're looking for.
+     * @return required visit.
+     * @throws IllegalStateException if visit with such id isn't found.
+     * @since 1.0
+     */
     public Visit getVisitById(Long id) {
         return visitRepository.findById(id)
                 .orElseThrow(() -> new IllegalStateException(String.format("Visit with id %d wasn't found", id)));
@@ -84,73 +196,41 @@ public class VisitService {
 
 
 
+    /**
+     * Saves visit to DB.
+     * @param visit visit to save.
+     * @since 1.0
+     */
     public void saveVisit(Visit visit) {
         visitRepository.save(visit);
     }
 
-    private boolean isTimeFreeForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
-        if (visitDate == null) return false;
 
-        return getAllVisitsByDoctor(doctorUser).stream()
-                .filter(visit -> visit.getStatus().equals(VisitStatus.ACTIVE))
-                .filter(visit -> {
-                    LocalDateTime appointsAt = visit.getAppointsAt();
-                    return ((visitDate.isAfter(appointsAt) || visitDate.isEqual(appointsAt)) &&
-                            (visitDate.isBefore(appointsAt.plusHours(1)))) ||
-                            ((visitDate.plusHours(1).isAfter(appointsAt)) &&
-                                    (visitDate.plusHours(1).isBefore(appointsAt.plusHours(1)) ||
-                                            visitDate.plusHours(1).isEqual(appointsAt.plusHours(1))));
-                })
-                .findAny()
-                .isEmpty();
-    }
 
-    private boolean isDateWithinWorkdayAndAtLeastTomorrow(LocalDateTime visitDate) {
-        if (visitDate == null) return false;
-
-        LocalTime timeWorkdayStarts = LocalTime.of(8, 0);
-        LocalTime timeWorkdayEnds = LocalTime.of(18, 0);
-        LocalTime timeWorkdayEndsMinusOneHour = timeWorkdayEnds.minusHours(1);
-        LocalDate today = LocalDate.now();
-        LocalDate tomorrow = today.plusDays(1);
-
-        return (visitDate.isAfter(LocalDateTime.of(tomorrow, timeWorkdayStarts)) ||
-                visitDate.isEqual(LocalDateTime.of(tomorrow, timeWorkdayStarts))) &&
-                (visitDate.toLocalTime().isBefore(timeWorkdayEndsMinusOneHour) ||
-                        visitDate.toLocalTime().equals(timeWorkdayEndsMinusOneHour));
-    }
-
-    private void isDateValidForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
-        if (!isDateWithinWorkdayAndAtLeastTomorrow(visitDate)) {
-            throw new IllegalStateException("Date is invalid. Try using \"0\" before the next digit or time within 8 and 18 o'clock from tomorrow. Example (08:09 11/01/2000)");
-        }
-        if (!isTimeFreeForDoctor(doctorUser, visitDate)) {
-            throw new IllegalStateException("This time has already been taken for another visit. Try another time");
-        }
-    }
-
-    private boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
-        return getAllVisitsByClient(clientData).stream()
-                .filter(visit -> visit.getDoctorData().equals(doctorData))
-                .filter(visit -> {
-                    VisitStatus status = visit.getStatus();
-                    return status.equals(SENT) || status.equals(ACTIVE);
-                })
-                .findFirst()
-                .isEmpty();
-    }
-
+    /**
+     * Checks for either SENT or ACTIVE visit presence between
+     * the client and the doctor, and then 'sends' the visit.
+     * @param clientUser client, who 'sends' the visit.
+     * @param request send request.
+     * @since 1.0
+     * @see Visit
+     */
     public void sendVisit(ClientData clientUser, SendVisitRequest request) {
         Long doctorDataId = request.getDoctorDataId();
         String complaint = request.getComplaint();
 
+        // take doctor by id
         DoctorData doctorData = personDataService
                 .getDoctorById(doctorDataId);
 
+        // check is the client and the doctor have neither
+        // SENT nor ACTIVE visits
         boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
                 isClientAndDoctorHaveNeitherSentNorActiveVisit(clientUser, doctorData);
 
+        // if they don't have one
         if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
+            // create new SENT visit
             Visit visitToSend = new Visit(
                     doctorData,
                     clientUser,
@@ -161,21 +241,31 @@ public class VisitService {
                     SENT
             );
 
+            // save it
             visitRepository.save(visitToSend);
 
         } else {
+            // else throw exception
             throw new IllegalStateException("You have already sent a request to this doctor.");
         }
 
     }
 
-    // 1. check for visits -> throw exception
-    // 2. check for date -> throw exception
-    // 3. register or just take client from db
-    // 4. create visit
+
+
+    /**
+     * Checks for either SENT or ACTIVE visit presence between
+     * the doctor and the client, then checks for correctness of
+     * appointment time and then 'creates' the visit.
+     * @param doctorUser doctor, who 'creates' the visit.
+     * @param request create request.
+     * @since 1.0
+     * @see Visit
+     */
     public void createVisit(DoctorData doctorUser, CreateVisitRequest request) {
         LocalDateTime visitDate = request.getAppointsAt();
 
+        // create new client
         ClientData newClient = new ClientData(
                 request.getClientFirstName(),
                 request.getClientLastName(),
@@ -183,15 +273,21 @@ public class VisitService {
                 request.getClientPassportId()
         );
 
+        // check is the client and the doctor have neither
+        // SENT nor ACTIVE visits
         boolean isClientAndDoctorHaveNeitherSentNorActiveVisit =
                 isClientAndDoctorHaveNeitherSentNorActiveVisit(newClient, doctorUser);
 
+        // if they don't have one
         if (isClientAndDoctorHaveNeitherSentNorActiveVisit) {
+            // check for correctness of appointment time
             isDateValidForDoctor(doctorUser, visitDate);
 
+            // create new client or return existing
             ClientData clientDataFromDB = personDataService
                     .signUpClientData(newClient);
 
+            // create new visit
             Visit visit = new Visit(
                     doctorUser,
                     clientDataFromDB,
@@ -202,89 +298,292 @@ public class VisitService {
                     ACTIVE
             );
 
+            // save the visit
             visitRepository.save(visit);
 
         } else {
+            // else throw exception
             throw new IllegalStateException("You have already has a visit with this client.");
         }
 
     }
 
+
+
+    /**
+     * Checks for the appointment time validness and 'accepts'
+     * the visit.
+     * @param doctorUser doctor, who 'accepts' the visit.
+     * @param request accept request.
+     * @since 1.0
+     * @see Visit
+     */
     public void acceptVisit(DoctorData doctorUser, AcceptVisitRequest request) {
         Long visitId = request.getVisitId();
         LocalDateTime visitDate = request.getAppointsAt();
 
+        // check for appointment time validness
         isDateValidForDoctor(doctorUser, visitDate);
 
+        // seek the visit from DB by the visit id
         Visit visitFromDatabase = getVisitById(visitId);
 
+        // if visit from DB has status SENT
         if (visitFromDatabase.getStatus().equals(SENT) &&
+                // and the given doctor is the visit's doctor
                 doctorUser.equals(visitFromDatabase.getDoctorData())) {
 
+            // set all the data
             visitFromDatabase.setAppointsAt(visitDate);
             visitFromDatabase.setAcceptedAt(LocalDateTime.now());
             visitFromDatabase.setStatus(ACTIVE);
 
+            // save the visit
             visitRepository.save(visitFromDatabase);
         }
 
     }
 
+
+
+    /**
+     * 'Declines' the visit.
+     * @param doctorUser doctor, who 'declines' the visit.
+     * @param request decline request.
+     * @since 1.0
+     * @see Visit
+     */
     public void declineVisit(DoctorData doctorUser, DeclineVisitRequest request) {
         Long visitId = request.getVisitId();
 
+        // seek the visit from DB by the visit id
         Visit visit = getVisitById(visitId);
 
+        // if visit from DB has status SENT
         if (visit.getStatus().equals(SENT) &&
+                // and the given doctor is the visit's doctor
                 doctorUser.equals(visit.getDoctorData())) {
 
+            // set all the data
             visit.setStatus(CANCELLED_BY_DOCTOR);
+
+            // save the visit
             visitRepository.save(visit);
         }
 
     }
 
+
+
+    /**
+     * 'Cancels' the visit.
+     * @param clientUser client, who 'cancels' the visit.
+     * @param request cancel request.
+     * @since 1.0
+     * @see Visit
+     */
     public void cancelVisit(ClientData clientUser, CancelVisitRequest request) {
         Long visitId = request.getVisitId();
 
+        // seek the visit from DB by the visit id
         Visit visit = getVisitById(visitId);
 
+        // if visit from DB has status SENT or ACTIVE
         if ((visit.getStatus().equals(ACTIVE) ||
                 (visit.getStatus().equals(SENT))) &&
+                // and the given client is the visit's client
                 clientUser.equals(visit.getClientData())) {
 
+            // set all the data
             visit.setStatus(CANCELLED_BY_CLIENT);
+
+            // save the visit
             visitRepository.save(visit);
         }
+
     }
 
+
+
+    /**
+     * Checks income visit status's correctness
+     * (OCCURRED/NOT_OCCURRED/CANCELLED_BY_DOCTOR) and then
+     * 'passes' the visit.
+     * @param doctorUser doctor, who 'passes' the visit.
+     * @param request pass request.
+     * @since 1.0
+     * @see Visit
+     * @see VisitStatus
+     */
     public void passVisit(DoctorData doctorUser, PassVisitRequest request) {
         Long visitId = request.getVisitId();
         VisitStatus visitStatus = request.getStatus();
 
+        // seek the visit from DB by the visit id
         Visit visit = getVisitById(visitId);
 
+        // the given visit status must be one of these statuses
         switch (visitStatus) {
             case OCCURRED:
             case NOT_OCCURRED:
             case CANCELLED_BY_DOCTOR:
                 break;
             default:
+                // else throw exception
                 throw new IllegalStateException("Status " + visitStatus + " is wrong.");
         }
 
+        // if visit from DB has status ACTIVE
         if (visit.getStatus().equals(ACTIVE) &&
+                // and the given doctor is the visit's doctor
                 doctorUser.equals(visit.getDoctorData())) {
 
+            // if the appointment time has already gone
             if (visit.getAppointsAt().isBefore(LocalDateTime.now()) ||
+                    // or the given status is CANCELLED_BY_DOCTOR
                     visitStatus.equals(CANCELLED_BY_DOCTOR)) {
+
+                // set all the data
                 visit.setStatus(visitStatus);
+
+                // save the visit
                 visitRepository.save(visit);
+
             } else {
+                // else throw exception
                 throw new IllegalStateException("The time hasn't come");
             }
         }
 
+    }
+
+
+
+    /**
+     * Validates that appointment time is free for doctor.
+     * Two dates must not collide for 1 hour relative to
+     * the appointment time.
+     * For example if one appointment is at 8 o'clock -
+     * next must be at least at 9 o'clock.
+     * @param doctorUser doctor, who created/accepted a visit.
+     * @param visitDate appointment time for validation.
+     * @return bool, about business of the appointment time
+     * (true - time is free for this doctor).
+     * @since 1.0
+     */
+    private boolean isTimeFreeForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
+        if (visitDate == null) return false;
+
+        // stream of all visits by doctor
+        return getAllVisitsByDoctor(doctorUser).stream()
+                // seek for ACTIVE visits
+                .filter(visit -> visit.getStatus().equals(VisitStatus.ACTIVE))
+                // seek for visit with same appointment time
+                .filter(visit -> {
+                    // visit from stream's appointment time
+                    LocalDateTime appointsAt = visit.getAppointsAt();
+                    return
+                            // is given date after or equals appointment time
+                            ((visitDate.isAfter(appointsAt) || visitDate.isEqual(appointsAt)) &&
+                                    // and given date is before (appointment time + 1 hour)
+                                    (visitDate.isBefore(appointsAt.plusHours(1)))) ||
+                                    // OR (given date + 1 hour) is after appointment time
+                                    ((visitDate.plusHours(1).isAfter(appointsAt)) &&
+                                            // and (given date + 1 hour) is before or equals (appointment time + 1 hour)
+                                            (visitDate.plusHours(1).isBefore(appointsAt.plusHours(1)) ||
+                                                    visitDate.plusHours(1).isEqual(appointsAt.plusHours(1))));
+                })
+                // find any visit with such collision
+                .findAny()
+                // if empty - this time is free for the doctor
+                .isEmpty();
+    }
+
+
+
+    /**
+     * Validates that appointment time is both within workday and
+     * at least tomorrow.
+     * @param visitDate appointment time for validation.
+     * @return bool, about correctness of the appointment
+     * time (true - time is valid).
+     * @since 1.0
+     */
+    private boolean isDateWithinWorkdayAndAtLeastTomorrow(LocalDateTime visitDate) {
+        if (visitDate == null) return false;
+
+        // time when workday starts
+        LocalTime timeWorkdayStarts = LocalTime.of(8, 0);
+
+        // time when workday ends - 1 hour
+        LocalTime timeWorkdayEnds = LocalTime.of(18, 0);
+        LocalTime timeWorkdayEndsMinusOneHour = timeWorkdayEnds.minusHours(1);
+
+        // tomorrow
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+
+        return
+                // is given date after or equals (tomorrow 8 o'clock)
+                (visitDate.isAfter(LocalDateTime.of(tomorrow, timeWorkdayStarts)) ||
+                        visitDate.isEqual(LocalDateTime.of(tomorrow, timeWorkdayStarts))) &&
+                        // is given date before of equals (tomorrow 18 o'clock - 1 hour)
+                        (visitDate.toLocalTime().isBefore(timeWorkdayEndsMinusOneHour) ||
+                                visitDate.toLocalTime().equals(timeWorkdayEndsMinusOneHour));
+
+    }
+
+
+
+    /**
+     * Validates appointment time by both validation methods
+     * and throws exception if appointment time is invalid.
+     * @param doctorUser doctor, who created/accepted a visit.
+     * @param visitDate appointment time for validation.
+     * @throws IllegalStateException if appointment time for
+     * some reason is invalid.
+     * @since 1.0
+     */
+    private void isDateValidForDoctor(DoctorData doctorUser, LocalDateTime visitDate) {
+        if (!isDateWithinWorkdayAndAtLeastTomorrow(visitDate)) {
+            throw new IllegalStateException("Date is invalid. Try using \"0\" before the next digit or time within 8 and 18 o'clock from tomorrow. Example (08:09 11/01/2000)");
+        }
+        if (!isTimeFreeForDoctor(doctorUser, visitDate)) {
+            throw new IllegalStateException("This time has already been taken for another visit. Try another time");
+        }
+    }
+
+
+
+    /**
+     * Checks that between client and doctor isn't present
+     * a visit with SENT or ACTIVE visit status.
+     * Used to permit creation of only one SENT or ACTIVE
+     * visit between client user and doctor user.
+     * @param clientData doctor with the same visit
+     * @param doctorData client with the same visit
+     * @return bool about absence of both SENT and
+     * ACTIVE visits between the client and the doctor
+     * (true - those visits are absent).
+     * @since 1.0
+     * @see VisitStatus
+     * @see Visit
+     */
+    private boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
+        // stream of all visits by client
+        return getAllVisitsByClient(clientData).stream()
+                // seek for a visit with the given doctor
+                .filter(visit -> visit.getDoctorData().equals(doctorData))
+                // seek for a visit with status SENT or ACTIVE
+                .filter(visit -> {
+                    VisitStatus status = visit.getStatus();
+                    return status.equals(SENT) || status.equals(ACTIVE);
+                })
+                // find first
+                .findFirst()
+                // if empty - there is full absence of those statuses
+                // or visits between the client and the doctor at all
+                .isEmpty();
     }
 
 }

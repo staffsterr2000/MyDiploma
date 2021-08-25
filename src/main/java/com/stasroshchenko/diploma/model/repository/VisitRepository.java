@@ -21,6 +21,7 @@ public interface VisitRepository
      * Runs with SQL query and returns visits sorted by their importance.
      * Sorting via visit status, time of visit and visit ID.
      * @return list of visits
+     * @since 1.0
      */
     @Query("FROM Visit v ORDER BY " +
             "CASE v.status " +
