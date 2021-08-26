@@ -3,17 +3,24 @@ package com.stasroshchenko.diploma.model.service;
 import com.stasroshchenko.diploma.entity.Visit;
 import com.stasroshchenko.diploma.entity.person.ClientData;
 import com.stasroshchenko.diploma.entity.person.DoctorData;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserClient;
+import com.stasroshchenko.diploma.entity.user.ApplicationUserDoctor;
+import com.stasroshchenko.diploma.model.service.user.ApplicationUserService;
 import com.stasroshchenko.diploma.request.visit.*;
 import com.stasroshchenko.diploma.model.repository.VisitRepository;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.stasroshchenko.diploma.util.VisitStatus.*;
@@ -28,6 +35,14 @@ import static com.stasroshchenko.diploma.util.VisitStatus.*;
 public class VisitService {
 
     /**
+     * Logging
+     */
+    private final static Logger LOGGER =
+            LoggerFactory.getLogger(ProfileService.class);
+
+
+
+    /**
      * Visit repo
      */
     private final VisitRepository visitRepository;
@@ -36,6 +51,11 @@ public class VisitService {
      * Person data service
      */
     private final PersonDataService personDataService;
+
+    /**
+     * User service
+     */
+    private final ApplicationUserService applicationUserService;
 
 
 
@@ -180,6 +200,125 @@ public class VisitService {
                 .collect(Collectors.toList());
     }
 
+
+
+    /**
+     * Lefts only one client's visits in the source list.
+     * @param clientData client, whose visits is needed to
+     *                   remain in the source list.
+     * @param source source list with visits.
+     * @return list of visits for certain client.
+     * @since 1.0
+     */
+    public List<Visit> remainOnlyOneClientDataVisitsInList(
+            ClientData clientData, List<Visit> source) {
+
+        // from source visit list
+        return source.stream()
+                // seek visits where client data is the certain client
+                .filter(visit -> visit.getClientData()
+                        .equals(clientData))
+                // collect them into list and return it
+                .collect(Collectors.toList());
+    }
+
+
+
+    /**
+     * Lefts only one doctor's visits in the source list.
+     * @param doctorData doctor, whose visits is needed to
+     *                   remain in the source list.
+     * @param source source list with visits.
+     * @return list of visits for certain doctor.
+     * @since 1.0
+     */
+    public List<Visit> remainOnlyOneDoctorDataVisitsInList(
+            DoctorData doctorData, List<Visit> source) {
+
+        // form source visit list
+        return source.stream()
+                // seek visits where doctor data is the certain doctor
+                .filter(visit -> visit.getDoctorData()
+                        .equals(doctorData))
+                // collect them into the list and return it
+                .collect(Collectors.toList());
+    }
+
+
+
+    /**
+     * Runs through source list, links visit to its client user
+     * and writes it to map (key - visit, value - client user).
+     * At the end of the day we have map of visits as keys and
+     * either client users or nulls as values.
+     * @param source source list with doctor's visits.
+     * @return map of visits linked to its client users.
+     * @since 1.0
+     */
+    public Map<Visit, ApplicationUserClient> getAllDoctorVisitsAndClientUsersInMap(
+            List<Visit> source) {
+        Map<Visit, ApplicationUserClient>
+                allVisitsByDoctorWithItsClientUsers = new LinkedHashMap<>();
+
+        // run through all source visits
+        for (Visit visit : source) {
+            ClientData clientData = visit.getClientData();
+            ApplicationUserClient applicationUserClient;
+            try {
+                // try to find client user by client
+                applicationUserClient = applicationUserService.getByClientData(clientData);
+
+            } catch (Exception ex) {
+                // catch, log
+                LOGGER.error(ex.getMessage());
+                applicationUserClient = null;
+            }
+
+            // put to map (user client == null if client has no account)
+            allVisitsByDoctorWithItsClientUsers.put(visit, applicationUserClient);
+        }
+
+        // return map
+        return allVisitsByDoctorWithItsClientUsers;
+    }
+
+
+
+    /**
+     * Runs through source list, links visit to its doctor user
+     * and puts it down to map (key - visit, value - doctor user).
+     * At the end of the day we have map of visits as keys and
+     * either doctor users or nulls as values.
+     * @param source source list with client's visits.
+     * @return map of visits linked to its doctor users.
+     * @since 1.0
+     */
+    public Map<Visit, ApplicationUserDoctor> getAllClientVisitsAndDoctorUsersInMap(
+            List<Visit> source) {
+        Map<Visit, ApplicationUserDoctor>
+                allVisitsByClientWithItsDoctorUsers = new LinkedHashMap<>();
+
+        // run through all source visits
+        for (Visit visit : source) {
+            DoctorData doctorData = visit.getDoctorData();
+            ApplicationUserDoctor applicationUserDoctor;
+            try {
+                // try to find doctor user by doctor
+                applicationUserDoctor = applicationUserService.getByDoctorData(doctorData);
+
+            } catch (Exception ex) {
+                // catch, log
+                LOGGER.error(ex.getMessage());
+                applicationUserDoctor = null;
+            }
+
+            // put to map (user doctor == null if doctor has no account)
+            allVisitsByClientWithItsDoctorUsers.put(visit, applicationUserDoctor);
+        }
+
+        // return map
+        return allVisitsByClientWithItsDoctorUsers;
+    }
 
 
     /**
@@ -569,7 +708,8 @@ public class VisitService {
      * @see VisitStatus
      * @see Visit
      */
-    private boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(ClientData clientData, DoctorData doctorData) {
+    private boolean isClientAndDoctorHaveNeitherSentNorActiveVisit(
+            ClientData clientData, DoctorData doctorData) {
         // stream of all visits by client
         return getAllVisitsByClient(clientData).stream()
                 // seek for a visit with the given doctor

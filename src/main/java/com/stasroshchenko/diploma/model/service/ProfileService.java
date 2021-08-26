@@ -10,8 +10,6 @@ import com.stasroshchenko.diploma.request.visit.*;
 import com.stasroshchenko.diploma.model.service.user.ApplicationUserService;
 import com.stasroshchenko.diploma.util.VisitStatus;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -19,27 +17,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
- * Processes all profile business logic.
+ * Processes all profile initialization business logic.
  * @author staffsterr2000
  * @version 1.0
  */
 @Service
 @AllArgsConstructor
 public class ProfileService {
-
-    /**
-     * Logging
-     */
-    private final static Logger LOGGER =
-            LoggerFactory.getLogger(ProfileService.class);
-
-
 
     /**
      * Visit service
@@ -52,128 +40,103 @@ public class ProfileService {
     private final PersonDataService personDataService;
 
     /**
-     * User service
+     * Connection with user service
      */
     private final ApplicationUserService applicationUserService;
 
 
 
     /**
-     * Lefts only one client's visits in the source list.
-     * @param clientData client, whose visits is needed to
-     *                   remain in the source list.
-     * @param source source list with visits.
-     * @return list of visits for certain client.
-     * @since 1.0
+     * Initializes model of attributes and returns view depending on
+     * whether the authenticated user is a doctor user or a client user.
+     * @param authentication current user's authentication.
+     * @param model model of attributes.
+     * @return view name.
      */
-    public List<Visit> remainOnlyOneClientDataVisitsInList(
-            ClientData clientData, List<Visit> source) {
+    public String initiateProfile(Authentication authentication, Model model) {
+        // add link to redirect back
+        model.addAttribute("redirectLink", "profile");
 
-        // from source visit list
-        return source.stream()
-                // seek visits where client data is the certain client
-                .filter(visit -> visit.getClientData()
-                        .equals(clientData))
-                // collect them into list and return it
-                .collect(Collectors.toList());
-    }
+        // get bindingResult
+        BindingResult bindingResult = (BindingResult) model.getAttribute("bindingResult");
+        boolean error = bindingResult != null;
 
+        // if authenticated user is doctor
+        if (authentication.getPrincipal() instanceof ApplicationUserDoctor) {
+            // initialize doctor profile
+            initiateDoctorProfile(authentication, model);
+            if (error)
+                // initialize errors if they exist
+                addErrorsIntoModel(model, bindingResult);
 
-
-    /**
-     * Lefts only one doctor's visits in the source list.
-     * @param doctorData doctor, whose visits is needed to
-     *                   remain in the source list.
-     * @param source source list with visits.
-     * @return list of visits for certain doctor.
-     * @since 1.0
-     */
-    public List<Visit> remainOnlyOneDoctorDataVisitsInList(
-            DoctorData doctorData, List<Visit> source) {
-
-        // form source visit list
-        return source.stream()
-                // seek visits where doctor data is the certain doctor
-                .filter(visit -> visit.getDoctorData()
-                        .equals(doctorData))
-                // collect them into the list and return it
-                .collect(Collectors.toList());
-    }
-
-
-
-    /**
-     * Runs through source list, links visit to its client user
-     * and writes it to map (key - visit, value - client user).
-     * At the end of the day we have map of visits as keys and
-     * either client users or nulls as values.
-     * @param source source list with doctor's visits.
-     * @return map of visits linked to its client users.
-     * @since 1.0
-     */
-    public Map<Visit, ApplicationUserClient> getDoctorVisitsAndClientUsersInMap(
-            List<Visit> source) {
-        Map<Visit, ApplicationUserClient>
-                allVisitsByDoctorWithItsClientUsers = new LinkedHashMap<>();
-
-        // run through all source visits
-        for (Visit visit : source) {
-            ClientData clientData = visit.getClientData();
-            ApplicationUserClient applicationUserClient;
-            try {
-                // try to find client user by client
-                applicationUserClient = applicationUserService.getByClientData(clientData);
-
-            } catch (Exception ex) {
-                // catch, log
-                LOGGER.error(ex.getMessage());
-                applicationUserClient = null;
-            }
-
-            // put to map (user client == null if client has no account)
-            allVisitsByDoctorWithItsClientUsers.put(visit, applicationUserClient);
+            return "doctor_profile";
         }
 
-        // return map
-        return allVisitsByDoctorWithItsClientUsers;
+        // if authenticated user is doctor
+        if (authentication.getPrincipal() instanceof ApplicationUserClient) {
+            // initialize client profile
+            initiateClientProfile(authentication, model);
+            if (error)
+                // initialize errors if they exist
+                addErrorsIntoModel(model, bindingResult);
+
+            return "client_profile";
+        }
+
+        // else throw exception
+        throw new IllegalStateException("Unknown role");
+
     }
 
 
 
     /**
-     * Runs through source list, links visit to its doctor user
-     * and puts it down to map (key - visit, value - doctor user).
-     * At the end of the day we have map of visits as keys and
-     * either doctor users or nulls as values.
-     * @param source source list with client's visits.
-     * @return map of visits linked to its doctor users.
-     * @since 1.0
+     * Initializes model of attributes and returns view depending on
+     * whether the required user is a doctor user or a client user.
+     * @param username username of the user, whose page the current
+     *                 user has attended.
+     * @param authentication current user's authentication.
+     * @param model model of attributes.
+     * @return view name.
      */
-    public Map<Visit, ApplicationUserDoctor> getClientVisitsAndDoctorUsersInMap(
-            List<Visit> source) {
-        Map<Visit, ApplicationUserDoctor>
-                allVisitsByClientWithItsDoctorUsers = new LinkedHashMap<>();
+    public String initiateIdProfile(String username, Authentication authentication, Model model) {
+        // add link to redirect back
+        model.addAttribute("redirectLink", "id/" + username);
 
-        // run through all source visits
-        for (Visit visit : source) {
-            DoctorData doctorData = visit.getDoctorData();
-            ApplicationUserDoctor applicationUserDoctor;
-            try {
-                // try to find doctor user by doctor
-                applicationUserDoctor = applicationUserService.getByDoctorData(doctorData);
+        // get bindingResult
+        BindingResult bindingResult = (BindingResult) model.getAttribute("bindingResult");
+        boolean error = bindingResult != null;
 
-            } catch (Exception ex) {
-                // catch, log
-                LOGGER.error(ex.getMessage());
-                applicationUserDoctor = null;
-            }
+        // get and add the user, whose profile the authenticated user has attended
+        ApplicationUser requiredUser = applicationUserService
+                .getByUsername(username);
+        model.addAttribute("requiredUser", requiredUser);
 
-            // put to map (user doctor == null if doctor has no account)
-            allVisitsByClientWithItsDoctorUsers.put(visit, applicationUserDoctor);
+        // if required user is a doctor user
+        if (requiredUser instanceof ApplicationUserDoctor) {
+            // initialize doctor id profile
+            initiateDoctorIdProfile((ApplicationUserDoctor) requiredUser, authentication, model);
+            if (error)
+                // initialize errors if they exist
+                addErrorsIntoModel(model, bindingResult);
+
+            return "doctor_id_profile";
         }
 
-        // return map
-        return allVisitsByClientWithItsDoctorUsers;
+        // if required user is a client user
+        if (requiredUser instanceof ApplicationUserClient) {
+            // initialize client id profile
+            initiateClientIdProfile((ApplicationUserClient) requiredUser, authentication, model);
+            if (error)
+                // initialize errors if they exist
+                addErrorsIntoModel(model, bindingResult);
+
+            return "client_id_profile";
+        }
+
+        // else throw exception
+        throw new IllegalStateException("Unknown role");
+
     }
 
 
@@ -228,10 +191,10 @@ public class ProfileService {
 
         // add map of client's visits, to their doctor users
         Map<Visit, ApplicationUserDoctor> allVisitsByClientWithItsDoctorUsers =
-                getClientVisitsAndDoctorUsersInMap(allVisits);
+                visitService.getAllClientVisitsAndDoctorUsersInMap(allVisits);
+        // add all SENT and ACTIVE visits
         model.addAttribute("allVisitsMap", allVisitsByClientWithItsDoctorUsers);
 
-        // add all SENT and ACTIVE visits
         List<Visit> allSentAndActiveVisits = visitService
                 .getAllVisitsWithSomeStatusesDoneByClient(clientUser, VisitStatus.SENT, VisitStatus.ACTIVE);
         model.addAttribute("allSentAndActiveVisits", allSentAndActiveVisits);
@@ -278,7 +241,7 @@ public class ProfileService {
 
         // add map of SENT to doctor visits, to their client users
         Map<Visit, ApplicationUserClient> allSentVisitsByDoctorWithItsClientUsers =
-                getDoctorVisitsAndClientUsersInMap(allSentVisits);
+                visitService.getAllDoctorVisitsAndClientUsersInMap(allSentVisits);
         model.addAttribute("allSentVisitsMap", allSentVisitsByDoctorWithItsClientUsers);
 
         // add all ACTIVE visits by doctor
@@ -295,7 +258,7 @@ public class ProfileService {
         // add map of all visits by doctor except visits SENT and CANCELLED statuses,
         // to their client users
         Map<Visit, ApplicationUserClient> allAcceptedVisitsByDoctorWithItsClientUsers =
-                getDoctorVisitsAndClientUsersInMap(allAcceptedVisits);
+                visitService.getAllDoctorVisitsAndClientUsersInMap(allAcceptedVisits);
         model.addAttribute("allAcceptedVisitsMap", allAcceptedVisitsByDoctorWithItsClientUsers);
 
 
@@ -350,7 +313,7 @@ public class ProfileService {
             List<Visit> allVisits = visitService
                     .getAllVisitsByDoctor(doctorUser);
             // remain only visits with required client user
-            allVisits = remainOnlyOneClientDataVisitsInList(
+            allVisits = visitService.remainOnlyOneClientDataVisitsInList(
                     requiredUser.getClientData(), allVisits);
             model.addAttribute("allVisits", allVisits);
 
@@ -358,14 +321,16 @@ public class ProfileService {
             List<Visit> allSentVisits = visitService
                     .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.SENT);
             // remain only visits with required client user
-            allSentVisits = remainOnlyOneClientDataVisitsInList(requiredUser.getClientData(), allSentVisits);
+            allSentVisits = visitService.remainOnlyOneClientDataVisitsInList(
+                    requiredUser.getClientData(), allSentVisits);
             model.addAttribute("allSentVisits", allSentVisits);
 
             // add all ACTIVE visits by doctor
             List<Visit> allActiveVisits = visitService
                     .getAllVisitsWithSomeStatusesDoneByDoctor(doctorUser, VisitStatus.ACTIVE);
             // remain only visits with required client user
-            allActiveVisits = remainOnlyOneClientDataVisitsInList(requiredUser.getClientData(), allActiveVisits);
+            allActiveVisits = visitService.remainOnlyOneClientDataVisitsInList(
+                    requiredUser.getClientData(), allActiveVisits);
             model.addAttribute("allActiveVisits", allActiveVisits);
 
             // add empty accept request in not exist
@@ -416,14 +381,16 @@ public class ProfileService {
             List<Visit> allVisits = visitService
                     .getAllVisitsByClient(clientUser);
             // remain only visits with required doctor user
-            allVisits = remainOnlyOneDoctorDataVisitsInList(requiredUser.getDoctorData(), allVisits);
+            allVisits = visitService.remainOnlyOneDoctorDataVisitsInList(
+                    requiredUser.getDoctorData(), allVisits);
             model.addAttribute("allVisits", allVisits);
 
             // add all SENT and ACTIVE visits by client
             List<Visit> allSentAndActiveVisits = visitService
                     .getAllVisitsWithSomeStatusesDoneByClient(clientUser, VisitStatus.SENT, VisitStatus.ACTIVE);
             // remain only visits with required doctor user
-            allSentAndActiveVisits = remainOnlyOneDoctorDataVisitsInList(requiredUser.getDoctorData(), allSentAndActiveVisits);
+            allSentAndActiveVisits = visitService.remainOnlyOneDoctorDataVisitsInList(
+                    requiredUser.getDoctorData(), allSentAndActiveVisits);
             model.addAttribute("allSentAndActiveVisits", allSentAndActiveVisits);
 
             // add empty send request if not exist
