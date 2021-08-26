@@ -52,6 +52,7 @@ public class ProfileService {
      * @param authentication current user's authentication.
      * @param model model of attributes.
      * @return view name.
+     * @since 1.0
      */
     public String initiateProfile(Authentication authentication, Model model) {
         // add link to redirect back
@@ -98,6 +99,7 @@ public class ProfileService {
      * @param authentication current user's authentication.
      * @param model model of attributes.
      * @return view name.
+     * @since 1.0
      */
     public String initiateIdProfile(String username, Authentication authentication, Model model) {
         // add link to redirect back

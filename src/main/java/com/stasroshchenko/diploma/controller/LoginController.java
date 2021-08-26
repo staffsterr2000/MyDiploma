@@ -30,6 +30,7 @@ public class LoginController {
 
     /**
      * On login failure returns extended Model and the same view.
+     * @param model model of attributes
      * @return view name
      * @since 1.0
      * @see ApplicationSecurityConfig
