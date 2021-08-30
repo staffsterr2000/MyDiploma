@@ -39,7 +39,7 @@ public class ProfileController {
             Authentication authentication,
             Model model) {
 
-        return profileService.initiateProfile(authentication, model);
+        return profileService.initiateProfileView(authentication, model);
 
     }
 

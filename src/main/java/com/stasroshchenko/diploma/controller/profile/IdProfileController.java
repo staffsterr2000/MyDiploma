@@ -1,7 +1,6 @@
 package com.stasroshchenko.diploma.controller.profile;
 
 import com.stasroshchenko.diploma.model.service.ProfileService;
-import com.stasroshchenko.diploma.model.service.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -46,7 +45,7 @@ public class IdProfileController {
             Authentication authentication,
             Model model) {
 
-        return profileService.initiateIdProfile(username, authentication, model);
+        return profileService.initiateIdProfileView(username, authentication, model);
 
     }
 

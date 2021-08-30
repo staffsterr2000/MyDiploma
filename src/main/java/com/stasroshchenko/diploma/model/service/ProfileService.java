@@ -54,7 +54,7 @@ public class ProfileService {
      * @return view name.
      * @since 1.0
      */
-    public String initiateProfile(Authentication authentication, Model model) {
+    public String initiateProfileView(Authentication authentication, Model model) {
         // add link to redirect back
         model.addAttribute("redirectLink", "profile");
 
@@ -65,7 +65,7 @@ public class ProfileService {
         // if authenticated user is doctor
         if (authentication.getPrincipal() instanceof ApplicationUserDoctor) {
             // initialize doctor profile
-            initiateDoctorProfile(authentication, model);
+            initiateDoctorProfileView(authentication, model);
             if (error)
                 // initialize errors if they exist
                 addErrorsIntoModel(model, bindingResult);
@@ -76,7 +76,7 @@ public class ProfileService {
         // if authenticated user is doctor
         if (authentication.getPrincipal() instanceof ApplicationUserClient) {
             // initialize client profile
-            initiateClientProfile(authentication, model);
+            initiateClientProfileView(authentication, model);
             if (error)
                 // initialize errors if they exist
                 addErrorsIntoModel(model, bindingResult);
@@ -101,7 +101,7 @@ public class ProfileService {
      * @return view name.
      * @since 1.0
      */
-    public String initiateIdProfile(String username, Authentication authentication, Model model) {
+    public String initiateIdProfileView(String username, Authentication authentication, Model model) {
         // add link to redirect back
         model.addAttribute("redirectLink", "id/" + username);
 
@@ -117,7 +117,7 @@ public class ProfileService {
         // if required user is a doctor user
         if (requiredUser instanceof ApplicationUserDoctor) {
             // initialize doctor id profile
-            initiateDoctorIdProfile((ApplicationUserDoctor) requiredUser, authentication, model);
+            initiateDoctorIdProfileView((ApplicationUserDoctor) requiredUser, authentication, model);
             if (error)
                 // initialize errors if they exist
                 addErrorsIntoModel(model, bindingResult);
@@ -128,7 +128,7 @@ public class ProfileService {
         // if required user is a client user
         if (requiredUser instanceof ApplicationUserClient) {
             // initialize client id profile
-            initiateClientIdProfile((ApplicationUserClient) requiredUser, authentication, model);
+            initiateClientIdProfileView((ApplicationUserClient) requiredUser, authentication, model);
             if (error)
                 // initialize errors if they exist
                 addErrorsIntoModel(model, bindingResult);
@@ -150,7 +150,7 @@ public class ProfileService {
      * @param result result of validation and binding (contains error objects).
      * @since 1.0
      */
-    public void addErrorsIntoModel(
+    private void addErrorsIntoModel(
             Model model, BindingResult result) {
 
         // for every global error
@@ -176,7 +176,7 @@ public class ProfileService {
      * @param model model of attributes
      * @since 1.0
      */
-    public void initiateClientProfile(
+    private void initiateClientProfileView(
             Authentication authentication, Model model) {
 
         // add authentication
@@ -226,7 +226,7 @@ public class ProfileService {
      * @param model model of attributes
      * @since 1.0
      */
-    public void initiateDoctorProfile(
+    private void initiateDoctorProfileView(
             Authentication authentication, Model model) {
 
         // add authentication
@@ -293,7 +293,7 @@ public class ProfileService {
      * @param model model of attributes
      * @since 1.0
      */
-    public void initiateClientIdProfile(
+    private void initiateClientIdProfileView(
             ApplicationUserClient requiredUser,
             Authentication authentication,
             Model model) {
@@ -361,7 +361,7 @@ public class ProfileService {
      * @param model model of attributes
      * @since 1.0
      */
-    public void initiateDoctorIdProfile(
+    private void initiateDoctorIdProfileView(
             ApplicationUserDoctor requiredUser,
             Authentication authentication,
             Model model) {
