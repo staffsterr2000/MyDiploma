@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-08-30">
-<meta name="description" content="declaration: package: com.stasroshchenko.diploma.model.service, class: VisitService">
+<meta name="description" content="declaration: package: com.stasroshchenko.clinic.model.service, class: VisitService">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -71,11 +71,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.diploma.model.service</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.clinic.model.service</a></div>
 <h1 title="Class VisitService" class="title">Class VisitService</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.stasroshchenko.diploma.model.service.VisitService</div>
+<div class="inheritance">com.stasroshchenko.clinic.model.service.VisitService</div>
 </div>
 <section class="description">
 <hr>
@@ -101,7 +101,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#applicationUserService">applicationUserService</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">User service</div>
@@ -111,12 +111,12 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Logging</div>
 </div>
-<div class="col-first even-row-color"><code>private <a href="PersonDataService.html" title="class in com.stasroshchenko.diploma.model.service">PersonDataService</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="PersonDataService.html" title="class in com.stasroshchenko.clinic.model.service">PersonDataService</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#personDataService">personDataService</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">Person data service</div>
 </div>
-<div class="col-first odd-row-color"><code>private <a href="../repository/VisitRepository.html" title="interface in com.stasroshchenko.diploma.model.repository">VisitRepository</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="../repository/VisitRepository.html" title="interface in com.stasroshchenko.clinic.model.repository">VisitRepository</a></code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#visitRepository">visitRepository</a></span></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Visit repo</div>
@@ -149,101 +149,101 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#acceptVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.AcceptVisitRequest)">acceptVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">AcceptVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#acceptVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.AcceptVisitRequest)">acceptVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">AcceptVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks for the appointment time validness and 'accepts'
  the visit.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#cancelVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.request.visit.CancelVisitRequest)">cancelVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientUser,
- <a href="../../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CancelVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#cancelVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.request.visit.CancelVisitRequest)">cancelVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientUser,
+ <a href="../../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CancelVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">'Cancels' the visit.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#createVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.CreateVisitRequest)">createVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CreateVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#createVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.CreateVisitRequest)">createVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CreateVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks for either SENT or ACTIVE visit presence between
  the doctor and the client, then checks for correctness of
  appointment time and then 'creates' the visit.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#declineVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.DeclineVisitRequest)">declineVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">DeclineVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#declineVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.DeclineVisitRequest)">declineVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">DeclineVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">'Declines' the visit.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserDoctor.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUserDoctor</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllClientVisitsAndDoctorUsersInMap(java.util.List)">getAllClientVisitsAndDoctorUsersInMap</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserDoctor.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUserDoctor</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllClientVisitsAndDoctorUsersInMap(java.util.List)">getAllClientVisitsAndDoctorUsersInMap</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Runs through source list, links visit to its doctor user
  and puts it down to map (key - visit, value - doctor user).</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUserClient</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllDoctorVisitsAndClientUsersInMap(java.util.List)">getAllDoctorVisitsAndClientUsersInMap</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUserClient</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllDoctorVisitsAndClientUsersInMap(java.util.List)">getAllDoctorVisitsAndClientUsersInMap</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Runs through source list, links visit to its client user
  and writes it to map (key - visit, value - client user).</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisits()">getAllVisits</a></span>()</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of all visits.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsByClient(com.stasroshchenko.diploma.entity.person.ClientData)">getAllVisitsByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsByClient(com.stasroshchenko.clinic.entity.person.ClientData)">getAllVisitsByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits by certain client.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData)">getAllVisitsByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData)">getAllVisitsByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits by certain doctor.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.util.VisitStatus...)">getAllVisitsExceptVisitsWithSomeStatusesDoneByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.util.VisitStatus...)">getAllVisitsExceptVisitsWithSomeStatusesDoneByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits both by certain client and non excluded
  visit statuses.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.util.VisitStatus...)">getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.util.VisitStatus...)">getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits by both certain doctor and non excluded
  visit statuses.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.util.VisitStatus...)">getAllVisitsWithSomeStatusesDoneByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.util.VisitStatus...)">getAllVisitsWithSomeStatusesDoneByClient</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits by both certain client and included visit
  statuses.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.util.VisitStatus...)">getAllVisitsWithSomeStatusesDoneByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getAllVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.util.VisitStatus...)">getAllVisitsWithSomeStatusesDoneByDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets list of visits by both certain doctor and included visit
  statuses.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a></code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a></code></div>
 <div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#getVisitById(java.lang.Long)">getVisitById</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;id)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Gets visit by its id.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private boolean</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isClientAndDoctorHaveNeitherSentNorActiveVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.entity.person.DoctorData)">isClientAndDoctorHaveNeitherSentNorActiveVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isClientAndDoctorHaveNeitherSentNorActiveVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.entity.person.DoctorData)">isClientAndDoctorHaveNeitherSentNorActiveVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks that between client and doctor isn't present
  a visit with SENT or ACTIVE visit status.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isDateValidForDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,java.time.LocalDateTime)">isDateValidForDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isDateValidForDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,java.time.LocalDateTime)">isDateValidForDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;visitDate)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Validates appointment time by both validation methods
@@ -256,39 +256,39 @@ loadScripts(document, 'script');</script>
  at least tomorrow.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private boolean</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isTimeFreeForDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,java.time.LocalDateTime)">isTimeFreeForDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#isTimeFreeForDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,java.time.LocalDateTime)">isTimeFreeForDoctor</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;visitDate)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Validates that appointment time is free for doctor.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#passVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.PassVisitRequest)">passVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">PassVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#passVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.PassVisitRequest)">passVisit</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">PassVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks income visit status's correctness
  (OCCURRED/NOT_OCCURRED/CANCELLED_BY_DOCTOR) and then
  'passes' the visit.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#remainOnlyOneClientDataVisitsInList(com.stasroshchenko.diploma.entity.person.ClientData,java.util.List)">remainOnlyOneClientDataVisitsInList</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#remainOnlyOneClientDataVisitsInList(com.stasroshchenko.clinic.entity.person.ClientData,java.util.List)">remainOnlyOneClientDataVisitsInList</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Lefts only one client's visits in the source list.</div>
 </div>
-<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#remainOnlyOneDoctorDataVisitsInList(com.stasroshchenko.diploma.entity.person.DoctorData,java.util.List)">remainOnlyOneDoctorDataVisitsInList</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</code></div>
+<div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#remainOnlyOneDoctorDataVisitsInList(com.stasroshchenko.clinic.entity.person.DoctorData,java.util.List)">remainOnlyOneDoctorDataVisitsInList</a></span>&#8203;(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Lefts only one doctor's visits in the source list.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#saveVisit(com.stasroshchenko.diploma.entity.Visit)">saveVisit</a></span>&#8203;(<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&nbsp;visit)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#saveVisit(com.stasroshchenko.clinic.entity.Visit)">saveVisit</a></span>&#8203;(<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&nbsp;visit)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Saves visit to DB.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.request.visit.SendVisitRequest)">sendVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientUser,
- <a href="../../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">SendVisitRequest</a>&nbsp;request)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.request.visit.SendVisitRequest)">sendVisit</a></span>&#8203;(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientUser,
+ <a href="../../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">SendVisitRequest</a>&nbsp;request)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks for either SENT or ACTIVE visit presence between
  the client and the doctor, and then 'sends' the visit.</div>
@@ -320,21 +320,21 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="visitRepository">
 <h3>visitRepository</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../repository/VisitRepository.html" title="interface in com.stasroshchenko.diploma.model.repository">VisitRepository</a></span>&nbsp;<span class="element-name">visitRepository</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../repository/VisitRepository.html" title="interface in com.stasroshchenko.clinic.model.repository">VisitRepository</a></span>&nbsp;<span class="element-name">visitRepository</span></div>
 <div class="block">Visit repo</div>
 </section>
 </li>
 <li>
 <section class="detail" id="personDataService">
 <h3>personDataService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="PersonDataService.html" title="class in com.stasroshchenko.diploma.model.service">PersonDataService</a></span>&nbsp;<span class="element-name">personDataService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="PersonDataService.html" title="class in com.stasroshchenko.clinic.model.service">PersonDataService</a></span>&nbsp;<span class="element-name">personDataService</span></div>
 <div class="block">Person data service</div>
 </section>
 </li>
 <li>
 <section class="detail" id="applicationUserService">
 <h3>applicationUserService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
 <div class="block">User service</div>
 </section>
 </li>
@@ -363,7 +363,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getAllVisits()">
 <h3>getAllVisits</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisits</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisits</span>()</div>
 <div class="block">Gets list of all visits.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -374,9 +374,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsByClient(com.stasroshchenko.diploma.entity.person.ClientData)">
+<section class="detail" id="getAllVisitsByClient(com.stasroshchenko.clinic.entity.person.ClientData)">
 <h3>getAllVisitsByClient</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData)</span></div>
 <div class="block">Gets list of visits by certain client.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -389,9 +389,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData)">
+<section class="detail" id="getAllVisitsByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData)">
 <h3>getAllVisitsByDoctor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData)</span></div>
 <div class="block">Gets list of visits by certain doctor.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -404,10 +404,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.util.VisitStatus...)">
+<section class="detail" id="getAllVisitsExceptVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.util.VisitStatus...)">
 <h3>getAllVisitsExceptVisitsWithSomeStatusesDoneByClient</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsExceptVisitsWithSomeStatusesDoneByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsExceptVisitsWithSomeStatusesDoneByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</span></div>
 <div class="block">Gets list of visits both by certain client and non excluded
  visit statuses.</div>
 <dl class="notes">
@@ -422,10 +422,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.util.VisitStatus...)">
+<section class="detail" id="getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.util.VisitStatus...)">
 <h3>getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsExceptVisitsWithSomeStatusesDoneByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</span></div>
 <div class="block">Gets list of visits by both certain doctor and non excluded
  visit statuses.</div>
 <dl class="notes">
@@ -440,10 +440,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.util.VisitStatus...)">
+<section class="detail" id="getAllVisitsWithSomeStatusesDoneByClient(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.util.VisitStatus...)">
 <h3>getAllVisitsWithSomeStatusesDoneByClient</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsWithSomeStatusesDoneByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsWithSomeStatusesDoneByClient</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</span></div>
 <div class="block">Gets list of visits by both certain client and included visit
  statuses.</div>
 <dl class="notes">
@@ -458,10 +458,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getAllVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.util.VisitStatus...)">
+<section class="detail" id="getAllVisitsWithSomeStatusesDoneByDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.util.VisitStatus...)">
 <h3>getAllVisitsWithSomeStatusesDoneByDoctor</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsWithSomeStatusesDoneByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>...&nbsp;statuses)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">getAllVisitsWithSomeStatusesDoneByDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>...&nbsp;statuses)</span></div>
 <div class="block">Gets list of visits by both certain doctor and included visit
  statuses.</div>
 <dl class="notes">
@@ -476,10 +476,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="remainOnlyOneClientDataVisitsInList(com.stasroshchenko.diploma.entity.person.ClientData,java.util.List)">
+<section class="detail" id="remainOnlyOneClientDataVisitsInList(com.stasroshchenko.clinic.entity.person.ClientData,java.util.List)">
 <h3>remainOnlyOneClientDataVisitsInList</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">remainOnlyOneClientDataVisitsInList</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">remainOnlyOneClientDataVisitsInList</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</span></div>
 <div class="block">Lefts only one client's visits in the source list.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -494,10 +494,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="remainOnlyOneDoctorDataVisitsInList(com.stasroshchenko.diploma.entity.person.DoctorData,java.util.List)">
+<section class="detail" id="remainOnlyOneDoctorDataVisitsInList(com.stasroshchenko.clinic.entity.person.DoctorData,java.util.List)">
 <h3>remainOnlyOneDoctorDataVisitsInList</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">remainOnlyOneDoctorDataVisitsInList</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;</span>&nbsp;<span class="element-name">remainOnlyOneDoctorDataVisitsInList</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</span></div>
 <div class="block">Lefts only one doctor's visits in the source list.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -514,7 +514,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getAllDoctorVisitsAndClientUsersInMap(java.util.List)">
 <h3>getAllDoctorVisitsAndClientUsersInMap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUserClient</a>&gt;</span>&nbsp;<span class="element-name">getAllDoctorVisitsAndClientUsersInMap</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUserClient</a>&gt;</span>&nbsp;<span class="element-name">getAllDoctorVisitsAndClientUsersInMap</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</span></div>
 <div class="block">Runs through source list, links visit to its client user
  and writes it to map (key - visit, value - client user).
  At the end of the day we have map of visits as keys and
@@ -532,7 +532,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getAllClientVisitsAndDoctorUsersInMap(java.util.List)">
 <h3>getAllClientVisitsAndDoctorUsersInMap</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserDoctor.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUserDoctor</a>&gt;</span>&nbsp;<span class="element-name">getAllClientVisitsAndDoctorUsersInMap</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&gt;&nbsp;source)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Map.html" title="class or interface in java.util" class="external-link">Map</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>,&#8203;<a href="../../entity/user/ApplicationUserDoctor.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUserDoctor</a>&gt;</span>&nbsp;<span class="element-name">getAllClientVisitsAndDoctorUsersInMap</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&gt;&nbsp;source)</span></div>
 <div class="block">Runs through source list, links visit to its doctor user
  and puts it down to map (key - visit, value - doctor user).
  At the end of the day we have map of visits as keys and
@@ -550,7 +550,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="getVisitById(java.lang.Long)">
 <h3>getVisitById</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a></span>&nbsp;<span class="element-name">getVisitById</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;id)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a></span>&nbsp;<span class="element-name">getVisitById</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Long.html" title="class or interface in java.lang" class="external-link">Long</a>&nbsp;id)</span></div>
 <div class="block">Gets visit by its id.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -565,9 +565,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="saveVisit(com.stasroshchenko.diploma.entity.Visit)">
+<section class="detail" id="saveVisit(com.stasroshchenko.clinic.entity.Visit)">
 <h3>saveVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">saveVisit</span>&#8203;<span class="parameters">(<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity">Visit</a>&nbsp;visit)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">saveVisit</span>&#8203;<span class="parameters">(<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity">Visit</a>&nbsp;visit)</span></div>
 <div class="block">Saves visit to DB.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -578,10 +578,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="sendVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.request.visit.SendVisitRequest)">
+<section class="detail" id="sendVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.request.visit.SendVisitRequest)">
 <h3>sendVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sendVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientUser,
- <a href="../../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">SendVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">sendVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientUser,
+ <a href="../../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">SendVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">Checks for either SENT or ACTIVE visit presence between
  the client and the doctor, and then 'sends' the visit.</div>
 <dl class="notes">
@@ -591,15 +591,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="createVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.CreateVisitRequest)">
+<section class="detail" id="createVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.CreateVisitRequest)">
 <h3>createVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">createVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CreateVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">createVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CreateVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">Checks for either SENT or ACTIVE visit presence between
  the doctor and the client, then checks for correctness of
  appointment time and then 'creates' the visit.</div>
@@ -610,15 +610,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="acceptVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.AcceptVisitRequest)">
+<section class="detail" id="acceptVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.AcceptVisitRequest)">
 <h3>acceptVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">acceptVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">AcceptVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">acceptVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">AcceptVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">Checks for the appointment time validness and 'accepts'
  the visit.</div>
 <dl class="notes">
@@ -628,15 +628,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="declineVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.DeclineVisitRequest)">
+<section class="detail" id="declineVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.DeclineVisitRequest)">
 <h3>declineVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">declineVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">DeclineVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">declineVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">DeclineVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">'Declines' the visit.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -645,15 +645,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="cancelVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.request.visit.CancelVisitRequest)">
+<section class="detail" id="cancelVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.request.visit.CancelVisitRequest)">
 <h3>cancelVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">cancelVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientUser,
- <a href="../../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CancelVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">cancelVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientUser,
+ <a href="../../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CancelVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">'Cancels' the visit.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -662,15 +662,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="passVisit(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.request.visit.PassVisitRequest)">
+<section class="detail" id="passVisit(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.request.visit.PassVisitRequest)">
 <h3>passVisit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">passVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
- <a href="../../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">PassVisitRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">passVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
+ <a href="../../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">PassVisitRequest</a>&nbsp;request)</span></div>
 <div class="block">Checks income visit status's correctness
  (OCCURRED/NOT_OCCURRED/CANCELLED_BY_DOCTOR) and then
  'passes' the visit.</div>
@@ -681,15 +681,15 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a>, 
-<a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util"><code>VisitStatus</code></a></dd>
+<dd><a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a>,
+<a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util"><code>VisitStatus</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="isTimeFreeForDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,java.time.LocalDateTime)">
+<section class="detail" id="isTimeFreeForDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,java.time.LocalDateTime)">
 <h3>isTimeFreeForDoctor</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isTimeFreeForDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isTimeFreeForDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;visitDate)</span></div>
 <div class="block">Validates that appointment time is free for doctor.
  Two dates must not collide for 1 hour relative to
@@ -726,9 +726,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="isDateValidForDoctor(com.stasroshchenko.diploma.entity.person.DoctorData,java.time.LocalDateTime)">
+<section class="detail" id="isDateValidForDoctor(com.stasroshchenko.clinic.entity.person.DoctorData,java.time.LocalDateTime)">
 <h3>isDateValidForDoctor</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">isDateValidForDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorUser,
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">isDateValidForDoctor</span>&#8203;<span class="parameters">(<a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorUser,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;visitDate)</span></div>
 <div class="block">Validates appointment time by both validation methods
  and throws exception if appointment time is invalid.</div>
@@ -745,10 +745,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="isClientAndDoctorHaveNeitherSentNorActiveVisit(com.stasroshchenko.diploma.entity.person.ClientData,com.stasroshchenko.diploma.entity.person.DoctorData)">
+<section class="detail" id="isClientAndDoctorHaveNeitherSentNorActiveVisit(com.stasroshchenko.clinic.entity.person.ClientData,com.stasroshchenko.clinic.entity.person.DoctorData)">
 <h3>isClientAndDoctorHaveNeitherSentNorActiveVisit</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isClientAndDoctorHaveNeitherSentNorActiveVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
- <a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData)</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isClientAndDoctorHaveNeitherSentNorActiveVisit</span>&#8203;<span class="parameters">(<a href="../../entity/person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
+ <a href="../../entity/person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData)</span></div>
 <div class="block">Checks that between client and doctor isn't present
  a visit with SENT or ACTIVE visit status.
  Used to permit creation of only one SENT or ACTIVE
@@ -764,8 +764,8 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util"><code>VisitStatus</code></a>, 
-<a href="../../entity/Visit.html" title="class in com.stasroshchenko.diploma.entity"><code>Visit</code></a></dd>
+<dd><a href="../../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util"><code>VisitStatus</code></a>,
+<a href="../../entity/Visit.html" title="class in com.stasroshchenko.clinic.entity"><code>Visit</code></a></dd>
 </dl>
 </section>
 </li>

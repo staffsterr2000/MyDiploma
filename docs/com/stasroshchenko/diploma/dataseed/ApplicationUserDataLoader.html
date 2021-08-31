@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-08-30">
-<meta name="description" content="declaration: package: com.stasroshchenko.diploma.dataseed, class: ApplicationUserDataLoader">
+<meta name="description" content="declaration: package: com.stasroshchenko.clinic.dataseed, class: ApplicationUserDataLoader">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -71,11 +71,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.diploma.dataseed</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.clinic.dataseed</a></div>
 <h1 title="Class ApplicationUserDataLoader" class="title">Class ApplicationUserDataLoader</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.stasroshchenko.diploma.dataseed.ApplicationUserDataLoader</div>
+<div class="inheritance">com.stasroshchenko.clinic.dataseed.ApplicationUserDataLoader</div>
 </div>
 <section class="description">
 <dl class="notes">
@@ -108,12 +108,12 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="../model/repository/ApplicationUserRepository.html" title="interface in com.stasroshchenko.diploma.model.repository">ApplicationUserRepository</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="../model/repository/ApplicationUserRepository.html" title="interface in com.stasroshchenko.clinic.model.repository">ApplicationUserRepository</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#applicationUserRepository">applicationUserRepository</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">Autowired repository for working with DB users</div>
 </div>
-<div class="col-first odd-row-color"><code>private <a href="../model/service/user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="../model/service/user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#applicationUserService">applicationUserService</a></span></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Autowired service for obtaining and processing users</div>
@@ -163,10 +163,10 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#run(java.lang.String...)">run</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;args)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
-<div class="block">Runs after automatic creation of the <a href="ApplicationUserDataLoader.html" title="class in com.stasroshchenko.diploma.dataseed"><code>ApplicationUserDataLoader</code></a></div>
+<div class="block">Runs after automatic creation of the <a href="ApplicationUserDataLoader.html" title="class in com.stasroshchenko.clinic.dataseed"><code>ApplicationUserDataLoader</code></a></div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#signUpInitialUser(com.stasroshchenko.diploma.entity.user.ApplicationUser)">signUpInitialUser</a></span>&#8203;(<a href="../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUser</a>&nbsp;rawUser)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#signUpInitialUser(com.stasroshchenko.clinic.entity.user.ApplicationUser)">signUpInitialUser</a></span>&#8203;(<a href="../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUser</a>&nbsp;rawUser)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Checks for absence the user in database, encodes rawUser's password and saves the user to memory</div>
 </div>
@@ -190,14 +190,14 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <li>
 <section class="detail" id="applicationUserRepository">
 <h3>applicationUserRepository</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/repository/ApplicationUserRepository.html" title="interface in com.stasroshchenko.diploma.model.repository">ApplicationUserRepository</a></span>&nbsp;<span class="element-name">applicationUserRepository</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/repository/ApplicationUserRepository.html" title="interface in com.stasroshchenko.clinic.model.repository">ApplicationUserRepository</a></span>&nbsp;<span class="element-name">applicationUserRepository</span></div>
 <div class="block">Autowired repository for working with DB users</div>
 </section>
 </li>
 <li>
 <section class="detail" id="applicationUserService">
 <h3>applicationUserService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/service/user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/service/user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
 <div class="block">Autowired service for obtaining and processing users</div>
 </section>
 </li>
@@ -235,7 +235,7 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <h3>run</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">run</span>&#8203;<span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>...&nbsp;args)</span>
          throws <span class="exceptions"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Exception.html" title="class or interface in java.lang" class="external-link">Exception</a></span></div>
-<div class="block">Runs after automatic creation of the <a href="ApplicationUserDataLoader.html" title="class in com.stasroshchenko.diploma.dataseed"><code>ApplicationUserDataLoader</code></a></div>
+<div class="block">Runs after automatic creation of the <a href="ApplicationUserDataLoader.html" title="class in com.stasroshchenko.clinic.dataseed"><code>ApplicationUserDataLoader</code></a></div>
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>run</code>&nbsp;in interface&nbsp;<code>org.springframework.boot.CommandLineRunner</code></dd>
@@ -260,7 +260,7 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../util/PassportIdGenerator.html" title="class in com.stasroshchenko.diploma.util"><code>PassportIdGenerator</code></a></dd>
+<dd><a href="../util/PassportIdGenerator.html" title="class in com.stasroshchenko.clinic.util"><code>PassportIdGenerator</code></a></dd>
 </dl>
 </section>
 </li>
@@ -273,15 +273,15 @@ implements org.springframework.boot.CommandLineRunner</span></div>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../util/PassportIdGenerator.html" title="class in com.stasroshchenko.diploma.util"><code>PassportIdGenerator</code></a>, 
-<a href="../util/DoctorDescriptionHelper.html" title="class in com.stasroshchenko.diploma.util"><code>DoctorDescriptionHelper</code></a></dd>
+<dd><a href="../util/PassportIdGenerator.html" title="class in com.stasroshchenko.clinic.util"><code>PassportIdGenerator</code></a>,
+<a href="../util/DoctorDescriptionHelper.html" title="class in com.stasroshchenko.clinic.util"><code>DoctorDescriptionHelper</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="signUpInitialUser(com.stasroshchenko.diploma.entity.user.ApplicationUser)">
+<section class="detail" id="signUpInitialUser(com.stasroshchenko.clinic.entity.user.ApplicationUser)">
 <h3>signUpInitialUser</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">signUpInitialUser</span>&#8203;<span class="parameters">(<a href="../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUser</a>&nbsp;rawUser)</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">signUpInitialUser</span>&#8203;<span class="parameters">(<a href="../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUser</a>&nbsp;rawUser)</span></div>
 <div class="block">Checks for absence the user in database, encodes rawUser's password and saves the user to memory</div>
 <dl class="notes">
 <dt>Parameters:</dt>

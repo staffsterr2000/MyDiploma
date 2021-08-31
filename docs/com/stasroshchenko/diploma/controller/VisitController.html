@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-08-30">
-<meta name="description" content="declaration: package: com.stasroshchenko.diploma.controller, class: VisitController">
+<meta name="description" content="declaration: package: com.stasroshchenko.clinic.controller, class: VisitController">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -71,11 +71,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.diploma.controller</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.clinic.controller</a></div>
 <h1 title="Class VisitController" class="title">Class VisitController</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.stasroshchenko.diploma.controller.VisitController</div>
+<div class="inheritance">com.stasroshchenko.clinic.controller.VisitController</div>
 </div>
 <section class="description">
 <hr>
@@ -102,7 +102,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="../model/service/VisitService.html" title="class in com.stasroshchenko.diploma.model.service">VisitService</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="../model/service/VisitService.html" title="class in com.stasroshchenko.clinic.model.service">VisitService</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#visitService">visitService</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">Connection with visit service</div>
@@ -135,8 +135,8 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#acceptVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.AcceptVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">acceptVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- @Valid <a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">AcceptVisitRequest</a>&nbsp;request,
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#acceptVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.AcceptVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">acceptVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ @Valid <a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">AcceptVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -146,8 +146,8 @@ loadScripts(document, 'script');</script>
  to redirect user back to the previous page.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#cancelVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.CancelVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">cancelVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- @Valid <a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CancelVisitRequest</a>&nbsp;request,
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#cancelVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.CancelVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">cancelVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ @Valid <a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CancelVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -157,8 +157,8 @@ loadScripts(document, 'script');</script>
  user back to the previous page.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#createVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.CreateVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">createVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- @Valid <a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CreateVisitRequest</a>&nbsp;request,
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#createVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.CreateVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">createVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ @Valid <a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CreateVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -168,8 +168,8 @@ loadScripts(document, 'script');</script>
  to redirect user back to the previous page.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#declineVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.DeclineVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">declineVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- @Valid <a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">DeclineVisitRequest</a>&nbsp;request,
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#declineVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.DeclineVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">declineVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ @Valid <a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">DeclineVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -179,9 +179,9 @@ loadScripts(document, 'script');</script>
  user back to the previous page.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#passVisit(java.lang.String,com.stasroshchenko.diploma.util.VisitStatus,com.stasroshchenko.diploma.request.visit.PassVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">passVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>&nbsp;status,
- @Valid <a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">PassVisitRequest</a>&nbsp;request,
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#passVisit(java.lang.String,com.stasroshchenko.clinic.util.VisitStatus,com.stasroshchenko.clinic.request.visit.PassVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">passVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>&nbsp;status,
+ @Valid <a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">PassVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -191,8 +191,8 @@ loadScripts(document, 'script');</script>
  to redirect user back to the previous page.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.SendVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">sendVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
- @Valid <a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">SendVisitRequest</a>&nbsp;request,
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#sendVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.SendVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">sendVisit</a></span>&#8203;(<a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
+ @Valid <a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">SendVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</code></div>
@@ -221,7 +221,7 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="visitService">
 <h3>visitService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/service/VisitService.html" title="class in com.stasroshchenko.diploma.model.service">VisitService</a></span>&nbsp;<span class="element-name">visitService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="../model/service/VisitService.html" title="class in com.stasroshchenko.clinic.model.service">VisitService</a></span>&nbsp;<span class="element-name">visitService</span></div>
 <div class="block">Connection with visit service</div>
 </section>
 </li>
@@ -248,14 +248,14 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="sendVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.SendVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="sendVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.SendVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>sendVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_CLIENT\')")
 @PostMapping("/send")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">sendVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @Valid @ModelAttribute("sendRequest")
- @Valid <a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">SendVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">SendVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -274,19 +274,19 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>SendVisitRequest</code></a></dd>
+<dd><a href="../request/visit/SendVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>SendVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="cancelVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.CancelVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="cancelVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.CancelVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>cancelVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_CLIENT\')")
 @PostMapping("/cancel")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">cancelVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @Valid @ModelAttribute("cancelRequest")
- @Valid <a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CancelVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CancelVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -305,19 +305,19 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>CancelVisitRequest</code></a></dd>
+<dd><a href="../request/visit/CancelVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>CancelVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="createVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.CreateVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="createVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.CreateVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>createVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_DOCTOR\')")
 @PostMapping("/create")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">createVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @Valid @ModelAttribute("createRequest")
- @Valid <a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">CreateVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">CreateVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -336,19 +336,19 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>CreateVisitRequest</code></a></dd>
+<dd><a href="../request/visit/CreateVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>CreateVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="acceptVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.AcceptVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="acceptVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.AcceptVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>acceptVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_DOCTOR\')")
 @PostMapping("/accept")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">acceptVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @Valid @ModelAttribute("acceptRequest")
- @Valid <a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">AcceptVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">AcceptVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -367,19 +367,19 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>AcceptVisitRequest</code></a></dd>
+<dd><a href="../request/visit/AcceptVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>AcceptVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="declineVisit(java.lang.String,com.stasroshchenko.diploma.request.visit.DeclineVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="declineVisit(java.lang.String,com.stasroshchenko.clinic.request.visit.DeclineVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>declineVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_DOCTOR\')")
 @PostMapping("/decline")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">declineVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @Valid @ModelAttribute("declineRequest")
- @Valid <a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">DeclineVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">DeclineVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -398,21 +398,21 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>DeclineVisitRequest</code></a></dd>
+<dd><a href="../request/visit/DeclineVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>DeclineVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="passVisit(java.lang.String,com.stasroshchenko.diploma.util.VisitStatus,com.stasroshchenko.diploma.request.visit.PassVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
+<section class="detail" id="passVisit(java.lang.String,com.stasroshchenko.clinic.util.VisitStatus,com.stasroshchenko.clinic.request.visit.PassVisitRequest,org.springframework.validation.BindingResult,org.springframework.web.servlet.mvc.support.RedirectAttributes,org.springframework.security.core.Authentication)">
 <h3>passVisit</h3>
 <div class="member-signature"><span class="annotations">@PreAuthorize("hasAuthority(\'ROLE_DOCTOR\')")
 @PostMapping("/pass")
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">passVisit</span>&#8203;<span class="parameters">(@RequestParam("redirectLink")
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;redirectLink,
  @RequestParam("status")
- <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>&nbsp;status,
+ <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>&nbsp;status,
  @Valid @ModelAttribute("passRequest")
- @Valid <a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit">PassVisitRequest</a>&nbsp;request,
+ @Valid <a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit">PassVisitRequest</a>&nbsp;request,
  org.springframework.validation.BindingResult&nbsp;result,
  org.springframework.web.servlet.mvc.support.RedirectAttributes&nbsp;redirectAttributes,
  org.springframework.security.core.Authentication&nbsp;authentication)</span></div>
@@ -432,7 +432,7 @@ loadScripts(document, 'script');</script>
 <dt>Since:</dt>
 <dd>1.0</dd>
 <dt>See Also:</dt>
-<dd><a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.diploma.request.visit"><code>PassVisitRequest</code></a></dd>
+<dd><a href="../request/visit/PassVisitRequest.html" title="class in com.stasroshchenko.clinic.request.visit"><code>PassVisitRequest</code></a></dd>
 </dl>
 </section>
 </li>

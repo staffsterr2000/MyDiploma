@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-08-30">
-<meta name="description" content="declaration: package: com.stasroshchenko.diploma.model.service, class: RegistrationService">
+<meta name="description" content="declaration: package: com.stasroshchenko.clinic.model.service, class: RegistrationService">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -71,11 +71,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.diploma.model.service</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.clinic.model.service</a></div>
 <h1 title="Class RegistrationService" class="title">Class RegistrationService</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.stasroshchenko.diploma.model.service.RegistrationService</div>
+<div class="inheritance">com.stasroshchenko.clinic.model.service.RegistrationService</div>
 </div>
 <section class="description">
 <hr>
@@ -101,17 +101,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Field</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color"><code>private <a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#applicationUserService">applicationUserService</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">User service</div>
 </div>
-<div class="col-first odd-row-color"><code>private <a href="ConfirmationTokenService.html" title="class in com.stasroshchenko.diploma.model.service">ConfirmationTokenService</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="ConfirmationTokenService.html" title="class in com.stasroshchenko.clinic.model.service">ConfirmationTokenService</a></code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#confirmationTokenService">confirmationTokenService</a></span></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Token service</div>
 </div>
-<div class="col-first even-row-color"><code>private <a href="email/EmailSender.html" title="interface in com.stasroshchenko.diploma.model.service.email">EmailSender</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="email/EmailSender.html" title="interface in com.stasroshchenko.clinic.model.service.email">EmailSender</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#emailSender">emailSender</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">Email sender</div>
@@ -149,19 +149,19 @@ loadScripts(document, 'script');</script>
 <div class="block">Checks for both confirmation and expiration time, then confirms
  the token and enables the user.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private <a href="../../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUser</a></code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#convertRegistrationRequestToApplicationUser(com.stasroshchenko.diploma.request.RegistrationRequest)">convertRegistrationRequestToApplicationUser</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</code></div>
+<div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>private <a href="../../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUser</a></code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#convertRegistrationRequestToApplicationUser(com.stasroshchenko.clinic.request.RegistrationRequest)">convertRegistrationRequestToApplicationUser</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
-<div class="block">Converts <a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request"><code>RegistrationRequest</code></a> to <a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.diploma.entity.user"><code>ApplicationUserClient</code></a>.</div>
+<div class="block">Converts <a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request"><code>RegistrationRequest</code></a> to <a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.clinic.entity.user"><code>ApplicationUserClient</code></a>.</div>
 </div>
 <div class="col-first even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#resendConfirmationToken(com.stasroshchenko.diploma.request.RegistrationRequest)">resendConfirmationToken</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</code></div>
+<div class="col-second even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#resendConfirmationToken(com.stasroshchenko.clinic.request.RegistrationRequest)">resendConfirmationToken</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</code></div>
 <div class="col-last even-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Converts registration request, deletes the old confirmation token,
  creates new one and sends it to the user's email address.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#signUpUser(com.stasroshchenko.diploma.request.RegistrationRequest)">signUpUser</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</code></div>
+<div class="col-second odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table"><code><span class="member-name-link"><a href="#signUpUser(com.stasroshchenko.clinic.request.RegistrationRequest)">signUpUser</a></span>&#8203;(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</code></div>
 <div class="col-last odd-row-color method-summary-table-tab2 method-summary-table-tab4 method-summary-table">
 <div class="block">Converts registration request, signs up user and sends him an
  email with confirmation link.</div>
@@ -186,21 +186,21 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="applicationUserService">
 <h3>applicationUserService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.diploma.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="user/ApplicationUserService.html" title="class in com.stasroshchenko.clinic.model.service.user">ApplicationUserService</a></span>&nbsp;<span class="element-name">applicationUserService</span></div>
 <div class="block">User service</div>
 </section>
 </li>
 <li>
 <section class="detail" id="emailSender">
 <h3>emailSender</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="email/EmailSender.html" title="interface in com.stasroshchenko.diploma.model.service.email">EmailSender</a></span>&nbsp;<span class="element-name">emailSender</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="email/EmailSender.html" title="interface in com.stasroshchenko.clinic.model.service.email">EmailSender</a></span>&nbsp;<span class="element-name">emailSender</span></div>
 <div class="block">Email sender</div>
 </section>
 </li>
 <li>
 <section class="detail" id="confirmationTokenService">
 <h3>confirmationTokenService</h3>
-<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="ConfirmationTokenService.html" title="class in com.stasroshchenko.diploma.model.service">ConfirmationTokenService</a></span>&nbsp;<span class="element-name">confirmationTokenService</span></div>
+<div class="member-signature"><span class="modifiers">private final</span>&nbsp;<span class="return-type"><a href="ConfirmationTokenService.html" title="class in com.stasroshchenko.clinic.model.service">ConfirmationTokenService</a></span>&nbsp;<span class="element-name">confirmationTokenService</span></div>
 <div class="block">Token service</div>
 </section>
 </li>
@@ -227,9 +227,9 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="signUpUser(com.stasroshchenko.diploma.request.RegistrationRequest)">
+<section class="detail" id="signUpUser(com.stasroshchenko.clinic.request.RegistrationRequest)">
 <h3>signUpUser</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">signUpUser</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">signUpUser</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</span></div>
 <div class="block">Converts registration request, signs up user and sends him an
  email with confirmation link.</div>
 <dl class="notes">
@@ -255,9 +255,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="resendConfirmationToken(com.stasroshchenko.diploma.request.RegistrationRequest)">
+<section class="detail" id="resendConfirmationToken(com.stasroshchenko.clinic.request.RegistrationRequest)">
 <h3>resendConfirmationToken</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resendConfirmationToken</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">resendConfirmationToken</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</span></div>
 <div class="block">Converts registration request, deletes the old confirmation token,
  creates new one and sends it to the user's email address.</div>
 <dl class="notes">
@@ -269,10 +269,10 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="convertRegistrationRequestToApplicationUser(com.stasroshchenko.diploma.request.RegistrationRequest)">
+<section class="detail" id="convertRegistrationRequestToApplicationUser(com.stasroshchenko.clinic.request.RegistrationRequest)">
 <h3>convertRegistrationRequestToApplicationUser</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.diploma.entity.user">ApplicationUser</a></span>&nbsp;<span class="element-name">convertRegistrationRequestToApplicationUser</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request">RegistrationRequest</a>&nbsp;request)</span></div>
-<div class="block">Converts <a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.diploma.request"><code>RegistrationRequest</code></a> to <a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.diploma.entity.user"><code>ApplicationUserClient</code></a>.</div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../../entity/user/ApplicationUser.html" title="class in com.stasroshchenko.clinic.entity.user">ApplicationUser</a></span>&nbsp;<span class="element-name">convertRegistrationRequestToApplicationUser</span>&#8203;<span class="parameters">(<a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request">RegistrationRequest</a>&nbsp;request)</span></div>
+<div class="block">Converts <a href="../../request/RegistrationRequest.html" title="class in com.stasroshchenko.clinic.request"><code>RegistrationRequest</code></a> to <a href="../../entity/user/ApplicationUserClient.html" title="class in com.stasroshchenko.clinic.entity.user"><code>ApplicationUserClient</code></a>.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>request</code> - registration request.</dd>

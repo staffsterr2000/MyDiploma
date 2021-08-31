@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="dc.created" content="2021-08-30">
-<meta name="description" content="declaration: package: com.stasroshchenko.diploma.entity, class: Visit">
+<meta name="description" content="declaration: package: com.stasroshchenko.clinic.entity, class: Visit">
 <meta name="generator" content="javadoc/ClassWriterImpl">
 <link rel="stylesheet" type="text/css" href="../../../../stylesheet.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../script-dir/jquery-ui.min.css" title="Style">
@@ -71,11 +71,11 @@ loadScripts(document, 'script');</script>
 <main role="main">
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.diploma.entity</a></div>
+<div class="sub-title"><span class="package-label-in-type">Package</span>&nbsp;<a href="package-summary.html">com.stasroshchenko.clinic.entity</a></div>
 <h1 title="Class Visit" class="title">Class Visit</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">com.stasroshchenko.diploma.entity.Visit</div>
+<div class="inheritance">com.stasroshchenko.clinic.entity.Visit</div>
 </div>
 <section class="description">
 <hr>
@@ -90,9 +90,9 @@ loadScripts(document, 'script');</script>
 <dt>Author:</dt>
 <dd>staffsterr2000</dd>
 <dt>See Also:</dt>
-<dd><a href="person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person"><code>DoctorData</code></a>, 
-<a href="person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person"><code>ClientData</code></a>, 
-<a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util"><code>VisitStatus</code></a></dd>
+<dd><a href="person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person"><code>DoctorData</code></a>,
+<a href="person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person"><code>ClientData</code></a>,
+<a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util"><code>VisitStatus</code></a></dd>
 </dl>
 </section>
 <section class="summary">
@@ -121,7 +121,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Non parsed time of the visit</div>
 </div>
-<div class="col-first odd-row-color"><code>private <a href="person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a></code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#clientData">clientData</a></span></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Client that has the visit</div>
@@ -131,7 +131,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color">
 <div class="block">Client's complaint with his health</div>
 </div>
-<div class="col-first odd-row-color"><code>private <a href="person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a></code></div>
+<div class="col-first odd-row-color"><code>private <a href="person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a></code></div>
 <div class="col-second odd-row-color"><code><span class="member-name-link"><a href="#doctorData">doctorData</a></span></code></div>
 <div class="col-last odd-row-color">
 <div class="block">Doctor that has the visit</div>
@@ -146,7 +146,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Name for the DB sequence</div>
 </div>
-<div class="col-first even-row-color"><code>private <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a></code></div>
+<div class="col-first even-row-color"><code>private <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a></code></div>
 <div class="col-second even-row-color"><code><span class="member-name-link"><a href="#status">status</a></span></code></div>
 <div class="col-last even-row-color">
 <div class="block">Status of the visit</div>
@@ -162,13 +162,13 @@ loadScripts(document, 'script');</script>
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><span class="member-name-link"><a href="#%3Cinit%3E(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.entity.person.ClientData,java.lang.String,java.time.LocalDateTime,java.time.LocalDateTime,java.lang.String,com.stasroshchenko.diploma.util.VisitStatus)">Visit</a></span>&#8203;(<a href="person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
+<div class="col-constructor-name even-row-color"><code><span class="member-name-link"><a href="#%3Cinit%3E(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.entity.person.ClientData,java.lang.String,java.time.LocalDateTime,java.time.LocalDateTime,java.lang.String,com.stasroshchenko.clinic.util.VisitStatus)">Visit</a></span>&#8203;(<a href="person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;complaint,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;acceptedAt,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;appointsAt,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;appointsAtInput,
- <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>&nbsp;status)</code></div>
+ <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>&nbsp;status)</code></div>
 <div class="col-last even-row-color">
 <div class="block">Creates visit object with doctor, client, complaint, confirmation time,
  appointment time and status</div>
@@ -216,7 +216,7 @@ loadScripts(document, 'script');</script>
 <div class="block">Name for the DB sequence</div>
 <dl class="notes">
 <dt>See Also:</dt>
-<dd><a href="../../../../constant-values.html#com.stasroshchenko.diploma.entity.Visit.SEQUENCE_NAME">Constant Field Values</a></dd>
+<dd><a href="../../../../constant-values.html#com.stasroshchenko.clinic.entity.Visit.SEQUENCE_NAME">Constant Field Values</a></dd>
 </dl>
 </section>
 </li>
@@ -230,14 +230,14 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="doctorData">
 <h3>doctorData</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a></span>&nbsp;<span class="element-name">doctorData</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a></span>&nbsp;<span class="element-name">doctorData</span></div>
 <div class="block">Doctor that has the visit</div>
 </section>
 </li>
 <li>
 <section class="detail" id="clientData">
 <h3>clientData</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a></span>&nbsp;<span class="element-name">clientData</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a></span>&nbsp;<span class="element-name">clientData</span></div>
 <div class="block">Client that has the visit</div>
 </section>
 </li>
@@ -272,11 +272,11 @@ loadScripts(document, 'script');</script>
 <li>
 <section class="detail" id="status">
 <h3>status</h3>
-<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a></span>&nbsp;<span class="element-name">status</span></div>
+<div class="member-signature"><span class="modifiers">private</span>&nbsp;<span class="return-type"><a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a></span>&nbsp;<span class="element-name">status</span></div>
 <div class="block">Status of the visit</div>
 <dl class="notes">
 <dt>See Also:</dt>
-<dd><a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util"><code>VisitStatus</code></a></dd>
+<dd><a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util"><code>VisitStatus</code></a></dd>
 </dl>
 </section>
 </li>
@@ -289,15 +289,15 @@ loadScripts(document, 'script');</script>
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(com.stasroshchenko.diploma.entity.person.DoctorData,com.stasroshchenko.diploma.entity.person.ClientData,java.lang.String,java.time.LocalDateTime,java.time.LocalDateTime,java.lang.String,com.stasroshchenko.diploma.util.VisitStatus)">
+<section class="detail" id="&lt;init&gt;(com.stasroshchenko.clinic.entity.person.DoctorData,com.stasroshchenko.clinic.entity.person.ClientData,java.lang.String,java.time.LocalDateTime,java.time.LocalDateTime,java.lang.String,com.stasroshchenko.clinic.util.VisitStatus)">
 <h3>Visit</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Visit</span>&#8203;<span class="parameters">(<a href="person/DoctorData.html" title="class in com.stasroshchenko.diploma.entity.person">DoctorData</a>&nbsp;doctorData,
- <a href="person/ClientData.html" title="class in com.stasroshchenko.diploma.entity.person">ClientData</a>&nbsp;clientData,
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">Visit</span>&#8203;<span class="parameters">(<a href="person/DoctorData.html" title="class in com.stasroshchenko.clinic.entity.person">DoctorData</a>&nbsp;doctorData,
+ <a href="person/ClientData.html" title="class in com.stasroshchenko.clinic.entity.person">ClientData</a>&nbsp;clientData,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;complaint,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;acceptedAt,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/time/LocalDateTime.html" title="class or interface in java.time" class="external-link">LocalDateTime</a>&nbsp;appointsAt,
  <a href="https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;appointsAtInput,
- <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.diploma.util">VisitStatus</a>&nbsp;status)</span></div>
+ <a href="../util/VisitStatus.html" title="enum class in com.stasroshchenko.clinic.util">VisitStatus</a>&nbsp;status)</span></div>
 <div class="block">Creates visit object with doctor, client, complaint, confirmation time,
  appointment time and status</div>
 <dl class="notes">
