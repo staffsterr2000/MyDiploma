@@ -52,11 +52,11 @@ Remove the containers (optional)
 
 ### 3. Using
 
-3.1. Go to [website](localhost:8080), click **Sign up** and commit registration procedure.
+3.1. Go to [website](https://localhost:8080), click **Sign up** and commit registration procedure.
 
-3.2. Follow the [mail receiver](localhost:1080) link and confirm the received message to enable your client account.
+3.2. Follow the [mail receiver](https://localhost:1080) link and confirm the received message to enable your client account.
 
-3.3. Go to [your profile](localhost:8080/profile) and make an appointment with a doctor from list.
+3.3. Go to [your profile](https://localhost:8080/profile) and make an appointment with a doctor from list.
 
 3.4. Doctor can either accept your visit and point its date and time, or decline it.
 
