@@ -11,14 +11,13 @@ choose your doctor and send request to him.
 
 # Summary
 
-The application represents a clinic website that 
-allows a client user to request for appointment with a specialist.
+The application represents a clinic website that gives an easy way to be in touch, for a client and a doctor. Here a client user can ask for appointment with the doctor and then the connection turns from remote into local, in the clinic.
 
-Besides, the doctor easily manages the clients' requests
- and then connection from remote turns into local, in the clinic.
-
-New client always can make an appointment online (by registering
-and creating the appointment from his profile page).
+# Versions
+### 1) AWS deployed version
+Link: http://clinicapp-env.eba-piam9is2.eu-west-1.elasticbeanstalk.com
+### 2) Local version with Docker compose
+The instalation instructions are below.
 
 # Prerequisite:
 
