@@ -1,56 +1,3 @@
-#server:
-#  error:
-#    include-message: always
-#    include-binding-errors: always
-#
-#spring:
-#  spring:
-#    profiles:
-#      active: @spring.profiles.active@
-#
-#  banner:
-#    location: banner.txt
-#
-#  datasource:               # налаштування конекту
-#    username: ${DATASOURCE_USER:postgres}       # ім'я юзера для входу у postgres
-#    password: ${DATASOURCE_PASSWORD:258456}     # пароль від postgres
-#    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:5432}/${DATASOURCE_DB:clinic}   # стандартне підключення до
-#                                    # postgres:
-#                                    # jdbc:postgresql://ХОСТ:ПОРТ/НАЗВА_БД
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.PostgreSQLDialect
-#        format_sql: true
-#    show-sql: true          # заповнення через SQL
-#                            # та відображення у логах також через SQL
-#
-#
-#  mail:
-#    # хост та порт, на який будуть
-#    # відсилатися листи
-#    host: ${MAIL_HOST:localhost}
-#    port: ${MAIL_RECEIVE_PORT:1025}
-#    username: username
-#    password: password
-#
-#    properties:
-#      mail:
-#        smtp:       # налаштування протоколу smtp
-#          ssl:
-#            trust: "*"
-#          auth: true
-#          starttls:
-#            enable: true
-#          connectiontimeout: 5000
-#          timeout: 3000
-#          writetimeout: 5000
-#
-#custom:
-#  host: localhost:8080
-
 server:
   port:
     5000
@@ -62,8 +9,8 @@ server:
 cloud:
   aws:
     credentials:
-      access-key: AKIA34UXY4R5F2AQEZDR
-      secret-key: 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
+      access-key:
+      secret-key:
       use-default-aws-credentials-chain: true
     region:
       static: eu-west-1
@@ -80,13 +27,11 @@ logging:
 
 
 spring:
-#  profiles:
-#    active: @spring.profiles.active@
   banner:
     location: banner.txt
   datasource:
-    username: postgres
-    password: postgres
+    username:
+    password:
     url: jdbc:postgresql://clinic-db.c8giwsnlmg22.eu-west-1.rds.amazonaws.com:5432/clinic
   jpa:
     hibernate:
