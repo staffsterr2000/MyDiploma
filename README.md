@@ -42,21 +42,17 @@ Build and start the containers by running
 
 > $ docker-compose -f docker-compose.yml --env-file docker.env up
 
-Stop the containers (optional)
-
-> $ ^C
-
 Remove the containers (optional)
 
 > $ docker-compose -f docker-compose.yml --env-file docker.env down
 
 ### 3. Using
 
-3.1. Go to [website](localhost:8080), click **Sign up** and commit registration procedure.
+3.1. Go to website at https://localhost:8080, click **Sign up** and commit registration procedure.
 
-3.2. Follow the [mail receiver](localhost:1080) link and confirm the received message to enable your client account.
+3.2. Follow the mail receiver at https://localhost:1080 link and confirm the received message to enable your client account.
 
-3.3. Go to [your profile](localhost:8080/profile) and make an appointment with a doctor from list.
+3.3. Go to your profile at https://localhost:8080/profile and make an appointment with a doctor from list.
 
 3.4. Doctor can either accept your visit and point its date and time, or decline it.
 
