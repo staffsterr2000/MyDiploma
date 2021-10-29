@@ -28,6 +28,10 @@ public class EmailService implements EmailSender {
 
 
 
+    private final static String FROM = "rosenkostas@gmail.com";
+
+
+
     /**
      * Mail sender
      */
@@ -55,7 +59,7 @@ public class EmailService implements EmailSender {
             helper.setText(email, true);           // контент листа
             helper.setTo(to);                           // отримувач листа
             helper.setSubject("Confirmation");          // тема листа
-            helper.setFrom("admin@gmail.com");          // відправляч листа
+            helper.setFrom(FROM);          // відправляч листа
 
             // sending
             mailSender.send(mimeMessage);

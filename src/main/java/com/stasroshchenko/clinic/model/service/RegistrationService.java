@@ -9,6 +9,8 @@ import com.stasroshchenko.clinic.model.service.user.ApplicationUserService;
 import com.stasroshchenko.clinic.request.RegistrationRequest;
 import com.stasroshchenko.clinic.util.EmailMessageHelper;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +23,6 @@ import java.time.LocalDateTime;
  * @version 1.0
  */
 @Service
-@AllArgsConstructor
 public class RegistrationService {
 
     /**
@@ -40,6 +41,26 @@ public class RegistrationService {
     private final ConfirmationTokenService confirmationTokenService;
 
 
+    /**
+     * Host name
+     */
+    private final String host;
+
+
+
+    @Autowired
+    public RegistrationService(
+            ApplicationUserService applicationUserService,
+            EmailSender emailSender,
+            ConfirmationTokenService confirmationTokenService,
+            @Value("${custom.host}") String host) {
+        this.applicationUserService = applicationUserService;
+        this.emailSender = emailSender;
+        this.confirmationTokenService = confirmationTokenService;
+        this.host = host;
+    }
+
+
 
     /**
      * Converts registration request, signs up user and sends him an
@@ -56,7 +77,6 @@ public class RegistrationService {
                 convertRegistrationRequestToApplicationUser(request));
 
         // create confirmation link
-        String host = "localhost:8080";
         String link = "http://" + host + "/registration/confirm?token=" + token;
 
         // send email with link to the user's email address
@@ -119,7 +139,6 @@ public class RegistrationService {
                 convertRegistrationRequestToApplicationUser(request));
 
         // create confirmation link
-        String host = "localhost:8080";
         String link = "http://" + host + "/registration/confirm?token=" + token;
         // send email with link to the user's email address
         emailSender.send(requestEmail,

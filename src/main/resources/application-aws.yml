@@ -1,0 +1,48 @@
+server:
+  port:
+    5000
+  error:
+    include-message: always
+    include-binding-errors: always
+
+
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA34UXY4R5F2AQEZDR
+      secret-key: 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
+      use-default-aws-credentials-chain: true
+    region:
+      static: eu-west-1
+      auto: false
+      use-default-aws-region-chain: true
+    stack:
+      auto: false
+
+
+logging:
+  level:
+    com.amazonaws.util.EC2MetadataUtils: error
+    com.amazonaws.internal.InstanceMetadataServiceResourceFetcher: error
+
+
+spring:
+#  profiles:
+#    active: @spring.profiles.active@
+  banner:
+    location: banner.txt
+  datasource:
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://clinic-db.c8giwsnlmg22.eu-west-1.rds.amazonaws.com:5432/clinic
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+custom:
+  host: http://clinicapp-env.eba-piam9is2.eu-west-1.elasticbeanstalk.com/
